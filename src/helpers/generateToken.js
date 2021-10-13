@@ -1,12 +1,12 @@
 const jsonwebtoken = require('jsonwebtoken')
 
-const tokenSign = async (accounts) => {
+const tokenSing = async (account) => {
     return jsonwebtoken.sign(
         {
-            _id: accounts._id,
-            role: accounts.role
+            _id: account._id,
+            role: account.role
         },
-        process.env.JWT_SECRET,
+        process.env.ACCESS_TOKEN_SECRET,
         {
             expiresIn: 60 * 5,
         }
@@ -14,13 +14,9 @@ const tokenSign = async (accounts) => {
 }
 
 const verifyToken = async (token) => {
-    const tokenVerified = jsonwebtoken.verify(token, process.env.JWT_SECRET);
+    const tokenVerified = jsonwebtoken.verify(token, process.env.ACCESS_TOKEN_SECRET);
     return tokenVerified;
 }
 
-const decodeSign = (token) => {
-    const decoded = jsonwebtoken.decode(token, null);
-    return decoded;
-}
 
-module.exports = { tokenSign, decodeSign, verifyToken }
+module.exports = {tokenSing, verifyToken}

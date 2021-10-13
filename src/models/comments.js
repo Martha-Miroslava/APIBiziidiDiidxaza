@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const comments = new Schema({
-    _id: Schema.Types.ObjectId,
     comment: { 
         type: String,
         require: true
@@ -10,6 +9,12 @@ const comments = new Schema({
     dateCreation: { 
         type: Date, 
         default: Date.now 
+    },
+    status: {
+        type: Number,
+        min: 1,
+        max: 2,
+        require: true
     },
     idAccount: [{ type: Schema.Types.ObjectId, ref: 'Accounts' }],
     idDiscussion: [{ type: Schema.Types.ObjectId, ref: 'Discussions' }]

@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const discussion = new Schema({
-    _id: Schema.Types.ObjectId,
+const discussions = new Schema({
     title: { 
         type: String,
         require: true
@@ -22,13 +21,18 @@ const discussion = new Schema({
         require: true
     },
     theme: {
+        type: String,
+        default: "info",
+        enum: ["info", "doubt", "rule"],
+        require: true
+    },
+    numberComments:{
         type: Number,
-        min: 1,
-        max: 3,
+        default: 0,
         require: true
     },
     idAccount: [{ type: Schema.Types.ObjectId, ref: 'Accounts' }]
 });
 
-discussion.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Discussions',discussion);
+discussions.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('Discussions',discussions);

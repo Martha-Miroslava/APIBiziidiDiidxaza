@@ -1,33 +1,61 @@
 const Accounts = require('../models/accounts');
-const {sendToTelegram} = require('../helpers/telegramBot');
-const  {tokenSing}= require('../helpers/generateToken');
-const {jsonErrors} = require('../helpers/exception-responses');
-const {ResponseREST} = require('../helpers/responses');
-const {Number} = require('../helpers/number');
-
+const {tokenSing}= require('../helpers/generateToken');
+const {StatusCodes, ReasonPhrases} = require ('http-status-codes');
 
 const postLogin = async (request, response) => {
     const {username, password} = request.body;
-    const queryAccounts  = Accounts.where({ status: Number.ONE, username: username});
-    queryAccounts.findOne(function (error, accounts) {   
-        if (error){           
-            sendToTelegram(exception);
-            response.status(ResponseREST.SERVER_ERROR).json(jsonErrors(ResponseREST.SERVER_ERROR));
-        }     
-        if (accounts) {
-            const isValidPassword = await accounts.matchPassword(password);
-            if(isValidPassword){
-                const token = tokenSing(accounts);
-                return res.json({token: token});
+    await Accounts.findOne({username: username}, {_id:1, status:1, password:1, role:1})
+    .then(async (account) =>{  
+        if (account) {
+            if(account.status == 1){
+                const isValidPassword = await account.matchPassword(password, account.password);
+                if(!isValidPassword){
+                    response.status(StatusCodes.BAD_REQUEST).json({message: ReasonPhrases.BAD_REQUEST});
+                }
+                else{
+                    const token = await tokenSing(account);
+                    response.json({token: token, IdAccount: account._id});
+                }  
             }
             else{
-                response.status(ResponseREST.INVALID_INPUT).json(jsonErrors(ResponseREST.INVALID_INPUT));
-            }
+                response.status(StatusCodes.FORBIDDEN).json({message: "La cuenta esta bloqueada o esta inactiva comuniquese con el administrador"});        
+            } 
         }
-        else{
-            response.status(ResponseREST.NOT_FOUND).json(jsonErrors(ResponseREST.NOT_FOUND));
+        else{    
+            response.status(StatusCodes.NOT_FOUND).json({message: ReasonPhrases.NOT_FOUND});
         }
+    })
+    .catch(function (error){
+        console.log(error);
+        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({path: error, message: ReasonPhrases.INTERNAL_SERVER_ERROR});
     });
 }
 
-module.exports = {postSigIn};
+
+const patchLogin = async (request, response) => {
+    const {username, codeConfirmation} = request.body;
+    await Accounts.findOne({username: username}, {_id:1, codeConfirmation:1})
+    .then( async (account) =>{ 
+        if(account){
+            if(account.codeConfirmation == codeConfirmation){
+                await Accounts.updateOne({_id: account._id}, {status:1})
+                response.status(StatusCodes.OK).json({message:ReasonPhrases.OK});
+            }
+            else{
+                response.status(StatusCodes.BAD_REQUEST)
+                .json({message: "El código de confimación es inválido"});
+            }
+        }
+        else{
+            response.status(StatusCodes.NOT_FOUND)
+            .json({message: ReasonPhrases.NOT_FOUND});
+        }
+    })
+    .catch(function (error){
+        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({path: error.path, message: ReasonPhrases.INTERNAL_SERVER_ERROR});
+    });
+}
+
+module.exports = {postLogin, patchLogin};
