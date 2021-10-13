@@ -1,6 +1,7 @@
 const Accounts = require('../models/accounts');
 const {tokenSing}= require('../helpers/generateToken');
-const {StatusCodes, ReasonPhrases} = require ('http-status-codes');
+const {StatusCodes} = require ('http-status-codes');
+const {responseServer, responseGeneral} = require('../helpers/response-result');
 
 const postLogin = async (request, response) => {
     const {username, password} = request.body;
@@ -10,7 +11,7 @@ const postLogin = async (request, response) => {
             if(account.status == 1){
                 const isValidPassword = await account.matchPassword(password, account.password);
                 if(!isValidPassword){
-                    response.status(StatusCodes.BAD_REQUEST).json({message: ReasonPhrases.BAD_REQUEST});
+                    responseGeneral(response, StatusCodes.BAD_REQUEST, "La contraseña es inválida");
                 }
                 else{
                     const token = await tokenSing(account);
@@ -18,43 +19,39 @@ const postLogin = async (request, response) => {
                 }  
             }
             else{
-                response.status(StatusCodes.FORBIDDEN).json({message: "La cuenta esta bloqueada o esta inactiva comuniquese con el administrador"});        
+                responseGeneral(response, StatusCodes.FORBIDDEN, "La cuenta esta bloqueada o esta inactiva comuniquese con el administrador");        
             } 
         }
         else{    
-            response.status(StatusCodes.NOT_FOUND).json({message: ReasonPhrases.NOT_FOUND});
+            responseGeneral(response, StatusCodes.NOT_FOUND, "No se encontro la cuenta");
         }
     })
     .catch(function (error){
         console.log(error);
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error, message: ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 
 
 const patchLogin = async (request, response) => {
     const {username, codeConfirmation} = request.body;
-    await Accounts.findOne({username: username}, {_id:1, codeConfirmation:1})
+    await Accounts.findOne({username: username, status:{$ne:3}}, {_id:1, codeConfirmation:1})
     .then( async (account) =>{ 
         if(account){
             if(account.codeConfirmation == codeConfirmation){
                 await Accounts.updateOne({_id: account._id}, {status:1})
-                response.status(StatusCodes.OK).json({message:ReasonPhrases.OK});
+                responseGeneral(response, StatusCodes.CREATED, "La confirmación es exitosa");
             }
             else{
-                response.status(StatusCodes.BAD_REQUEST)
-                .json({message: "El código de confimación es inválido"});
+                responseGeneral(response, StatusCodes.BAD_REQUEST, "El código de confimación es inválido");
             }
         }
         else{
-            response.status(StatusCodes.NOT_FOUND)
-            .json({message: ReasonPhrases.NOT_FOUND});
+            responseGeneral(response, StatusCodes.NOT_FOUND, "No se encontro la cuenta o esta bloqueda");
         }
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message: ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 

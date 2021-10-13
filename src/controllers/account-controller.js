@@ -1,7 +1,9 @@
 const Accounts = require('../models/accounts');
-const {StatusCodes, ReasonPhrases} = require ('http-status-codes');
+const {StatusCodes} = require ('http-status-codes');
 const mongoose = require('mongoose');
 const {generateCode} = require('../helpers/generateCode');
+const {responseServer, responseNotFound, responseGeneral} = require('../helpers/response-result');
+const {sendEmail} = require('./email-controller');
 
 const validateExistsAccount = (request, response, next) => {
     const {idAccount} = request.body;
@@ -10,11 +12,10 @@ const validateExistsAccount = (request, response, next) => {
         if(accounts){
             return next();
         }
-        return response.status(StatusCodes.BAD_REQUEST).json({message: "La cuenta no existe"});
+        return responseGeneral(response, StatusCodes.BAD_REQUEST, "La cuenta no existe");
     })
     .catch(function (error){
-        return response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message: ReasonPhrases.INTERNAL_SERVER_ERROR});
+        return responseServer(response, error);
     });
 }
 
@@ -25,11 +26,10 @@ const validateExistsAccounts = (request, response, next) => {
         if(accounts.length == 2){
             return next();
         }
-        return response.status(StatusCodes.BAD_REQUEST).json({message: "Las cuentas no existen"});
+        return responseGeneral(response, StatusCodes.BAD_REQUEST, "Las cuentas no existen");
     })
     .catch(function (error){
-        return response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message: ReasonPhrases.INTERNAL_SERVER_ERROR});
+        return responseServer(response, error);
     });
 }
 
@@ -38,14 +38,12 @@ const validateExistsUsernameEmail = (request, response, next) => {
     Accounts.find({$or:[{username:username},{email:email}]}, {_id:1})
     .then(function (accounts) {  
         if(accounts.length){
-            return response.status(StatusCodes.CONFLICT)
-            .json({message: ReasonPhrases.CONFLICT});
+            return responseGeneral(response, StatusCodes.CONFLICT, "Existe una cuenta con el mismo nombre de usuario o correo");
         }
         return next();
     })
     .catch(function (error){
-        return response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message: ReasonPhrases.INTERNAL_SERVER_ERROR});
+        return responseServer(response, error);
     });
 }
 
@@ -54,17 +52,14 @@ const validateExistsAccountUpdate = (request, response, next) => {
     Accounts.find({$and :[{$or:[{username:username},{email:email}]}, {_id:{$ne: id}}]}, {_id:1})
     .then(function (accounts) {  
         if(accounts.length){
-            return response.status(StatusCodes.CONFLICT)
-            .json({message: ReasonPhrases.CONFLICT});
+            return responseGeneral(response, StatusCodes.CONFLICT, "Existe una cuenta con el mismo nombre de usuario o correo");
         }
         return next();
     })
     .catch(function (error){
-        return response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message: ReasonPhrases.INTERNAL_SERVER_ERROR});
+        return responseServer(response, error);
     });
 }
-
 
 
 const getAccountsFilters = async (request, response) => {
@@ -100,12 +95,11 @@ const getAccountsFilters = async (request, response) => {
             response.status(StatusCodes.OK).json(accounts);
         }
         else{
-            response.status(StatusCodes.NOT_FOUND).json({message:ReasonPhrases.NOT_FOUND});
+            responseNotFound(response);
         }
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 
@@ -116,12 +110,11 @@ const getAccounts = async (request, response) => {
             response.status(StatusCodes.OK).json(accounts);
         }
         else{
-            response.status(StatusCodes.NOT_FOUND).json({message:ReasonPhrases.NOT_FOUND});
+            responseNotFound(response);
         }
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 
@@ -133,12 +126,11 @@ const getAccount = async (request, response) => {
             response.status(StatusCodes.OK).json(account);
         }
         else{
-            response.status(StatusCodes.NOT_FOUND).json({message:ReasonPhrases.NOT_FOUND});
+            responseNotFound(response);
         }
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 
@@ -171,14 +163,13 @@ const postAccount = async (request, response) => {
     await account.save()
     .then(async (account)  =>{  
         const title = "Código de Confirmación de la cuenta"
-        const message = "Estimado usuario "+account.name+" "+account.lastname+
-        " para terminar el proceso de creación de su cuenta le enviamos su código de confirmación: "+ account.codeConfirmation;
-        await sendEmail(account.email,title,message);
+        const message = "Estimado usuario "+name+" "+lastname+
+        " para terminar el proceso de creación de su cuenta le enviamos su código de confirmación: "+ codeConfirmation;
+        await sendEmail(email,title,message);
         response.status(StatusCodes.CREATED).json(account);
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error, message: ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 
@@ -195,11 +186,10 @@ const putAccount = async (request, response) => {
     age:age, dateBirth:dateBirth, email: email, URLPhoto:"httpp.photo.com", idCity:idCityConverted, username:username};
     Accounts.updateOne(queryAccount, newValuesAccount)
     .then(function (document) {  
-        response.status(StatusCodes.OK).json({message:ReasonPhrases.OK});
+        responseGeneral(response, StatusCodes.OK, "La cuenta se edito exitosamente");
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 
@@ -210,11 +200,10 @@ const patchAccount = async (request, response) => {
     const newValuesAccount = {status:status};
     Accounts.updateOne(queryAccount, newValuesAccount)
     .then(async (document) =>{  
-        response.status(StatusCodes.OK).json({message:ReasonPhrases.OK});
+        responseGeneral(response, StatusCodes.OK, "La cuenta cambio su estado exitosamente");
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 

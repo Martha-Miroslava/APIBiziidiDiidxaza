@@ -1,6 +1,7 @@
 const Comments = require('../models/comments');
 const {StatusCodes, ReasonPhrases} = require ('http-status-codes');
 const mongoose = require('mongoose');
+const {responseServer, responseNotFound, responseGeneral} = require('../helpers/response-result');
 
 const getComments = async (request, response) => {
     const discussionID = request.params.discussionID;
@@ -11,12 +12,11 @@ const getComments = async (request, response) => {
             response.status(StatusCodes.OK).json(comments);
         }
         else{
-            response.status(StatusCodes.NOT_FOUND).json({message:ReasonPhrases.NOT_FOUND});
+            responseNotFound(response);
         }
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 
@@ -41,8 +41,7 @@ const postComment = async (request, response) => {
         response.status(StatusCodes.CREATED).json(comment);
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error, message: ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 
@@ -57,8 +56,7 @@ const patchComment = async (request, response) => {
         response.status(StatusCodes.OK).json({message:ReasonPhrases.OK});
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 

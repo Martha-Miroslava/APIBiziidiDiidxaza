@@ -1,7 +1,8 @@
 const Discussions = require('../models/discussions');
 const Accounts = require('../models/accounts');
-const {StatusCodes, ReasonPhrases} = require ('http-status-codes');
+const {StatusCodes} = require ('http-status-codes');
 const mongoose = require('mongoose');
+const {responseServer, responseNotFound, responseGeneral} = require('../helpers/response-result');
 
 const validateExistsDiscussion = (request, response, next) => {
     const {idDiscussion} = request.body;
@@ -10,11 +11,10 @@ const validateExistsDiscussion = (request, response, next) => {
         if(discussion){
             return next();
         }
-        return response.status(StatusCodes.BAD_REQUEST).json({message: "La discusion no existe"});
+        return responseGeneral(response, StatusCodes.BAD_REQUEST, "La discusion no existe");
     })
     .catch(function (error){
-        return response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message: ReasonPhrases.INTERNAL_SERVER_ERROR});
+        return responseServer(response, error);
     });
 }
 
@@ -34,12 +34,11 @@ const getDiscussionsFilters = async (request, response) => {
             response.status(StatusCodes.OK).json(discussions);
         }
         else{
-            response.status(StatusCodes.NOT_FOUND).json({message:ReasonPhrases.NOT_FOUND});
+            responseNotFound(response);
         }
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 
@@ -53,12 +52,11 @@ const getDiscussionsCriterion = async (request, response) => {
                 response.status(StatusCodes.OK).json(discussions);
             }
             else{
-                response.status(StatusCodes.NOT_FOUND).json({message:ReasonPhrases.NOT_FOUND});
+                responseNotFound(response);
             }
         })
         .catch(function (error){
-            response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-            .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+            responseServer(response, error);
         });
     } 
     Accounts.findById(criterion, {_id:0, discussions:1})
@@ -68,12 +66,11 @@ const getDiscussionsCriterion = async (request, response) => {
             response.status(StatusCodes.OK).json(account.discussions);
         }
         else{
-            response.status(StatusCodes.NOT_FOUND).json({message:ReasonPhrases.NOT_FOUND});
+            responseNotFound(response);
         }
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });  
 }
 
@@ -84,12 +81,11 @@ const getDiscussions = async (request, response) => {
             response.status(StatusCodes.OK).json(discussions);
         }
         else{
-            response.status(StatusCodes.NOT_FOUND).json({message:ReasonPhrases.NOT_FOUND});
+            responseNotFound(response);
         }
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 
@@ -102,12 +98,11 @@ const getDiscussion = async (request, response) => {
             response.status(StatusCodes.OK).json(discussion);
         }
         else{
-            response.status(StatusCodes.NOT_FOUND).json({message:ReasonPhrases.NOT_FOUND});
+            responseNotFound(response);
         }
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 
@@ -132,8 +127,7 @@ const postDiscussion = async (request, response) => {
         response.status(StatusCodes.CREATED).json(discussion);
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error, message: ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 
@@ -146,11 +140,10 @@ const patchDiscussion = async (request, response) => {
     const idConverted  = mongoose.Types.ObjectId(id);
     Accounts.updateOne({_id:idAccountConverted}, {discussions:idConverted})
     .then(function (document) {  
-        response.status(StatusCodes.OK).json({message:ReasonPhrases.OK});
+        responseGeneral(response, StatusCodes.OK, "La discusión se segui exitosamente");
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 

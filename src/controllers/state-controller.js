@@ -1,5 +1,6 @@
 const States = require('../models/states');
-const {StatusCodes, ReasonPhrases} = require ('http-status-codes');
+const {StatusCodes} = require ('http-status-codes');
+const {responseServer, responseNotFound, responseGeneral} = require('../helpers/response-result');
 
 const validateExistState = (request, response, next) => {
     const {idState} = request.body;
@@ -8,11 +9,10 @@ const validateExistState = (request, response, next) => {
         if(state){
             return next();
         }
-        return response.status(StatusCodes.BAD_REQUEST).json({message: "El estado no existe"}); 
+        return responseGeneral(response, StatusCodes.BAD_REQUEST, "El estado no existe");
     })
     .catch(function (error){
-        return response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message: ReasonPhrases.INTERNAL_SERVER_ERROR});
+        return responseServer(response, error);
     });
 }
 
@@ -23,12 +23,11 @@ const getStates = async (request, response) => {
             response.status(StatusCodes.OK).json(states);
         }
         else{
-            response.status(StatusCodes.NOT_FOUND).json({message:ReasonPhrases.NOT_FOUND});
+            responseNotFound(response);
         }
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 

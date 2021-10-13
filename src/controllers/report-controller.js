@@ -1,6 +1,7 @@
 const Reports = require('../models/reports');
-const {StatusCodes, ReasonPhrases} = require ('http-status-codes');
+const {StatusCodes} = require ('http-status-codes');
 const mongoose = require('mongoose');
+const {responseServer, responseNotFound} = require('../helpers/response-result');
 
 const postReport = async (request, response) => {
     const {
@@ -22,8 +23,7 @@ const postReport = async (request, response) => {
         response.status(StatusCodes.CREATED).json(report);
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 
@@ -39,12 +39,11 @@ const getReportsFilters = async (request, response) => {
                 response.status(StatusCodes.OK).json(reports);
             }
             else{
-                response.status(StatusCodes.NOT_FOUND).json({message:ReasonPhrases.NOT_FOUND});
+                responseNotFound(response);
             }
         })
         .catch(function (error){
-            response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-            .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+            responseServer(response, error);
         }); 
     }
     else{
@@ -85,12 +84,11 @@ const getReportsFilters = async (request, response) => {
                 response.status(StatusCodes.OK).json(reports);
             }
             else{
-                response.status(StatusCodes.NOT_FOUND).json({message:ReasonPhrases.NOT_FOUND});
+                responseNotFound(response);
             }
         })
         .catch(function (error){
-            response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-            .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+            responseServer(response, error);
         });
     }
 }
@@ -105,12 +103,11 @@ const getReports = async (request, response) => {
             response.status(StatusCodes.OK).json(reports);
         }
         else{
-            response.status(StatusCodes.NOT_FOUND).json({message:ReasonPhrases.NOT_FOUND});
+            responseNotFound(response);
         }
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 
@@ -125,12 +122,11 @@ const getReport = async (request, response) => {
             response.status(StatusCodes.OK).json(report);
         }
         else{
-            response.status(StatusCodes.NOT_FOUND).json({message:ReasonPhrases.NOT_FOUND});
+            responseNotFound(response);
         }
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 

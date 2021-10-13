@@ -1,6 +1,7 @@
 const Cities = require('../models/cities');
 const mongoose = require('mongoose');
-const {StatusCodes, ReasonPhrases} = require ('http-status-codes');
+const {StatusCodes} = require ('http-status-codes');
+const {responseServer, responseNotFound, responseGeneral} = require('../helpers/response-result');
 
 const validateExistsCity = (request, response, next) => {
     const {idCity} = request.body;
@@ -9,11 +10,10 @@ const validateExistsCity = (request, response, next) => {
         if(city){
             return next();
         }
-        return response.status(StatusCodes.BAD_REQUEST).json({message: "La ciudad no existe"});
+        return responseGeneral(response, StatusCodes.BAD_REQUEST, "La ciudad no existe")
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        return responseServer(response, error);
     });
 }
 
@@ -26,12 +26,11 @@ const getCities = async (request, response) => {
             response.status(StatusCodes.OK).json(cities);
         }
         else{
-            response.status(StatusCodes.NOT_FOUND).json({message:ReasonPhrases.NOT_FOUND});
+            responseNotFound(response);
         }
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 
@@ -50,8 +49,7 @@ const postCity = async (request, response) => {
         response.status(StatusCodes.CREATED).json(city);
     })
     .catch(function (error){
-        response.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({path: error.path, message:ReasonPhrases.INTERNAL_SERVER_ERROR});
+        responseServer(response, error);
     });
 }
 
