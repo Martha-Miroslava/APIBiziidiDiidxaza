@@ -48,8 +48,8 @@ const validateExistsUsernameEmail = (request, response, next) => {
 }
 
 const validateExistsAccountUpdate = (request, response, next) => {
-    const {id, email, username} = request.body;
-    Accounts.find({$and :[{$or:[{username:username},{email:email}]}, {_id:{$ne: id}}]}, {_id:1})
+    const {_id, email, username} = request.body;
+    Accounts.find({$and :[{$or:[{username:username},{email:email}]}, {_id:{$ne: _id}}]}, {_id:1})
     .then(function (accounts) {  
         if(accounts.length){
             return responseGeneral(response, StatusCodes.CONFLICT, "Existe una cuenta con el mismo nombre de usuario o correo");
@@ -176,10 +176,10 @@ const postAccount = async (request, response) => {
 
 const putAccount = async (request, response) => {
     const {
-        id,lastname, name, age,
+        _id,lastname, name, age,
         dateBirth, email, username, idCity
     } = request.body;
-    const idAccount  = mongoose.Types.ObjectId(id);
+    const idAccount  = mongoose.Types.ObjectId(_id);
     const idCityConverted  = mongoose.Types.ObjectId(idCity);
     const queryAccount = {_id:idAccount};
     const newValuesAccount = {lastname:lastname, name:name,
@@ -194,8 +194,8 @@ const putAccount = async (request, response) => {
 }
 
 const patchAccount = async (request, response) => {
-    const {id, status} = request.body;
-    const idAccount  = mongoose.Types.ObjectId(id);
+    const {_id, status} = request.body;
+    const idAccount  = mongoose.Types.ObjectId(_id);
     const queryAccount = {_id:idAccount};
     const newValuesAccount = {status:status};
     Accounts.updateOne(queryAccount, newValuesAccount)

@@ -18,6 +18,6 @@ router.get('/discussions/:discussionID', checkAuth, checkRoleAuth(["manager", "u
 
 router.post('/discussions', checkAuth, checkRoleAuth(["user"]), validationDiscussion, validateExistsAccount, postDiscussion);
 
-router.patch('/discussions', checkAuth, checkRoleAuth(["user"]), validationUpdateDiscussion, validateExistsAccount, validateExistsDiscussion, patchDiscussion);
+router.patch('/discussions', checkAuth, checkRoleAuth(["user"]), validationUpdateDiscussion, validateExistsAccount, patchDiscussion);
 
 module.exports = router;

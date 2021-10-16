@@ -139,19 +139,25 @@ const postDiscussion = async (request, response) => {
 
 const patchDiscussion = async (request, response) => {
     const {
-        idDiscussion, idAccount,
+        _id, idAccount,
     } = request.body;
     const idAccountConverted  = mongoose.Types.ObjectId(idAccount);
-    const idConverted  = mongoose.Types.ObjectId(idDiscussion);
+    const idConverted  = mongoose.Types.ObjectId(_id);
     Accounts.findOne({_id:idAccountConverted}, {discussions:1})
-    .then(async (account) => { 
-        if(account.discussions == '[]'){  
-            await Accounts.updateOne({_id:idAccountConverted}, {discussions:idConverted});
+    .then(async (account) => {
+        const discussion = await Discussions.findOne({_id:idAccountConverted});
+        if(discussion){
+            if(account.discussions == '[]'){  
+                await Accounts.updateOne({_id:idAccountConverted}, {discussions:idConverted});
+            }
+            else{
+                await Accounts.updateOne({_id:idAccountConverted}, {$push: {discussions:idConverted}});
+            }
+            responseGeneral(response, StatusCodes.OK, "La discusión se segui exitosamente");
         }
         else{
-            await Accounts.updateOne({_id:idAccountConverted}, {$push: {discussions:idConverted}});
+            return responseGeneral(response, StatusCodes.BAD_REQUEST, "La discusion no existe");
         }
-        responseGeneral(response, StatusCodes.OK, "La discusión se segui exitosamente");
     })
     .catch(function (error){
         responseServer(response, error);

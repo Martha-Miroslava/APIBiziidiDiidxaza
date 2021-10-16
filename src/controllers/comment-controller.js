@@ -46,8 +46,8 @@ const postComment = async (request, response) => {
 
 
 const deleteComment = async (request, response) => {
-    const {id} = request.body;
-    const idComment  = mongoose.Types.ObjectId(id);
+    const {_id} = request.body;
+    const idComment  = mongoose.Types.ObjectId(_id);
     Comments.deleteOne({_id:idComment})
     .then(function (document) {  
         responseGeneral(response, StatusCodes.OK, "El comentario se eliminó exitosamente");

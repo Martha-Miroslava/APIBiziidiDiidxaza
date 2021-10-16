@@ -1,6 +1,7 @@
 const  {check, param}  =  require ( 'express-validator' )
 const {StatusCodes} = require ('http-status-codes');
 const {validateResult} = require('../helpers/response-result');
+const {validationId} = require('../validators/account-validator');
 
 
 const validationDiscussionFilters  = [
@@ -85,17 +86,9 @@ const validationDiscussion = [
     }
 ]
 
-const validationDiscussionIdBody = [
-    check('idDiscussion')
-        .exists().withMessage('El campo debe existir')
-        .notEmpty().withMessage('El campo no debe estar vacío')
-        .matches(/^[a-z0-9]{24}$/).withMessage('El ID debe tener números y letras minúsculas')
-        .isLength(24).withMessage('Debe tener 24 caracteres')
-]
-
 const validationUpdateDiscussion = [
     validationAccountId,
-    validationDiscussionIdBody,
+    validationId,
     (request, response, next) => {
         validateResult(request, response, next);
     }
@@ -103,5 +96,5 @@ const validationUpdateDiscussion = [
 
 module.exports = {validationDiscussionFilters, validationDiscussionCriterion, validationCriterion, 
     validationDiscussionId, validationDiscussion, validationUpdateDiscussion, validationAccountId, 
-    validationComment, validationDiscussionIdBody
+    validationComment
 };

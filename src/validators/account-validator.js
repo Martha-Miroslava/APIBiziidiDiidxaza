@@ -142,7 +142,7 @@ const validationCreationAccount = [
 
 
 const validationId  = [
-    check('id')
+    check('_id')
         .exists().withMessage('El campo debe existir')
         .notEmpty().withMessage('El campo no debe estar vacío')
         .matches(/^[a-z0-9]{24}$/).withMessage('El ID debe tener números y letras minúsculas')
