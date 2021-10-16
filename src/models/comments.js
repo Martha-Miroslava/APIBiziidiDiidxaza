@@ -7,13 +7,7 @@ const comments = new Schema({
         require: true
     },
     dateCreation: { 
-        type: Date, 
-        default: Date.now 
-    },
-    status: {
-        type: Number,
-        min: 1,
-        max: 2,
+        type: String, 
         require: true
     },
     idAccount: [{ type: Schema.Types.ObjectId, ref: 'Accounts' }],

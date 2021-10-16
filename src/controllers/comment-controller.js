@@ -1,11 +1,11 @@
 const Comments = require('../models/comments');
-const {StatusCodes, ReasonPhrases} = require ('http-status-codes');
+const {StatusCodes} = require ('http-status-codes');
 const mongoose = require('mongoose');
 const {responseServer, responseNotFound, responseGeneral} = require('../helpers/response-result');
 
 const getComments = async (request, response) => {
     const discussionID = request.params.discussionID;
-    Comments.find({idDiscussion: discussionID})
+    Comments.find({idDiscussion: discussionID}, {idDiscussion:0})
     .populate({path: 'idAccount', select: 'name lastname'})
     .then(function (comments) {  
         if(comments.length){
@@ -28,11 +28,10 @@ const postComment = async (request, response) => {
     const idAccountConverted  = mongoose.Types.ObjectId(idAccount);
     const idDiscussionConverted  = mongoose.Types.ObjectId(idDiscussion);
     const dateNow = new Date();
-    const dateCreation = dateNow.getFullYear()+"-"+dateNow.getMonth()+"-"+dateNow.getDate();
+    const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
     const newComment = new Comments ({
         comment: comment,
         dateCreation: dateCreation,
-        status: 1,
         idAccount: idAccountConverted,
         idDiscussion: idDiscussionConverted
     });
@@ -46,18 +45,16 @@ const postComment = async (request, response) => {
 }
 
 
-const patchComment = async (request, response) => {
-    const { id,status} = request.body;
+const deleteComment = async (request, response) => {
+    const {id} = request.body;
     const idComment  = mongoose.Types.ObjectId(id);
-    const queryComment = {_id:idComment};
-    const newValuesComment = {status:status};
-    Comments.updateOne(queryComment, newValuesComment)
+    Comments.deleteOne({_id:idComment})
     .then(function (document) {  
-        response.status(StatusCodes.OK).json({message:ReasonPhrases.OK});
+        responseGeneral(response, StatusCodes.OK, "El comentario se eliminó exitosamente");
     })
     .catch(function (error){
         responseServer(response, error);
     });
 }
 
-module.exports = {getComments, postComment, patchComment}
+module.exports = {getComments, postComment, deleteComment}

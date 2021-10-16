@@ -12,17 +12,12 @@ const validationCreationComment = [
     }
 ]
 
-const validationUpdateComment = [
+const validationDeleteComment = [
     validationId,
-    check('status')
-        .exists().withMessage('El campo debe existir')
-        .notEmpty().withMessage('El campo no debe estar vacío')
-        .isNumeric().withMessage('El campo no debe ser un número')
-        .matches(/^[1-2]$/).withMessage('Permitir solo números del 1 al 2'),
     (request, response, next) => {
         validateResult(request, response, next);
     }
 ]
 
 
-module.exports = {validationCreationComment,validationUpdateComment};
+module.exports = {validationCreationComment, validationDeleteComment};

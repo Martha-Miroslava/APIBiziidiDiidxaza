@@ -8,7 +8,7 @@ const {validationDiscussionFilters, validationDiscussionCriterion, validationCri
     validationDiscussion, validationUpdateDiscussion} = require('../validators/discussion-validator');
 const {validateExistsAccount} = require('../controllers/account-controller');
 
-router.get('/discussions/:filter', checkAuth, checkRoleAuth(["manager", "user"]), validationDiscussionFilters, getDiscussionsFilters);
+router.get('/discussions/filters/:filter', checkAuth, checkRoleAuth(["manager", "user"]), validationDiscussionFilters, getDiscussionsFilters);
 
 router.get('/discussions/:filter/:criterion', checkAuth, checkRoleAuth(["manager", "user"]), validationDiscussionCriterion, validationCriterion, getDiscussionsCriterion);
 

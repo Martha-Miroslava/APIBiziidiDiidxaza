@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
-
+const{NODE_ENV, URI_PRODUCTION, URI_TEST} = process.env
 // Connection the dataBase
-const dataBaseConnect = () => {
-    const URI = process.env.NODE_ENV === 'test'
-    ? process.env.URI
-    : process.env.URI_TEST;
-    mongoose.connect(
+const dataBaseConnect = async () => {
+    const URI = NODE_ENV === 'test'
+    ? URI_PRODUCTION
+    : URI_TEST;
+    await mongoose.connect(
         URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true

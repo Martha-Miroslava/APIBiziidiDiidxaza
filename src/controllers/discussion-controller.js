@@ -20,16 +20,14 @@ const validateExistsDiscussion = (request, response, next) => {
 
 const getDiscussionsFilters = async (request, response) => {
     const filter = request.params.filter;
-    let queryDiscussions = {numberComments:{$gte:15}};;
+    let queryDiscussions = {numberComments:{ $gte: 15 }};
     if(filter == "news"){
         const dateNow = new Date();
-        const dateCreationNow = dateNow.getFullYear()+"-"+dateNow.getMonth()+"-"+dateNow.getDate();
-        const threeDayBefore = new Date(dateNow - 3);
-        const dateCreationThreeDay = threeDayBefore.getFullYear()+"-"+threeDayBefore.getMonth()+"-"+threeDayBefore.getDate();
-        queryDiscussions = {$and: [{dateCreation:{$gte:dateCreationThreeDay}},{dateCreation: {$lte:dateCreationNow}}]};
-    }  
-    Discussions.find(queryDiscussions, {title:1, dateCreation:1, numberComments:1, theme:1})
-    .then(function (discussions) {  
+        const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
+        queryDiscussions = {dateCreation:dateCreation};
+    } 
+    await Discussions.find(queryDiscussions, {title:1, dateCreation:1, numberComments:1, theme:1})
+    .then(function (discussions) {
         if(discussions.length){
             response.status(StatusCodes.OK).json(discussions);
         }
@@ -59,19 +57,26 @@ const getDiscussionsCriterion = async (request, response) => {
             responseServer(response, error);
         });
     } 
-    Accounts.findById(criterion, {_id:0, discussions:1})
-    .populate({path: 'discussions', select: 'title dateCreation numberComments theme'})
-    .then(function (account) {  
-        if(account){
-            response.status(StatusCodes.OK).json(account.discussions);
-        }
-        else{
-            responseNotFound(response);
-        }
-    })
-    .catch(function (error){
-        responseServer(response, error);
-    });  
+    else{
+        Accounts.findOne({_id:criterion}, {_id:0, discussions:1})
+        .then(async (account) =>{
+            if(!account || account.discussions == '[]'){
+                responseNotFound(response);
+            }
+            else{
+                const disccussions = await Discussions.find({_id:{ $in: account.discussions}}, {title:1, dateCreation:1, numberComments:1, theme:1})
+                if(disccussions.length){
+                    response.status(StatusCodes.OK).json(disccussions);
+                }
+                else{
+                    responseNotFound(response);
+                }
+            }
+        })
+        .catch(function (error){
+            responseServer(response, error);
+        }); 
+    } 
 }
 
 const getDiscussions = async (request, response) => {
@@ -134,12 +139,18 @@ const postDiscussion = async (request, response) => {
 
 const patchDiscussion = async (request, response) => {
     const {
-        id, idAccount,
+        idDiscussion, idAccount,
     } = request.body;
     const idAccountConverted  = mongoose.Types.ObjectId(idAccount);
-    const idConverted  = mongoose.Types.ObjectId(id);
-    Accounts.updateOne({_id:idAccountConverted}, {discussions:idConverted})
-    .then(function (document) {  
+    const idConverted  = mongoose.Types.ObjectId(idDiscussion);
+    Accounts.findOne({_id:idAccountConverted}, {discussions:1})
+    .then(async (account) => { 
+        if(account.discussions == '[]'){  
+            await Accounts.updateOne({_id:idAccountConverted}, {discussions:idConverted});
+        }
+        else{
+            await Accounts.updateOne({_id:idAccountConverted}, {$push: {discussions:idConverted}});
+        }
         responseGeneral(response, StatusCodes.OK, "La discusión se segui exitosamente");
     })
     .catch(function (error){

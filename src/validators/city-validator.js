@@ -6,7 +6,7 @@ const validationStateId  = [
         .exists().withMessage('El campo debe existir')
         .notEmpty().withMessage('El campo no debe estar vacío')
         .matches(/^[a-z0-9]{24}$/).withMessage('El ID debe tener números y letras minúsculas')
-        .isLength(24).withMessage('Debe Tener que tener 24 caracteres'),
+        .isLength(24).withMessage('Debe tener 24 caracteres'),
     (request, response, next) => {
         validateResult(request, response, next);
     }
@@ -22,7 +22,7 @@ const validationCity  = [
         .exists().withMessage('El campo debe existir')
         .notEmpty().withMessage('El campo no debe estar vacío')
         .matches(/^[a-z0-9]{24}$/).withMessage('El ID debe tener números y letras minúsculas')
-        .isLength(24).withMessage('Debe Tener que tener 24 caracteres'),
+        .isLength(24).withMessage('Debe tener 24 caracteres'),
     (request, response, next) => {
         validateResult(request, response, next);
     }
