@@ -17,7 +17,7 @@ const validationAccount = [
     check('age')
         .exists().withMessage('El campo debe existir')
         .notEmpty().withMessage('El campo no debe estar vacío')
-        .isNumeric().withMessage('El campo no debe ser un número')
+        .not().isString().withMessage('El campo debe ser un número')
         .custom((value, { request }) => {
             if (value < 10 || value > 100) {
                 return false;
@@ -28,7 +28,7 @@ const validationAccount = [
         .exists().withMessage('El campo debe existir')
         .notEmpty().withMessage('El campo no debe estar vacío')
         .isString().withMessage('El campo debe ser una cadena')
-        .matches(/^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/).withMessage('La fecha debe tener el formato AAAA-MM-DD')
+        .matches(/^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/).withMessage('La fecha debe tener el formato YYYY-MM-DD')
         .custom((value, { request }) => {
             try{
                 const dateBirth = new Date(value).getFullYear();
@@ -81,8 +81,8 @@ const validationConfirmationAccount = [
     check('codeConfirmation')
         .exists().withMessage('El campo debe existir')
         .notEmpty().withMessage('El campo no debe estar vacío')
-        .isNumeric().withMessage('El campo no debe ser un número')
-        .matches(/^[0-9]{6}$/).withMessage('Permitir solo números del 0 al 9'),
+        .not().isString().withMessage('El campo debe ser un número')
+        .matches(/^[0-9]{6}$/).withMessage('Permitir solo números del 0 al 9 y deben ser 6 dígitos'),
     (request, response, next) => {
         validateResult(request, response, next);
     }
@@ -100,12 +100,12 @@ const validationAccountEmail = [
     check('title')
         .notEmpty().withMessage('El campo no debe estar vacío')
         .isString().withMessage('El campo debe ser una cadena')
-        .isLength({ min: 5, max: 100}).withMessage('El comentario debe tener un mínimo de 5 caracteres y un máximo de 100 caracteres')
+        .isLength({ min: 5, max: 100}).withMessage('El titulo del mensaje debe tener un mínimo de 5 caracteres y un máximo de 100 caracteres')
         .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]+(\s*[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]*){5,600}/).withMessage('Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios'), 
     check('message')
         .notEmpty().withMessage('El campo no debe estar vacío')
         .isString().withMessage('El campo debe ser una cadena')
-        .isLength({ min: 5, max: 600}).withMessage('El comentario debe tener un mínimo de 5 caracteres y un máximo de 600 caracteres')
+        .isLength({ min: 5, max: 600}).withMessage('El mensaje debe tener un mínimo de 5 caracteres y un máximo de 600 caracteres')
         .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]+(\s*[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]*){5,600}/).withMessage('Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios'), 
     (request, response, next) => {
         validateResult(request, response, next);
@@ -134,7 +134,7 @@ const validationCreationAccount = [
         .exists().withMessage('El campo debe existir')
         .notEmpty().withMessage('El campo no debe estar vacío')
         .matches(/^[a-z0-9]{24}$/).withMessage('El ID debe tener números y letras minúsculas')
-        .isLength(24),
+        .isLength(24).withMessage('Debe Tener que tener 24 caracteres'),
     (request, response, next) => {
         validateResult(request, response, next);
     }
@@ -146,7 +146,7 @@ const validationId  = [
         .exists().withMessage('El campo debe existir')
         .notEmpty().withMessage('El campo no debe estar vacío')
         .matches(/^[a-z0-9]{24}$/).withMessage('El ID debe tener números y letras minúsculas')
-        .isLength(24)
+        .isLength(24).withMessage('Debe Tener que tener 24 caracteres')
 ]
 
 const validationUpdateAccount  = [
@@ -172,7 +172,7 @@ const validationAccountId  = [
         .exists().withMessage('El campo debe existir')
         .notEmpty().withMessage('El campo no debe estar vacío')
         .matches(/^[a-z0-9]{24}$/).withMessage('El ID debe tener números y letras minúsculas')
-        .isLength(24),
+        .isLength(24).withMessage('Debe Tener que tener 24 caracteres'),
     (request, response, next) => {
         validateResult(request, response, next);
     }
@@ -198,13 +198,13 @@ const validationCriterion = (request, response, next) =>{
     let message = "Solo se permiten letras y espacios";
     switch(filter){
         case "age":
-            expReg = new RegExp(/^[1-9]{1,2}$/);
+            expReg = new RegExp(/^[0-9]{1,2}$/);
             message = "El campo debe ser un número";
             break;
         case "dateBirth":
         case "dateCreation":
             expReg = new RegExp(/^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/);
-            message = "La fecha debe tener el formato AAAA-MM-DD";
+            message = "La fecha debe tener el formato YYYY-MM-DD";
             break;
         case "email":
             expReg = new RegExp(/\b[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,6}\b/);
@@ -212,11 +212,11 @@ const validationCriterion = (request, response, next) =>{
             break;
         case "username":
             expReg = new RegExp(/^[A-Za-z0-9]{3,20}$/);
-            message = "El nombre de usuario debe tener solo letras y números de 3 a 20 caracteres'";
+            message = "El nombre de usuario debe tener solo letras y números. De 3 a 20 caracteres'";
             break;
     }
     if( !expReg.test(criterion)) {
-        return response.status(StatusCodes.BAD_REQUEST).json({errors: message});
+        return response.status(StatusCodes.BAD_REQUEST).json({message: message});
     }
     return next();
 }

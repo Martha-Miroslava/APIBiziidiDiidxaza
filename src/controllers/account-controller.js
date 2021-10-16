@@ -26,7 +26,7 @@ const validateExistsAccounts = (request, response, next) => {
         if(accounts.length == 2){
             return next();
         }
-        return responseGeneral(response, StatusCodes.BAD_REQUEST, "Las cuentas no existen");
+        return responseGeneral(response, StatusCodes.BAD_REQUEST, "La cuenta o cuentas no existen");
     })
     .catch(function (error){
         return responseServer(response, error);
@@ -143,7 +143,7 @@ const postAccount = async (request, response) => {
     let codeConfirmation = generateCode();
     const idCityConverted  = mongoose.Types.ObjectId(idCity);
     const dateNow = new Date();
-    const dateCreation = dateNow.getFullYear()+"-"+dateNow.getMonth()+"-"+dateNow.getDate();
+    const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
     const account = new Accounts ({
         lastname: lastname,
         name: name,

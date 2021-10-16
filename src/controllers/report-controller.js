@@ -10,7 +10,7 @@ const postReport = async (request, response) => {
     const idAcountConverted  = mongoose.Types.ObjectId(idAccount);
     const accountReportedConverted  = mongoose.Types.ObjectId(accountReported);
     const dateNow = new Date();
-    const dateCreation = dateNow.getFullYear()+"-"+dateNow.getMonth()+"-"+dateNow.getDate();
+    const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
     const report = new Reports ({
         reason: reason,
         context:context,

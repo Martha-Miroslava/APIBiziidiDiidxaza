@@ -19,7 +19,7 @@ const validationReport = [
         .exists().withMessage('El campo debe existir')
         .notEmpty().withMessage('El campo no debe estar vacío')
         .matches(/^[a-z0-9]{24}$/).withMessage('El ID de la cuenta reportada debe tener números y letras minúsculas')
-        .isLength(24),
+        .isLength(24).withMessage('Debe Tener que tener 24 caracteres'),
     (request, response, next) => {
         validateResult(request, response, next);
     }
@@ -42,11 +42,11 @@ const validationReportFilters  = [
 const validationCriterion = (request, response, next) =>{
     const filter = request.params.filter;
     const criterion = request.params.criterion;
-    var expReg =  new RegExp(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]+(\s*[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]*){5,500}/);
-    let message = "Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios. Solo de 5 a 500 caracteres";
+    var expReg =  new RegExp(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü ]{2,150}$/);
+    let message = "Solo letras de la A a la Z. Caracteres de 2 a 150";
     if(filter =="dateCreation"){
         expReg = new RegExp(/^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/);
-        message = "La fecha debe tener el formato AAAA-MM-DD";
+        message = "La fecha debe tener el formato YYYY-MM-DD";
     }
     if( !expReg.test(criterion)) {
         return response.status(StatusCodes.BAD_REQUEST).json({errors: message});
@@ -59,7 +59,7 @@ const validationReportId  = [
         .exists().withMessage('El campo debe existir')
         .notEmpty().withMessage('El campo no debe estar vacío')
         .matches(/^[a-z0-9]{24}$/).withMessage('El ID debe tener números y letras minúsculas')
-        .isLength(24),
+        .isLength(24).withMessage('Debe Tener que tener 24 caracteres'),
     (request, response, next) => {
         validateResult(request, response, next);
     }

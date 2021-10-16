@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "test": "jest --verbose --silent --detectOpenHandles"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,8 @@
     "nodemailer": "^6.7.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "jest": "^27.2.5",
+    "nodemon": "^2.0.12",
+    "supertest": "^6.1.6"
   }
 }

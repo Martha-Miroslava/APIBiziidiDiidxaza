@@ -16,7 +16,7 @@ const accounts = new Schema({
         require: true
     },
     dateBirth: {
-        type: Date,
+        type: String,
         require: true
     },
     email: {
@@ -53,7 +53,7 @@ const accounts = new Schema({
         require: true
     },
     dateCreation: { 
-        type: Date,
+        type: String,
         require: true
     },
     idCity: [{ type: Schema.Types.ObjectId, ref: 'Cities'}],

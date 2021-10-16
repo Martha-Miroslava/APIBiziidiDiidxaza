@@ -28,7 +28,7 @@ const getDiscussionsFilters = async (request, response) => {
         const dateCreationThreeDay = threeDayBefore.getFullYear()+"-"+threeDayBefore.getMonth()+"-"+threeDayBefore.getDate();
         queryDiscussions = {$and: [{dateCreation:{$gte:dateCreationThreeDay}},{dateCreation: {$lte:dateCreationNow}}]};
     }  
-    Discussions.find(queryDiscussions, {title:1, dateCreation:1, numberComments:1})
+    Discussions.find(queryDiscussions, {title:1, dateCreation:1, numberComments:1, theme:1})
     .then(function (discussions) {  
         if(discussions.length){
             response.status(StatusCodes.OK).json(discussions);
@@ -46,7 +46,7 @@ const getDiscussionsCriterion = async (request, response) => {
     const filter = request.params.filter;
     const criterion = request.params.criterion;
     if(filter == "title"){
-        Discussions.find({title:{$regex : new RegExp(criterion, "i")}}, {title:1, dateCreation:1, numberComments:1})
+        Discussions.find({title:{$regex : new RegExp(criterion, "i")}}, {title:1, dateCreation:1, numberComments:1, theme:1})
         .then(function (discussions) {  
             if(discussions.length){
                 response.status(StatusCodes.OK).json(discussions);
@@ -60,7 +60,7 @@ const getDiscussionsCriterion = async (request, response) => {
         });
     } 
     Accounts.findById(criterion, {_id:0, discussions:1})
-    .populate({path: 'discussions', select: 'title dateCreation numberComments'})
+    .populate({path: 'discussions', select: 'title dateCreation numberComments theme'})
     .then(function (account) {  
         if(account){
             response.status(StatusCodes.OK).json(account.discussions);
@@ -75,7 +75,7 @@ const getDiscussionsCriterion = async (request, response) => {
 }
 
 const getDiscussions = async (request, response) => {
-    Discussions.find(null,{title:1, dateCreation:1, numberComments:1})
+    Discussions.find(null,{title:1, dateCreation:1, numberComments:1, theme:1})
     .then(function (discussions) {  
         if(discussions.length){
             response.status(StatusCodes.OK).json(discussions);
@@ -113,7 +113,7 @@ const postDiscussion = async (request, response) => {
     } = request.body;
     const idAccountConverted  = mongoose.Types.ObjectId(idAccount);
     const dateNow = new Date();
-    const dateCreation = dateNow.getFullYear()+"-"+dateNow.getMonth()+"-"+dateNow.getDate();
+    const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
     const discussion = new Discussions ({
         title: title,
         comment: comment,

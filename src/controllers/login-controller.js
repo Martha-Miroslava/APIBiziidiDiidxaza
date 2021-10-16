@@ -15,7 +15,7 @@ const postLogin = async (request, response) => {
                 }
                 else{
                     const token = await tokenSing(account);
-                    response.json({token: token, IdAccount: account._id});
+                    response.status(StatusCodes.CREATED).json({token: token, IdAccount: account._id});
                 }  
             }
             else{
@@ -35,7 +35,7 @@ const postLogin = async (request, response) => {
 
 const patchLogin = async (request, response) => {
     const {username, codeConfirmation} = request.body;
-    await Accounts.findOne({username: username, status:{$ne:3}}, {_id:1, codeConfirmation:1})
+    await Accounts.findOne({$and:[{username: username}, {status:[ 1,2]}]}, {_id:1, codeConfirmation:1})
     .then( async (account) =>{ 
         if(account){
             if(account.codeConfirmation == codeConfirmation){

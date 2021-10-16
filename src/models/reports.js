@@ -11,7 +11,7 @@ const reports = new Schema({
         require: true
     },
     dateCreation: { 
-        type: Date,
+        type: String,
         require: true
     },
     idAccount: [{ type: Schema.Types.ObjectId, ref: 'Accounts' }],

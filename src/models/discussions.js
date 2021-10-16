@@ -11,7 +11,7 @@ const discussions = new Schema({
         require: true
     },
     dateCreation: { 
-        type: Date, 
+        type: String, 
         default: Date.now 
     },
     status: {

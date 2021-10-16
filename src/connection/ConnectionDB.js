@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
 
+
 // Connection the dataBase
 const dataBaseConnect = () => {
-    const URI = process.env.URI;
+    const URI = process.env.NODE_ENV === 'test'
+    ? process.env.URI
+    : process.env.URI_TEST;
     mongoose.connect(
         URI, {
         useNewUrlParser: true,

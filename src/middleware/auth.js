@@ -16,7 +16,6 @@ const checkAuth = async (request, response, next) => {
         }
     })
     .catch ((error) => {
-        console.log(error)
         if(error.message === "jwt expired"){
             return response.status(StatusCodes.INSUFFICIENT_SPACE_ON_RESOURCE).json({message: "Se agotado se tiempo en el sistema, por favor vuelva a iniciar sesión"});
         }
