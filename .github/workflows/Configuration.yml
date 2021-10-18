@@ -61,7 +61,8 @@ jobs:
         path: tests/reports
   
   build-image:
-    runs-on: [tests]
+    needs: [tests]
+    runs-on: ubuntu-latest
     steps:
       - name: checkout-repo
         uses: actions/checkout@v2
