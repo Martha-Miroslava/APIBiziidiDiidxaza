@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon src/app.js",
-    "test": "mocha --timeout 8000",
-    "test-html": "mocha --timeout 8000 --reporter mochawesome --reporter-options reportDir = tests/reports, reportFilename = report-tests"
+    "test": "mocha ./tests --timeout 8000",
+    "test-html": "mocha ./tests --timeout 8000 --reporter mochawesome --reporter-options reportDir=./tests/reports"
   },
   "keywords": [],
   "author": "",
