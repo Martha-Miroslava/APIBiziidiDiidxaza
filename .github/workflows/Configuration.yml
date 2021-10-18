@@ -15,16 +15,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      ACCESS_TOKEN_SECRET: ${{secrets.ACCESS_TOKEN_SECRET}}
-      PORT: ${{ secrets.PORT }}
-      HOST: ${{ secrets.HOST }}
-      PASSWORD: ${{ secrets.PASSWORD }} 
-      PORT_EMAIL: ${{ secrets.PORT_EMAIL }}
-      URI_PRODUCTION: ${{ secrets.URI_PRODUCTION }}
-      URI_TEST: ${{ secrets.URI_TEST }}
-      USER_EMAIL: ${{ secrets.USER_EMAIL }}
-      NODE_ENV: test
     steps:
     - name: Checkhout the code
       uses: actions/checkout@v2
@@ -40,6 +30,16 @@ jobs:
   test:
     needs: [build]
     runs-on: ubuntu-latest
+    env:
+      ACCESS_TOKEN_SECRET: ${{secrets.ACCESS_TOKEN_SECRET}}
+      PORT: ${{ secrets.PORT }}
+      HOST: ${{ secrets.HOST }}
+      PASSWORD: ${{ secrets.PASSWORD }} 
+      PORT_EMAIL: ${{ secrets.PORT_EMAIL }}
+      URI_PRODUCTION: ${{ secrets.URI_PRODUCTION }}
+      URI_TEST: ${{ secrets.URI_TEST }}
+      USER_EMAIL: ${{ secrets.USER_EMAIL }}
+      NODE_ENV: test
     steps:
     - name: Run tests
       run: npm run test-html
