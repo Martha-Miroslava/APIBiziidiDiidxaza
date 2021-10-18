@@ -4,8 +4,8 @@ const{NODE_ENV, URI_PRODUCTION, URI_TEST} = process.env
 // Connection the dataBase
 const dataBaseConnect = async () => {
     const URI = NODE_ENV === 'test'
-    ? URI_PRODUCTION
-    : URI_TEST;
+    ? URI_TEST
+    : URI_PRODUCTION;
     await mongoose.connect(
         URI, {
         useNewUrlParser: true,
