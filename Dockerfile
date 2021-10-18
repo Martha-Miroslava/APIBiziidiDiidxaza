@@ -1,5 +1,5 @@
 FROM node:14
-WORKDIR /apiBiziidi
+WORKDIR /apibiziidi
 COPY package*.json ./
 RUN npm install
 ENV ACCESS_TOKEN_SECRET= ${{secrets.ACCESS_TOKEN_SECRET}}
