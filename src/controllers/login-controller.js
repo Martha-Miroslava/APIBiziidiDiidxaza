@@ -5,7 +5,7 @@ const {responseServer, responseGeneral} = require('../helpers/response-result');
 
 const postLogin = async (request, response) => {
     const {username, password} = request.body;
-    await Accounts.findOne({username: username}, {_id:1, status:1, password:1, role:1})
+    await Accounts.findOne({username: username}, {_id:1, status:1, password:1, role:1, name:1, lastname:1, URLPhoto:1})
     .then(async (account) =>{  
         if (account) {
             if(account.status == 1){
@@ -15,7 +15,7 @@ const postLogin = async (request, response) => {
                 }
                 else{
                     const token = await tokenSing(account);
-                    response.status(StatusCodes.CREATED).json({token: token, IdAccount: account._id});
+                    response.status(StatusCodes.CREATED).json({token: token, account: account});
                 }  
             }
             else{
