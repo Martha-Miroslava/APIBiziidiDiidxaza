@@ -8,8 +8,8 @@ const {sendEmail} = require('./email-controller');
 const validateExistsAccount = (request, response, next) => {
     const {idAccount} = request.body;
     Accounts.findById(idAccount, {_id:1})
-    .then(function (accounts) {  
-        if(accounts){
+    .then(function (account) {  
+        if(account){
             return next();
         }
         return responseGeneral(response, StatusCodes.BAD_REQUEST, "La cuenta no existe");

@@ -49,7 +49,7 @@ const validationCriterion = (request, response, next) =>{
         message = "La fecha debe tener el formato YYYY-MM-DD";
     }
     if( !expReg.test(criterion)) {
-        return response.status(StatusCodes.BAD_REQUEST).json({errors: message});
+        return response.status(StatusCodes.BAD_REQUEST).json({message: message});
     }
     return next();
 }

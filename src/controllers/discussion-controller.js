@@ -145,7 +145,7 @@ const patchDiscussion = async (request, response) => {
     const idConverted  = mongoose.Types.ObjectId(_id);
     Accounts.findOne({_id:idAccountConverted}, {discussions:1})
     .then(async (account) => {
-        const discussion = await Discussions.findOne({_id:idAccountConverted});
+        const discussion = await Discussions.findOne({_id:idConverted});
         if(discussion){
             if(account.discussions == '[]'){  
                 await Accounts.updateOne({_id:idAccountConverted}, {discussions:idConverted});

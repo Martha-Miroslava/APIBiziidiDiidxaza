@@ -1,21 +1,23 @@
-const request = require('supertest');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
-const {app, server} = require('../src/app');
-//const {dataBaseConnect} = require('../src/connection/ConnectionDB');
-//const api = supertest(app);
+const {server} = require('../src/app');
+chai.should();
+chai.use(chaiHttp);
 
-beforeEach(async () => {
-    jest.setTimeout(10000)
-})
+describe("Tests States",()=>{
+    it("GET /States", (done) =>{
+       chai.request(server).get("/states")
+        .end( (error, response) => {
+            response.should.have.status(200);
+            response.body.should.be.a("array");
+            response.body.length.should.be.eq(2);
+            done();
+        });
+    });
+});
 
-test('Status code 200', async() => {
-    const response = await request(app).get('/states').send();
-    expect(response.statusCode).toBe(200)
-})
-
-
-afterAll(async ()  => {
-    //await dataBaseConnect.close();
-    await mongoose.disconnect();
-    await server.close();
+after(() => {
+    server.close();
+    mongoose.connection.close();
 });

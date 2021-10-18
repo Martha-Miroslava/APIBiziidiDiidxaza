@@ -31,7 +31,7 @@ const discussions = new Schema({
         default: 0,
         require: true
     },
-    idAccount: [{ type: Schema.Types.ObjectId, ref: 'Accounts' }]
+    idAccount: [{ type: Schema.Types.ObjectId, ref: 'Accounts'}]
 });
 
 discussions.plugin(require('mongoose-autopopulate'));
