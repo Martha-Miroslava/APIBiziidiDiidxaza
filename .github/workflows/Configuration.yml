@@ -41,6 +41,17 @@ jobs:
       USER_EMAIL: ${{ secrets.USER_EMAIL }}
       NODE_ENV: test
     steps:
+    - name: Checkhout the code
+      uses: actions/checkout@v2
+
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with: 
+        node-version: 14.x
+    
+    - name: Install dependencies
+      run: npm ci
+    
     - name: Run tests
       run: npm run test-html
 
