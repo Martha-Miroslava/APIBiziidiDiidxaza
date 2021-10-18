@@ -27,7 +27,7 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-  test:
+  tests:
     needs: [build]
     runs-on: ubuntu-latest
     env:
@@ -58,5 +58,5 @@ jobs:
     - name: Upload test report
       uses: actions/upload-artifact@v2
       with:
-        name: test_report
+        name: test_report/report
         path: tests/reports
