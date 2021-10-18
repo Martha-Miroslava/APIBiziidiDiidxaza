@@ -15,24 +15,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      ACCESS_TOKEN_SECRET: ${{secrets.ACCESS_TOKEN_SECRET}}
+      PORT: ${{ secrets.PORT }}
+      HOST: ${{ secrets.HOST }}
+      PASSWORD: ${{ secrets.PASSWORD }} 
+      PORT_EMAIL: ${{ secrets.PORT_EMAIL }}
+      URI_PRODUCTION: ${{ secrets.URI_PRODUCTION }}
+      URI_TEST: ${{ secrets.URI_TEST }}
+      USER_EMAIL: ${{ secrets.USER_EMAIL }}
+      NODE_ENV: Production
     steps:
     - name: Checkhout the code
       uses: actions/checkout@v2
-    
-    - name: Create env file
-        run: |
-          touch .env
-          echo URI = $URI >> .env
-          echo ACCESS_TOKEN_SECRET = ${{ secrets.ACCESS_TOKEN_SECRET }} >> .env
-          echo PORT = ${{ secrets.PORT }} >> .env
-          echo HOST = ${{ secrets.HOST }} >> .env
-          echo PASSWORD = ${{ secrets.PASSWORD }} >> .env
-          echo PORT_EMAIL = ${{ secrets.PORT_EMAIL }} >> .env
-          echo URI_PRODUCTION = ${{ secrets.URI_PRODUCTION }} >> .env
-          echo URI_TEST = ${{ secrets.URI_TEST }} >> .env
-          echo USER_EMAIL = ${{ secrets.USER_EMAIL }} >> .env
-          echo NODE_ENV = Production
+
     - name: Setup Node
       uses: actions/setup-node@v1
 
