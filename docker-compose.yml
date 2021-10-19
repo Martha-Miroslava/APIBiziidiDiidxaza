@@ -1,0 +1,18 @@
+version: "1"
+services:
+  app:
+    image: mm1805/apibiziididiidxaza
+    container_name: apibiziidi
+    build: ./
+    restart: always
+    ports:
+    - "5000:5000"
+    enviroment: 
+      - NODE_ENV = Production
+      - PORT = ${{ secrets.PORT }}
+      - PORT_EMAIL= ${{ secrets.PORT_EMAIL }}
+      - HOST=  ${{ secrets.HOST }}
+      - PASSWORD= ${{ secrets.PASSWORD }}
+      - USER_EMAIL= ${{ secrets.USER_EMAIL }}
+      - ACCESS_TOKEN_SECRET = ${{secrets.ACCESS_TOKEN_SECRET}}
+      - URI_PRODUCTION = ${{ secrets.URI_PRODUCTION }}
