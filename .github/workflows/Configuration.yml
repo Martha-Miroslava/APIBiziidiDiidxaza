@@ -67,18 +67,31 @@ jobs:
       - name: checkout-repo
         uses: actions/checkout@v2
 
-      - name: login-dockerhub
-        uses: docker/login-action@v1
+      - name: Install buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v1
         with:
-          username: ${{secrets.USERNAME_DOCKERHUB}}
-          password: ${{secrets.PASSWORD_DOCKERHUB}}
+          version: latest
+      - name: Login to Docker Hub
+        run: echo "${{secrets.PASSWORD_DOCKERHUB}}" | docker login -u "${{secrets.USERNAME_DOCKERHUB}}" --password-stdin
+      - name: Build the image
+        run: |
+          docker buildx build --push \
+            --tag ${{secrets.USERNAME_DOCKERHUB}}/apibiziididiidxaza:lastest \
+            --platform linux/arm64,linux/arm/v7 .
+      #- name: login-dockerhub
+        #uses: docker/login-action@v1
+        #with:
+          #username: ${{secrets.USERNAME_DOCKERHUB}}
+          #password: ${{secrets.PASSWORD_DOCKERHUB}}
         
-      - name: qemu
-        uses: docker/setup-qemu-action@v1
-      - name: build-x
-        uses: docker/setup-buildx-action@v1
-      - name: build-push-image
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: ${{secrets.USERNAME_DOCKERHUB}}/apibiziididiidxaza:lastest
+      #- name: qemu
+      #  uses: docker/setup-qemu-action@v1
+      #- name: build-x
+      #  uses: docker/setup-buildx-action@v1
+      #- name: build-push-image
+
+        #uses: docker/build-push-action@v2
+        #with:
+          #push: true
+          #tags: ${{secrets.USERNAME_DOCKERHUB}}/apibiziididiidxaza:lastest
