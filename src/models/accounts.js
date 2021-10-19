@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 
 const accounts = new Schema({
-    _id: Schema.Types.ObjectId,
     lastname: {
         type: String,
         require: true
@@ -17,7 +16,7 @@ const accounts = new Schema({
         require: true
     },
     dateBirth: {
-        type: Date,
+        type: String,
         require: true
     },
     email: {
@@ -49,20 +48,25 @@ const accounts = new Schema({
         max: 3,
         require: true
     },
-    dateCreation: { 
-        type: Date, 
-        default: Date.now 
+    codeConfirmation: {
+        type: Number,
+        require: true
     },
-    idCity: [{ type: Schema.Types.ObjectId, ref: 'Cities' }]
+    dateCreation: { 
+        type: String,
+        require: true
+    },
+    idCity: [{ type: Schema.Types.ObjectId, ref: 'Cities'}],
+    discussions: [{ type: Schema.Types.ObjectId, ref: 'Discussions'}]
 });
 
-accounts.methods.encrypPassword = async password =>{
+accounts.methods.encrypPassword = async (password) =>{
     const salt = await bcrypt.genSalt(10);
     return await bcrypt.hash(password,salt);
 }
 
-accounts.methods.matchPassword = async function (password){
-    return await bcrypt.compare(password, this.password);
+accounts.methods.matchPassword = async (password, passwordCurrent) =>{
+    return await bcrypt.compare(password, passwordCurrent);
 }
 
 accounts.plugin(require('mongoose-autopopulate'));

@@ -8,15 +8,15 @@ const questions = new Schema({
         require: true
     },
     level: { 
-        type: Number,
-        min: 1,
-        max: 3,
+        type: String,
+        default: "easy",
+        enum: ["easy", "half", "difficult"],
         require: true
     },
-    type: { 
-        type: Number,
-        min: 1,
-        max: 2,
+    typeQuestion: { 
+        type: String,
+        default: "only",
+        enum: ["only", "multiple"],
         require: true 
     },
     question: { 

@@ -1,14 +1,17 @@
 const mongoose = require('mongoose');
 
+const{NODE_ENV, URI_PRODUCTION, URI_TEST} = process.env
 // Connection the dataBase
-const dataBaseConnect = () => {
-    const URI = process.env.URI;
-    mongoose.connect(
+const dataBaseConnect = async () => {
+    const URI = NODE_ENV === 'test'
+    ? URI_TEST
+    : URI_PRODUCTION;
+    await mongoose.connect(
         URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true
-    }).then(db => console.log('**** CORRECT CONNECTION ****'))
-    .catch(err => console.log('***** CONNECTION ERROR ****', err));
+    }).then(database => console.log('**** CORRECT CONNECTION ****'))
+    .catch(error => console.log('***** CONNECTION ERROR ****', error.message));
 }
 
 module.exports = { dataBaseConnect }

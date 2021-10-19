@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const lessonHistories = new Schema({
+const lessonRecords = new Schema({
     _id: Schema.Types.ObjectId,
     dateCreation: { 
         type: Date, 
@@ -15,5 +15,5 @@ const lessonHistories = new Schema({
     idLesson: [{ type: Schema.Types.ObjectId, ref: 'Lessons' }]
 });
 
-lessonHistories.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('LessonHistories',lessonHistories);
+lessonRecords.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('LessonRecords', lessonRecords);
