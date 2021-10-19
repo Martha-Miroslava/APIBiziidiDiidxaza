@@ -1,4 +1,4 @@
-FROM arm64/node:14
+FROM node:14
 WORKDIR /apibiziidi
 COPY package*.json ./
 RUN npm install
