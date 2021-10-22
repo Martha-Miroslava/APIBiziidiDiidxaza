@@ -8,9 +8,9 @@ const fs = require('fs').promises;
 
 const patchResource = (request, response, next) => {
     const URL = request.body.URL;
-    fs.stat(__dirname+URL)
+    fs.stat(path.join(__dirname,URL))
     .then( ()=>{
-        response.sendFile(__dirname+URL);
+        response.sendFile(path.join(__dirname,URL));
     })
     .catch((error) =>{
         if(error.code == 'ENOENT'){
@@ -24,13 +24,13 @@ const patchResource = (request, response, next) => {
 
 const postImageLesson = (request, response, next) =>{
     const idLesson = request.body.idLesson;
-    const url = "/images/lessons/"
+    const url = "../images/lessons/"
     postResource(request, response, idLesson,url, Lessons);
 }
 
 const postImageAccount = (request, response, next) =>{
     const idAccount = request.body.idAccount;
-    const url = "/images/accounts/"
+    const url = "../images/accounts/"
     postResource(request, response, idAccount,url, Accounts);
 }
 
@@ -43,8 +43,8 @@ const postAudio = (request, response, next) =>{
         const allowedExtensions = /mp3|mp4/;
         const size = file.data.length;
         if(allowedExtensions.test(extension) && size<20000000){
-            const url = "/audios/"+idQuestion+extension;
-            file.mv(__dirname+url).then(async () => {
+            const url = "../audios/"+idQuestion+extension;
+            file.mv(path.join(__dirname,url)).then(async () => {
                 await Questions.updateOne({_id:idQuestion}, {URL:url})
                 responseGeneral(response, StatusCodes.CREATED, "El audio se guardo exitosamente");
             }).catch((error) => {
@@ -69,7 +69,7 @@ const postResource = async (request, response, id, URLPhoto, model) => {
         const size = file.data.length;
         if(allowedExtensions.test(extension) && size<10000000){
             const url = URLPhoto+id+extension;
-            file.mv(__dirname+url).then(async () => {
+            file.mv(path.join(__dirname, url)).then(async () => {
                 await model.updateOne({_id:id}, {URL:url})
                 return responseGeneral(response, StatusCodes.CREATED, "La imagen se guardo exitosamente");
             }).catch((error) => {
@@ -88,7 +88,7 @@ const postResource = async (request, response, id, URLPhoto, model) => {
 
 const deleteResource = (request, response, next) => {
     const url = request.body.URL;
-    fs.unlink(__dirname+url)
+    fs.unlink(path.join(__dirname,url))
     .then(() => {
         responseGeneral(response, StatusCodes.OK, "El archivo se eliminó exitosamente");
     }).catch((error) => {

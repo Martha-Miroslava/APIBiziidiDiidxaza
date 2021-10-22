@@ -60,10 +60,11 @@ describe("POST Tests Resource Account",()=>{
     });
 
     it("POST /Resource Account", (done) =>{
-        chai.request(server).post("/resources/account")
+        chai.request(server)
+        .post("/resources/account")
         .field('Content-Type', 'multipart/form-data')
         .field('idAccount', '6164db5823242f430c487fca')
-        .attach('file', __dirname+"/resources/imageAccount.png", 'imageAccount.png')
+        .attach('file', `${__dirname}/resources/imageAccount.png`, 'imageAccount.png')
         .end( (error, response) => {
             response.should.have.status(201);
             response.body.should.have.property("message");
@@ -145,7 +146,7 @@ describe("POST Tests Resource Lesson",()=>{
         chai.request(server).post("/resources/lesson")
         .field('Content-Type', 'multipart/form-data')
         .field('idLesson', '6171fb2eeb326a2f1850c22e')
-        .attach('file', __dirname+"/resources/image.png", 'image.png')
+        .attach('file', `${__dirname}/resources/image.png`, 'image.png')
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
             response.should.have.status(201);
@@ -158,7 +159,7 @@ describe("POST Tests Resource Lesson",()=>{
     after((done) => {
         chai.request(server).delete("/resources")
         .send({
-            URL: "/images/lessons/6171fb2eeb326a2f1850c22e.png"
+            URL: "../images/lessons/6171fb2eeb326a2f1850c22e.png"
         })
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -239,7 +240,7 @@ describe("POST Tests Resource Audio",()=>{
         chai.request(server).post("/resources/audio")
         .field('Content-Type', 'multipart/form-data')
         .field('idQuestion', '6171fde5eb326a2f1850c231')
-        .attach('file', __dirname+"/resources/audio.mp3", 'audio.mp3')
+        .attach('file', `${__dirname}/resources/audio.mp3`, 'audio.mp3')
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
             response.should.have.status(201);
@@ -252,7 +253,7 @@ describe("POST Tests Resource Audio",()=>{
     after((done) => {
         chai.request(server).delete("/resources")
         .send({
-            URL: "/audios/6171fde5eb326a2f1850c231.mp3"
+            URL: "../audios/6171fde5eb326a2f1850c231.mp3"
         })
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -288,7 +289,7 @@ describe("PATCH Tests Resource",()=>{
 
     it("PATCH /Resource Not Found", (done) =>{
         const url = {
-            URL: "/images/accounts/6164db5823242f430c487fcb.png"
+            URL: "../images/accounts/6164db5823242f430c487fcb.png"
         }
         chai.request(server).patch("/resources").send(url)
         .auth(accessToken, { type: 'bearer' })
@@ -302,7 +303,7 @@ describe("PATCH Tests Resource",()=>{
 
     it("PATCH /Resource", (done) =>{
         const url = {
-            URL: "/images/accounts/6164db5823242f430c487fca.png"
+            URL: "../images/accounts/6164db5823242f430c487fca.png"
         }
         chai.request(server).patch("/resources").send(url)
         .auth(accessToken, { type: 'bearer' })
@@ -339,7 +340,7 @@ describe("DELETE Tests Resource",()=>{
 
     it("DELETE /Resource Bad Request File", (done) =>{
         const url = {
-            URL: "/images/accounts/6164db5823242f430c487fcb.png"
+            URL: "../images/accounts/6164db5823242f430c487fcb.png"
         }
         chai.request(server).delete("/resources").send(url)
         .auth(accessToken, { type: 'bearer' })
@@ -353,7 +354,7 @@ describe("DELETE Tests Resource",()=>{
 
     it("DELETE /Resource", (done) =>{
         const url = {
-            URL: "/images/accounts/6164db5823242f430c487fca.png"
+            URL: "../images/accounts/6164db5823242f430c487fca.png"
         }
         chai.request(server).delete("/resources").send(url)
         .auth(accessToken, { type: 'bearer' })

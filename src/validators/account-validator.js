@@ -153,7 +153,7 @@ const validationURL  = [
     check('URL')
         .exists().withMessage('El campo debe existir')
         .notEmpty().withMessage('El campo no debe estar vacío')
-        .matches(/^[/]([a-zA-Z0-9]+[/])+([a-zA-Z0-9]+)[.](?:jpg|mp3|png|mp4|jpeg)$/).withMessage('No es una URL válida'),
+        .matches(/^[.][.][/]([a-zA-Z0-9]+[/])+([a-zA-Z0-9]+)[.](?:jpg|mp3|png|mp4|jpeg)$/).withMessage('No es una URL válida'),
     (request, response, next) => {
         validateResult(request, response, next);
     }
