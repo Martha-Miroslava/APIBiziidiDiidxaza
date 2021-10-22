@@ -149,6 +149,16 @@ const validationId  = [
         .isLength(24).withMessage('Debe tener 24 caracteres')
 ]
 
+const validationURL  = [
+    check('URL')
+        .exists().withMessage('El campo debe existir')
+        .notEmpty().withMessage('El campo no debe estar vacío')
+        .matches(/^[.][.][/]([a-zA-Z0-9]+[/])+([a-zA-Z0-9]+)[.](?:jpg|mp3|png|mp4|jpeg)$/).withMessage('No es una URL válida'),
+    (request, response, next) => {
+        validateResult(request, response, next);
+    }
+]
+
 const validationUpdateAccount  = [
     validationId,
     validationAccount,
@@ -227,5 +237,5 @@ const validationCriterion = (request, response, next) =>{
 module.exports = {
     validationCreationAccount, validationUpdateAccount, validationChangeStatusAccount, validationAccountId, 
     validationAccountFilters, validationCriterion, validationId, validationAccountEmail, validationSendEmail,
-    validationLogin, validationConfirmationAccount
+    validationLogin, validationConfirmationAccount, validationURL
 };

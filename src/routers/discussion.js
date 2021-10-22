@@ -3,7 +3,7 @@ const router = Router();
 const checkAuth = require('../middleware/auth');
 const checkRoleAuth = require('../middleware/role-auth');
 const {getDiscussions, getDiscussionsFilters, getDiscussionsCriterion, getDiscussion, postDiscussion, 
-    patchDiscussion, validateExistsDiscussion} = require('../controllers/discussion-controller');
+    patchDiscussion} = require('../controllers/discussion-controller');
 const {validationDiscussionFilters, validationDiscussionCriterion, validationCriterion, validationDiscussionId,
     validationDiscussion, validationUpdateDiscussion} = require('../validators/discussion-validator');
 const {validateExistsAccount} = require('../controllers/account-controller');

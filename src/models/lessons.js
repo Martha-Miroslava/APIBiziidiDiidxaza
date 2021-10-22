@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const lessons = new Schema({
-    _id: Schema.Types.ObjectId,
     name: {
         type: String,
         require: true
@@ -11,8 +10,11 @@ const lessons = new Schema({
         type: String,
         require: true
     },
+    URL: {
+        type: String
+    },
     pointsTotal: { 
-        type: Int32,
+        type: Number,
         require: true
     }
 });

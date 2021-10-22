@@ -3,12 +3,14 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const {dataBaseConnect} = require('./connection/ConnectionDB');
+const upload = require('express-fileupload');
 
 //setting
 app.set('port', process.env.PORT);
 
 //middleware
 app.use(morgan(`dev`));
+app.use(upload());
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(require('./routers/account'));
@@ -19,6 +21,7 @@ app.use(require('./routers/report'));
 app.use(require('./routers/discussion'));
 app.use(require('./routers/comment'));
 app.use(require('./routers/email'));
+app.use(require('./routers/resource'));
 
 //Connect the data base
 dataBaseConnect();

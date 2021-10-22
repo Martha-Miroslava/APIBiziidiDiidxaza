@@ -150,7 +150,6 @@ const postAccount = async (request, response) => {
         age: age,
         dateBirth: dateBirth,
         email: email,
-        URLPhoto: "https:photo.com",
         username: username,
         password: password,
         role: role,
@@ -183,7 +182,7 @@ const putAccount = async (request, response) => {
     const idCityConverted  = mongoose.Types.ObjectId(idCity);
     const queryAccount = {_id:idAccount};
     const newValuesAccount = {lastname:lastname, name:name,
-    age:age, dateBirth:dateBirth, email: email, URLPhoto:"httpp.photo.com", idCity:idCityConverted, username:username};
+    age:age, dateBirth:dateBirth, email: email, idCity:idCityConverted, username:username};
     Accounts.updateOne(queryAccount, newValuesAccount)
     .then(function (document) {  
         responseGeneral(response, StatusCodes.OK, "La cuenta se edito exitosamente");
