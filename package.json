@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "nodemon src/app.js",
     "start": "node app.js",
-    "test": "mocha ./tests --timeout 8000",
-    "test-html": "mocha ./tests --timeout 8000 --reporter mochawesome --reporter-options reportDir=./tests/reports"
+    "test": "mocha --timeout 8000",
+    "test-html": "mocha --timeout 8000 --reporter mochawesome --reporter-options reportDir=./tests/reports"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,7 @@
     "bcryptjs": "^2.4.3",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
     "express-validator": "^6.12.2",
     "http-status-codes": "^2.1.4",
     "jsonwebtoken": "^8.5.1",

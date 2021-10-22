@@ -24,7 +24,7 @@ const accounts = new Schema({
         unique:true,
         require: true
     },
-    URLPhoto: {
+    URL: {
         type: String
     },
     username: {

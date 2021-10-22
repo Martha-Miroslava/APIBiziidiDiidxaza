@@ -58,7 +58,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: test_report
-        path: tests/reports
+        path: test/reports
   
   build-image:
     needs: [tests]

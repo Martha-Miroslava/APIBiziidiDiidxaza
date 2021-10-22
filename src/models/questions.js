@@ -2,9 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const questions = new Schema({
-    _id: Schema.Types.ObjectId,
     score: { 
-        type: Int32,
+        type: Number,
         require: true
     },
     level: { 
@@ -23,7 +22,7 @@ const questions = new Schema({
         type: String,
         require: true
     },
-    URLQuestion: { 
+    URL: { 
         type: String,
         require: true
     },
