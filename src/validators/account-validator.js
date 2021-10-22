@@ -18,7 +18,7 @@ const validationAccount = [
         .exists().withMessage('El campo debe existir')
         .notEmpty().withMessage('El campo no debe estar vacío')
         .not().isString().withMessage('El campo debe ser un número')
-        .custom((value, { request }) => {
+        .custom((value) => {
             if (value < 10 || value > 100) {
                 return false;
             }
@@ -29,7 +29,7 @@ const validationAccount = [
         .notEmpty().withMessage('El campo no debe estar vacío')
         .isString().withMessage('El campo debe ser una cadena')
         .matches(/^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/).withMessage('La fecha debe tener el formato YYYY-MM-DD')
-        .custom((value, { request }) => {
+        .custom((value) => {
             try{
                 const dateBirth = new Date(value).getFullYear();
                 const dateNow = new Date().getFullYear();

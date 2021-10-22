@@ -22,6 +22,7 @@ app.use(require('./routers/discussion'));
 app.use(require('./routers/comment'));
 app.use(require('./routers/email'));
 app.use(require('./routers/resource'));
+app.use(require('./routers/lesson'));
 
 //Connect the data base
 dataBaseConnect();
