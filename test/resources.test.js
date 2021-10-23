@@ -173,7 +173,7 @@ describe("POST Tests Resource Audio",()=>{
     it("POST /Resource Audio Bad Request File", (done) =>{
         chai.request(server).post("/resources/audio")
         .field('Content-Type', 'multipart/form-data')
-        .field('idQuestion', '6171fde5eb326a2f1850c231')
+        .field('idQuestion', '6173660d944b5e03bc7ddf3c')
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
             response.should.have.status(400);
@@ -186,7 +186,7 @@ describe("POST Tests Resource Audio",()=>{
     it("POST /Resource Audio Bad Request File Extension", (done) =>{
         chai.request(server).post("/resources/audio")
         .field('Content-Type', 'multipart/form-data')
-        .field('idQuestion', '6171fde5eb326a2f1850c231')
+        .field('idQuestion', '6173660d944b5e03bc7ddf3c')
         .attach('file', `${__dirname}/resources/imageError.bmp`, 'imageError.bmp')
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
