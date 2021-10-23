@@ -24,6 +24,7 @@ app.use(require('./routers/email'));
 app.use(require('./routers/resource'));
 app.use(require('./routers/lesson'));
 app.use(require('./routers/question'));
+app.use(require('./routers/answer'));
 
 //Connect the data base
 dataBaseConnect();
