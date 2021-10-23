@@ -30,13 +30,13 @@ describe("GET Tests Questions",()=>{
         });
     });
 
-    it("GET /Questions Bad Request Lesson", (done) =>{
+    it("GET /Questions Not Found", (done) =>{
         chai.request(server).get("/questions/6171fb2eeb326a2f1850c22c")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
-            response.should.have.status(400);
+            response.should.have.status(404);
             response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La lección no existe");
+            response.body.should.have.property("message").eq("No se encontro registro(s)");
             done();
         });
     });
