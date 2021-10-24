@@ -92,7 +92,7 @@ const deleteResource = (request, response, next) => {
     .then(() => {
         responseGeneral(response, StatusCodes.OK, "El archivo se eliminó exitosamente");
     }).catch((error) => {
-        if(error.code == 'ENOENT'){
+        if(error.code === "ENOENT"){
             responseGeneral(response, StatusCodes.BAD_REQUEST, "No existe el archivo");
         }
         else{

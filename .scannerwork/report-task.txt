@@ -2,5 +2,5 @@ projectKey=APIBiziidiDiidxaza
 serverUrl=http://localhost:9000
 serverVersion=8.5.1.38104
 dashboardUrl=http://localhost:9000/dashboard?id=APIBiziidiDiidxaza
-ceTaskId=AXywgUWHpvyCnB4YF5rq
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AXywgUWHpvyCnB4YF5rq
+ceTaskId=AXywrlzVpvyCnB4YF5rr
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXywrlzVpvyCnB4YF5rr

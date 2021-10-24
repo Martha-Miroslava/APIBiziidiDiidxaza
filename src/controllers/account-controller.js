@@ -6,7 +6,7 @@ const {responseServer, responseNotFound, responseGeneral} = require("../helpers/
 const {sendEmail} = require("./email-controller");
 
 const validateExistsAccount = (request, response, next) => {
-    const {idAccount} = request.body;
+    const idAccount = request.body.idAccount;
     Accounts.findById(idAccount, {_id:1})
     .then(function (account) {  
         if(account){
@@ -135,7 +135,7 @@ const getAccount = async (request, response) => {
 };
 
 const postAccount = async (request, response) => {
-    const {lastname,name,age,dateBirth, email,username, password,role, idCity} = request.body;
+    const {lastname,name,age,dateBirth,email,username,password,role,idCity} = request.body;
     let codeConfirmation = generateCode();
     const idCityConverted  = mongoose.Types.ObjectId(idCity);
     const dateNow = new Date();
@@ -182,7 +182,7 @@ const putAccount = async (request, response) => {
     })
     .catch(function (error){
         responseServer(response, error);
-    });;
+    });
 };
 
 const patchAccount = async (request, response) => {
