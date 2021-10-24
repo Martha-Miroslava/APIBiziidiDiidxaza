@@ -1,9 +1,9 @@
-const Accounts = require('../models/accounts');
-const {StatusCodes} = require ('http-status-codes');
-const mongoose = require('mongoose');
-const {generateCode} = require('../helpers/generateCode');
-const {responseServer, responseNotFound, responseGeneral} = require('../helpers/response-result');
-const {sendEmail} = require('./email-controller');
+const Accounts = require("../models/accounts");
+const {StatusCodes} = require ("http-status-codes");
+const mongoose = require("mongoose");
+const {generateCode} = require("../helpers/generateCode");
+const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
+const {sendEmail} = require("./email-controller");
 
 const validateExistsAccount = (request, response, next) => {
     const {idAccount} = request.body;
@@ -17,13 +17,13 @@ const validateExistsAccount = (request, response, next) => {
     .catch(function (error){
         return responseServer(response, error);
     });
-}
+};
 
 const validateExistsAccounts = (request, response, next) => {
-    const { idAccount, accountReported} = request.body;
+    const {idAccount, accountReported} = request.body;
     Accounts.find({$or:[{_id:accountReported},{_id:idAccount}]}, {_id:1})
     .then(function (accounts) {  
-        if(accounts.length == 2){
+        if(accounts.length === 2){
             return next();
         }
         return responseGeneral(response, StatusCodes.BAD_REQUEST, "La cuenta o cuentas no existen");
@@ -31,10 +31,10 @@ const validateExistsAccounts = (request, response, next) => {
     .catch(function (error){
         return responseServer(response, error);
     });
-}
+};
 
 const validateExistsUsernameEmail = (request, response, next) => {
-    const { email, username} = request.body;
+    const {email, username} = request.body;
     Accounts.find({$or:[{username:username},{email:email}]}, {_id:1})
     .then(function (accounts) {  
         if(accounts.length){
@@ -45,7 +45,7 @@ const validateExistsUsernameEmail = (request, response, next) => {
     .catch(function (error){
         return responseServer(response, error);
     });
-}
+};
 
 const validateExistsAccountUpdate = (request, response, next) => {
     const {_id, email, username} = request.body;
@@ -59,7 +59,7 @@ const validateExistsAccountUpdate = (request, response, next) => {
     .catch(function (error){
         return responseServer(response, error);
     });
-}
+};
 
 
 const getAccountsFilters = async (request, response) => {
@@ -101,7 +101,7 @@ const getAccountsFilters = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 const getAccounts = async (request, response) => {
     Accounts.find(null,{name:1, lastname:1, username:1})
@@ -116,7 +116,7 @@ const getAccounts = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 const getAccount = async (request, response) => {
     const accountID = request.params.accountID;
@@ -132,14 +132,10 @@ const getAccount = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 const postAccount = async (request, response) => {
-    const {
-        lastname,name,age,
-        dateBirth, email,
-        username, password,role, idCity
-    } = request.body;
+    const {lastname,name,age,dateBirth, email,username, password,role, idCity} = request.body;
     let codeConfirmation = generateCode();
     const idCityConverted  = mongoose.Types.ObjectId(idCity);
     const dateNow = new Date();
@@ -170,14 +166,11 @@ const postAccount = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 
 const putAccount = async (request, response) => {
-    const {
-        _id,lastname, name, age,
-        dateBirth, email, username, idCity
-    } = request.body;
+    const {_id,lastname, name, age,dateBirth, email, username, idCity} = request.body;
     const idAccount  = mongoose.Types.ObjectId(_id);
     const idCityConverted  = mongoose.Types.ObjectId(idCity);
     const queryAccount = {_id:idAccount};
@@ -189,8 +182,8 @@ const putAccount = async (request, response) => {
     })
     .catch(function (error){
         responseServer(response, error);
-    });
-}
+    });;
+};
 
 const patchAccount = async (request, response) => {
     const {_id, status} = request.body;
@@ -204,7 +197,7 @@ const patchAccount = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 
 

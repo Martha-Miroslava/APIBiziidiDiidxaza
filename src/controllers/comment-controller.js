@@ -1,7 +1,7 @@
-const Comments = require('../models/comments');
-const {StatusCodes} = require ('http-status-codes');
-const mongoose = require('mongoose');
-const {responseServer, responseNotFound, responseGeneral} = require('../helpers/response-result');
+const Comments = require("../models/comments");
+const {StatusCodes} = require ("http-status-codes");
+const mongoose = require("mongoose");
+const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
 
 const getComments = async (request, response) => {
     const discussionID = request.params.discussionID;
@@ -18,13 +18,10 @@ const getComments = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
-
+};
 
 const postComment = async (request, response) => {
-    const {
-        comment, idAccount, idDiscussion
-    } = request.body;
+    const {comment, idAccount, idDiscussion} = request.body;
     const idAccountConverted  = mongoose.Types.ObjectId(idAccount);
     const idDiscussionConverted  = mongoose.Types.ObjectId(idDiscussion);
     const dateNow = new Date();
@@ -42,7 +39,7 @@ const postComment = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 
 const deleteComment = async (request, response) => {
@@ -55,6 +52,6 @@ const deleteComment = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
-module.exports = {getComments, postComment, deleteComment}
+module.exports = {getComments, postComment, deleteComment};

@@ -1,10 +1,10 @@
-const {responseServer, responseGeneral, responseNotFound} = require('../helpers/response-result');
-const {StatusCodes} = require ('http-status-codes');
-const Accounts = require('../models/accounts');
-const Lessons = require('../models/lessons');
-const Questions = require('../models/questions');
-const path = require('path');
-const fs = require('fs').promises;
+const {responseServer, responseGeneral, responseNotFound} = require("../helpers/response-result");
+const {StatusCodes} = require ("http-status-codes");
+const Accounts = require("../models/accounts");
+const Lessons = require("../models/lessons");
+const Questions = require("../models/questions");
+const path = require("path");
+const fs = require("fs").promises;
 
 const patchResource = (request, response, next) => {
     const URL = request.body.URL;
@@ -13,26 +13,26 @@ const patchResource = (request, response, next) => {
         response.sendFile(path.join(__dirname,URL));
     })
     .catch((error) =>{
-        if(error.code == 'ENOENT'){
+        if(error.code == "ENOENT"){
             responseNotFound(response);
         }
         else{
             responseServer(response, error);
         } 
     });
-}
+};
 
 const postImageLesson = (request, response, next) =>{
     const idLesson = request.body.idLesson;
     const url = "../images/lessons/"
     postResource(request, response, idLesson,url, Lessons);
-}
+};
 
 const postImageAccount = (request, response, next) =>{
     const idAccount = request.body.idAccount;
     const url = "../images/accounts/"
     postResource(request, response, idAccount,url, Accounts);
-}
+};
 
 const postAudio = (request, response, next) =>{
     if(request.files){
@@ -58,7 +58,7 @@ const postAudio = (request, response, next) =>{
     else{
         responseGeneral(response, StatusCodes.BAD_REQUEST, "Necesita subir un audio");
     }
-}
+};
 
 const postResource = async (request, response, id, URLPhoto, model) => {
     if(request.files){
@@ -83,7 +83,7 @@ const postResource = async (request, response, id, URLPhoto, model) => {
     else{
         return  responseGeneral(response, StatusCodes.BAD_REQUEST, "Necesita subir una imagen");
     }
-}
+};
 
 
 const deleteResource = (request, response, next) => {
@@ -99,7 +99,7 @@ const deleteResource = (request, response, next) => {
             responseServer(response, error);
         } 
     });
-}
+};
 
 
 module.exports = {postImageAccount, postImageLesson, deleteResource, patchResource, postAudio};

@@ -1,6 +1,6 @@
-const Questions = require('../models/questions');
-const {StatusCodes} = require ('http-status-codes');
-const {responseServer, responseNotFound, responseGeneral} = require('../helpers/response-result');
+const Questions = require("../models/questions");
+const {StatusCodes} = require ("http-status-codes");
+const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
 
 const validateExistsQuestion = (request, response, next) => {
     const idQuestion = request.body.idQuestion || request.params.questionID;
@@ -14,7 +14,7 @@ const validateExistsQuestion = (request, response, next) => {
     .catch(function (error){
         return responseServer(response, error);
     });
-}
+};
 
 const getQuestions = async (request, response) => {
     const lessonID = request.params.lessonID;
@@ -30,6 +30,6 @@ const getQuestions = async (request, response) => {
     .catch((error) => {
         responseServer(response, error);
     });
-}
+};
 
-module.exports = {validateExistsQuestion, getQuestions}
+module.exports = {validateExistsQuestion, getQuestions};

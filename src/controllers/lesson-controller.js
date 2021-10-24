@@ -1,6 +1,6 @@
-const Lessons = require('../models/lessons');
-const {StatusCodes} = require ('http-status-codes');
-const {responseServer, responseGeneral, responseNotFound} = require('../helpers/response-result');
+const Lessons = require("../models/lessons");
+const {StatusCodes} = require ("http-status-codes");
+const {responseServer, responseGeneral, responseNotFound} = require("../helpers/response-result");
 
 
 const validateExistsLesson = (request, response, next) => {
@@ -15,7 +15,7 @@ const validateExistsLesson = (request, response, next) => {
     .catch(function (error){
         return responseServer(response, error);
     });
-}
+};
 
 
 const getLessons = async (request, response) => {
@@ -31,7 +31,7 @@ const getLessons = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 const postLesson = async (request, response) => {
     const {
@@ -49,6 +49,6 @@ const postLesson = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
-module.exports = {validateExistsLesson, getLessons, postLesson}
+module.exports = {validateExistsLesson, getLessons, postLesson};

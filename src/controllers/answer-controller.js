@@ -1,6 +1,6 @@
-const Answers = require('../models/answers');
-const {StatusCodes} = require ('http-status-codes');
-const {responseServer, responseNotFound} = require('../helpers/response-result');
+const Answers = require("../models/answers");
+const {StatusCodes} = require ("http-status-codes");
+const {responseServer, responseNotFound} = require("../helpers/response-result");
 
 const getAnswers = async (request, response) => {
     const questionID = request.params.questionID;
@@ -16,6 +16,6 @@ const getAnswers = async (request, response) => {
     .catch((error) => {
         responseServer(response, error);
     });
-}
+};
 
-module.exports = {getAnswers}
+module.exports = {getAnswers};

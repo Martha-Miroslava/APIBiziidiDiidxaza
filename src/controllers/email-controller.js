@@ -1,8 +1,8 @@
-const Accounts = require('../models/accounts');
-const {StatusCodes} = require ('http-status-codes');
-const {generateCode} = require('../helpers/generateCode');
-const nodemailer = require('nodemailer');
-const {responseServer, responseGeneral} = require('../helpers/response-result');
+const Accounts = require("../models/accounts");
+const {StatusCodes} = require ("http-status-codes");
+const {generateCode} = require("../helpers/generateCode");
+const nodemailer = require("nodemailer");
+const {responseServer, responseGeneral} = require("../helpers/response-result");
 
 const postEmail = async (request, response) => {
     const {email} = request.body;
@@ -24,7 +24,7 @@ const postEmail = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 const postAccountEmail = async (request, response) => {
     const {email, title, message} = request.body;
@@ -35,7 +35,7 @@ const postAccountEmail = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 const sendEmail = async (toEmail, subject, content) => {
     const transport = nodemailer.createTransport ({
@@ -53,6 +53,6 @@ const sendEmail = async (toEmail, subject, content) => {
         subject: subject,
         text: content
     })
-}
+};
 
-module.exports = {sendEmail, postAccountEmail, postEmail}
+module.exports = {sendEmail, postAccountEmail, postEmail};
