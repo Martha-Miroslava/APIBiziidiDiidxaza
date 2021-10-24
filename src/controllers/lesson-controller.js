@@ -17,19 +17,6 @@ const validateExistsLesson = (request, response, next) => {
     });
 }
 
-const validateExistsIDLesson = (request, response, next) => {
-    const id = request.params.lessonID;
-    Lessons.findById(id, {_id:1})
-    .then(function (lesson) {  
-        if(lesson){
-            return next();
-        }
-        return responseGeneral(response, StatusCodes.BAD_REQUEST, "La lección no existe");
-    })
-    .catch(function (error){
-        return responseServer(response, error);
-    });
-}
 
 const getLessons = async (request, response) => {
     Lessons.find()
@@ -64,4 +51,4 @@ const postLesson = async (request, response) => {
     });
 }
 
-module.exports = {validateExistsLesson, validateExistsIDLesson, getLessons, postLesson}
+module.exports = {validateExistsLesson, getLessons, postLesson}

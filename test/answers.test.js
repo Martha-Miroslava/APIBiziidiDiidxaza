@@ -30,13 +30,13 @@ describe("GET Tests Answers",()=>{
         });
     });
 
-    it("GET /Answers Bad Request Question", (done) =>{
+    it("GET /Answers Not Found", (done) =>{
         chai.request(server).get("/answers/6171fb2eeb326a2f1850c22c")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
-            response.should.have.status(400);
+            response.should.have.status(404);
             response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La pregunta no existe");
+            response.body.should.have.property("message").eq("No se encontro registro(s)");
             done();
         });
     });

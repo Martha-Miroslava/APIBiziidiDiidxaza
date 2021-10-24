@@ -2,13 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const lessonRecords = new Schema({
-    _id: Schema.Types.ObjectId,
     dateCreation: { 
-        type: Date, 
-        default: Date.now 
+        type: String, 
+        require: true
     },
     pointsObtained: { 
-        type: Int32,
+        type: Number,
         require: true
     },
     idAccount: [{ type: Schema.Types.ObjectId, ref: 'Accounts' }],

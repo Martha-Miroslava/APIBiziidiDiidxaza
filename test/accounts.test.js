@@ -49,6 +49,7 @@ describe("GET Tests Accounts Filters",()=>{
             .end( (error, response) => {
                 response.should.have.status(400);
                 response.body.should.have.property("message");
+                response.body.should.have.property("message").eq("Solo se permiten letras y espacios");
                 done();
             });
         });
@@ -83,6 +84,7 @@ describe("GET Tests Accounts Filters",()=>{
             .end( (error, response) => {
                 response.should.have.status(400);
                 response.body.should.have.property("message");
+                response.body.should.have.property("message").eq("Solo se permiten letras y espacios");
                 done();
             });
         });
@@ -117,6 +119,7 @@ describe("GET Tests Accounts Filters",()=>{
             .end( (error, response) => {
                 response.should.have.status(400);
                 response.body.should.have.property("message");
+                response.body.should.have.property("message").eq("El campo debe ser un número");
                 done();
             });
         });
@@ -151,6 +154,7 @@ describe("GET Tests Accounts Filters",()=>{
             .end( (error, response) => {
                 response.should.have.status(400);
                 response.body.should.have.property("message");
+                response.body.should.have.property("message").eq("La fecha debe tener el formato YYYY-MM-DD");
                 done();
             });
         });
@@ -185,6 +189,7 @@ describe("GET Tests Accounts Filters",()=>{
             .end( (error, response) => {
                 response.should.have.status(400);
                 response.body.should.have.property("message");
+                response.body.should.have.property("message").eq("El correo electrónico debería parecerse al ejemplo martha_15_723@outlook.com");
                 done();
             });
         });
@@ -254,6 +259,7 @@ describe("GET Tests Accounts Filters",()=>{
             .end( (error, response) => {
                 response.should.have.status(400);
                 response.body.should.have.property("message");
+                response.body.should.have.property("message").eq("La fecha debe tener el formato YYYY-MM-DD");
                 done();
             });
         });
