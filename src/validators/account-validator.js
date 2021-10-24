@@ -1,34 +1,34 @@
-const  {check, param}  =  require ( 'express-validator' );
-const {StatusCodes} = require ('http-status-codes');
-const {validateResult} = require('../helpers/response-result');
+const  {check, param}  =  require ("express-validator");
+const {StatusCodes} = require ("http-status-codes");
+const {validateResult} = require("../helpers/response-result");
 
 
 const validationAccount = [
-    check('lastname')
-        .notEmpty().withMessage('El campo no debe estar vacío')
-        .isString().withMessage('El campo debe ser una cadena')
-        .isLength({ min: 2, max: 150}).withMessage('El apellido(s) deben tener un mínimo de 2 caracteres y un máximo de 150 caracteres')
-        .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü ]+$/).withMessage('Solo se permiten letras y espacios'),
-    check('name')
-        .notEmpty().withMessage('El campo no debe estar vacío')
-        .isString().withMessage('El campo debe ser una cadena')
-        .isLength({ min: 2, max: 150}).withMessage('El nombre(s) deben tener un mínimo de 2 caracteres y un máximo de 150 caracteres')
-        .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü ]+$/).withMessage('Solo se permiten letras y espacios'),
-    check('age')
-        .exists().withMessage('El campo debe existir')
-        .notEmpty().withMessage('El campo no debe estar vacío')
-        .not().isString().withMessage('El campo debe ser un número')
+    check("lastname")
+        .notEmpty().withMessage("El campo no debe estar vacío")
+        .isString().withMessage("El campo debe ser una cadena")
+        .isLength({ min: 2, max: 150}).withMessage("El apellido(s) deben tener un mínimo de 2 caracteres y un máximo de 150 caracteres")
+        .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü ]+$/).withMessage("Solo se permiten letras y espacios"),
+    check("name")
+        .notEmpty().withMessage("El campo no debe estar vacío")
+        .isString().withMessage("El campo debe ser una cadena")
+        .isLength({ min: 2, max: 150}).withMessage("El nombre(s) deben tener un mínimo de 2 caracteres y un máximo de 150 caracteres")
+        .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü ]+$/).withMessage("Solo se permiten letras y espacios"),
+    check("age")
+        .exists().withMessage("El campo debe existir")
+        .notEmpty().withMessage("El campo no debe estar vacío")
+        .not().isString().withMessage("El campo debe ser un número")
         .custom((value) => {
             if (value < 10 || value > 100) {
                 return false;
             }
             return true;
-        }).withMessage('Debe tener más de 10 años y menos de 100 años.'),
-    check('dateBirth')
-        .exists().withMessage('El campo debe existir')
-        .notEmpty().withMessage('El campo no debe estar vacío')
-        .isString().withMessage('El campo debe ser una cadena')
-        .matches(/^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/).withMessage('La fecha debe tener el formato YYYY-MM-DD')
+        }).withMessage("Debe tener más de 10 años y menos de 100 años."),
+    check("dateBirth")
+        .exists().withMessage("El campo debe existir")
+        .notEmpty().withMessage("El campo no debe estar vacío")
+        .isString().withMessage("El campo debe ser una cadena")
+        .matches(/^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/).withMessage("La fecha debe tener el formato YYYY-MM-DD")
         .custom((value) => {
             try{
                 const dateBirth = new Date(value).getFullYear();
@@ -41,30 +41,30 @@ const validationAccount = [
             }catch(error){
                 return false;
             }     
-        }).withMessage('El rango de la fecha actual y la fecha de nacimiento debe estar entre 10 y 100 años.')
+        }).withMessage("El rango de la fecha actual y la fecha de nacimiento debe estar entre 10 y 100 años.")
 ]
 
 const validationUsername = [
-    check('username')
-        .exists().withMessage('El campo debe existir')
-        .notEmpty().withMessage('El campo no debe estar vacío')
-        .isString().withMessage('El campo debe ser una cadena')
-        .isLength({ min: 3, max: 20}).withMessage('El nombre de usuario debe tener un mínimo de 3 caracteres y un máximo de 20 caracteres')
-        .matches(/^[A-Za-z0-9]{3,20}$/).withMessage('El nombre de usuario debe tener solo letras y números')
+    check("username")
+        .exists().withMessage("El campo debe existir")
+        .notEmpty().withMessage("El campo no debe estar vacío")
+        .isString().withMessage("El campo debe ser una cadena")
+        .isLength({ min: 3, max: 20}).withMessage("El nombre de usuario debe tener un mínimo de 3 caracteres y un máximo de 20 caracteres")
+        .matches(/^[A-Za-z0-9]{3,20}$/).withMessage("El nombre de usuario debe tener solo letras y números")
 ]
 
 const validationEmail = [
-    check('email')
+    check("email")
         .normalizeEmail()
-        .isEmail().withMessage('Debe ser un correo electrónico')
+        .isEmail().withMessage("Debe ser un correo electrónico")
 ]
 
 const validationPassword = [
-    check('password')
-        .exists().withMessage('El campo debe existir')
-        .notEmpty().withMessage('El campo no debe estar vacío')
-        .isString().withMessage('El campo debe ser una cadena')
-        .isLength({ min: 8, max:254 }).trim().withMessage('Password must have a minimum of 8 characters and a maximum of 254 characters')
+    check("password")
+        .exists().withMessage("El campo debe existir")
+        .notEmpty().withMessage("El campo no debe estar vacío")
+        .isString().withMessage("El campo debe ser una cadena")
+        .isLength({ min: 8, max:254 }).trim().withMessage("Password must have a minimum of 8 characters and a maximum of 254 characters")
 ]
 
 
@@ -78,11 +78,11 @@ const validationLogin = [
 
 const validationConfirmationAccount = [
     validationUsername,
-    check('codeConfirmation')
-        .exists().withMessage('El campo debe existir')
-        .notEmpty().withMessage('El campo no debe estar vacío')
-        .not().isString().withMessage('El campo debe ser un número')
-        .matches(/^[0-9]{6}$/).withMessage('Permitir solo números del 0 al 9 y deben ser 6 dígitos'),
+    check("codeConfirmation")
+        .exists().withMessage("El campo debe existir")
+        .notEmpty().withMessage("El campo no debe estar vacío")
+        .not().isString().withMessage("El campo debe ser un número")
+        .matches(/^[0-9]{6}$/).withMessage("Permitir solo números del 0 al 9 y deben ser 6 dígitos"),
     (request, response, next) => {
         validateResult(request, response, next);
     }
@@ -97,27 +97,27 @@ const validationSendEmail = [
 
 const validationAccountEmail = [
     validationEmail,
-    check('title')
-        .notEmpty().withMessage('El campo no debe estar vacío')
-        .isString().withMessage('El campo debe ser una cadena')
-        .isLength({ min: 5, max: 100}).withMessage('El titulo del mensaje debe tener un mínimo de 5 caracteres y un máximo de 100 caracteres')
-        .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]+(\s*[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]*){5,600}/).withMessage('Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios'), 
-    check('message')
-        .notEmpty().withMessage('El campo no debe estar vacío')
-        .isString().withMessage('El campo debe ser una cadena')
-        .isLength({ min: 5, max: 600}).withMessage('El mensaje debe tener un mínimo de 5 caracteres y un máximo de 600 caracteres')
-        .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]+(\s*[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]*){5,600}/).withMessage('Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios'), 
+    check("title")
+        .notEmpty().withMessage("El campo no debe estar vacío")
+        .isString().withMessage("El campo debe ser una cadena")
+        .isLength({ min: 5, max: 100}).withMessage("El titulo del mensaje debe tener un mínimo de 5 caracteres y un máximo de 100 caracteres")
+        .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]+(\s*[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]*){5,600}/).withMessage("Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios"), 
+    check("message")
+        .notEmpty().withMessage("El campo no debe estar vacío")
+        .isString().withMessage("El campo debe ser una cadena")
+        .isLength({ min: 5, max: 600}).withMessage("El mensaje debe tener un mínimo de 5 caracteres y un máximo de 600 caracteres")
+        .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]+(\s*[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]*){5,600}/).withMessage("Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios"), 
     (request, response, next) => {
         validateResult(request, response, next);
     }
 ]
 
 const validationStatusAccount  = [
-    check('status')
-        .exists().withMessage('El campo debe existir')
-        .notEmpty().withMessage('El campo no debe estar vacío')
-        .isNumeric().withMessage('El campo no debe ser un número')
-        .matches(/^[1-3]$/).withMessage('Permitir solo números del 1 al 3')
+    check("status")
+        .exists().withMessage("El campo debe existir")
+        .notEmpty().withMessage("El campo no debe estar vacío")
+        .isNumeric().withMessage("El campo no debe ser un número")
+        .matches(/^[1-3]$/).withMessage("Permitir solo números del 1 al 3")
 ]
 
 
@@ -126,15 +126,15 @@ const validationCreationAccount = [
     validationUsername,
     validationEmail,
     validationPassword,
-    check('role')
-        .exists().withMessage('El campo debe existir')
-        .isString().withMessage('El campo debe ser una cadena')
-        .isIn(['user', 'manager']).withMessage('El rol no es válido'),
-    check('idCity')
-        .exists().withMessage('El campo debe existir')
-        .notEmpty().withMessage('El campo no debe estar vacío')
-        .matches(/^[a-z0-9]{24}$/).withMessage('El ID debe tener números y letras minúsculas')
-        .isLength(24).withMessage('Debe tener 24 caracteres'),
+    check("role")
+        .exists().withMessage("El campo debe existir")
+        .isString().withMessage("El campo debe ser una cadena")
+        .isIn(["user", "manager"]).withMessage("El rol no es válido"),
+    check("idCity")
+        .exists().withMessage("El campo debe existir")
+        .notEmpty().withMessage("El campo no debe estar vacío")
+        .matches(/^[a-z0-9]{24}$/).withMessage("El ID debe tener números y letras minúsculas")
+        .isLength(24).withMessage("Debe tener 24 caracteres"),
     (request, response, next) => {
         validateResult(request, response, next);
     }
@@ -142,18 +142,18 @@ const validationCreationAccount = [
 
 
 const validationId  = [
-    check('_id')
-        .exists().withMessage('El campo debe existir')
-        .notEmpty().withMessage('El campo no debe estar vacío')
-        .matches(/^[a-z0-9]{24}$/).withMessage('El ID debe tener números y letras minúsculas')
-        .isLength(24).withMessage('Debe tener 24 caracteres')
+    check("_id")
+        .exists().withMessage("El campo debe existir")
+        .notEmpty().withMessage("El campo no debe estar vacío")
+        .matches(/^[a-z0-9]{24}$/).withMessage("El ID debe tener números y letras minúsculas")
+        .isLength(24).withMessage("Debe tener 24 caracteres")
 ]
 
 const validationURL  = [
-    check('URL')
-        .exists().withMessage('El campo debe existir')
-        .notEmpty().withMessage('El campo no debe estar vacío')
-        .matches(/^[.][.][/]([a-zA-Z0-9]+[/])+([a-zA-Z0-9]+)[.](?:jpg|mp3|png|mp4|jpeg)$/).withMessage('No es una URL válida'),
+    check("URL")
+        .exists().withMessage("El campo debe existir")
+        .notEmpty().withMessage("El campo no debe estar vacío")
+        .matches(/^[.][.][/]([a-zA-Z0-9]+[/])+([a-zA-Z0-9]+)[.](?:jpg|mp3|png|mp4|jpeg)$/).withMessage("No es una URL válida"),
     (request, response, next) => {
         validateResult(request, response, next);
     }
@@ -178,24 +178,24 @@ const validationChangeStatusAccount = [
 ]
 
 const validationAccountId  = [
-    param('accountID')
-        .exists().withMessage('El campo debe existir')
-        .notEmpty().withMessage('El campo no debe estar vacío')
-        .matches(/^[a-z0-9]{24}$/).withMessage('El ID debe tener números y letras minúsculas')
-        .isLength(24).withMessage('Debe tener 24 caracteres'),
+    param("accountID")
+        .exists().withMessage("El campo debe existir")
+        .notEmpty().withMessage("El campo no debe estar vacío")
+        .matches(/^[a-z0-9]{24}$/).withMessage("El ID debe tener números y letras minúsculas")
+        .isLength(24).withMessage("Debe tener 24 caracteres"),
     (request, response, next) => {
         validateResult(request, response, next);
     }
 ]
 
 const validationAccountFilters  = [
-    param('filter')
-        .exists().withMessage('El campo debe existir')
-        .notEmpty().withMessage('El campo no debe estar vacío')
-        .isIn(['lastname', 'name', 'age', 'dateBirth', 'email', 'username', 'dateCreation']).withMessage('El filtro es inválido'),
-    param('criterion')
-        .exists().withMessage('El campo debe existir')
-        .notEmpty().withMessage('El campo no debe estar vacío'),
+    param("filter")
+        .exists().withMessage("El campo debe existir")
+        .notEmpty().withMessage("El campo no debe estar vacío")
+        .isIn(["lastname", "name", "age", "dateBirth", "email", "username", "dateCreation"]).withMessage("El filtro es inválido"),
+    param("criterion")
+        .exists().withMessage("El campo debe existir")
+        .notEmpty().withMessage("El campo no debe estar vacío"),
     (request, response, next) => {
         validateResult(request, response, next);
     }

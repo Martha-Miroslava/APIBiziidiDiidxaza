@@ -1,4 +1,4 @@
-const jsonwebtoken = require('jsonwebtoken')
+const jsonwebtoken = require("jsonwebtoken");
 
 const tokenSing = async (account) => {
     return jsonwebtoken.sign(
@@ -20,4 +20,4 @@ const verifyToken = async (token) => {
 }
 
 
-module.exports = {tokenSing, verifyToken}
+module.exports = {tokenSing, verifyToken};

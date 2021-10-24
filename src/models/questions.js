@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const questions = new Schema({
@@ -26,8 +26,8 @@ const questions = new Schema({
         type: String,
         require: true
     },
-    idLesson: [{ type: Schema.Types.ObjectId, ref: 'Lessons' }]
+    idLesson: [{ type: Schema.Types.ObjectId, ref: "Lessons" }]
 });
 
-questions.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Questions',questions);
+questions.plugin(require("mongoose-autopopulate"));
+module.exports = mongoose.model("Questions",questions);

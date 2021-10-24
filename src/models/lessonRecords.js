@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const lessonRecords = new Schema({
@@ -10,9 +10,9 @@ const lessonRecords = new Schema({
         type: Number,
         require: true
     },
-    idAccount: [{ type: Schema.Types.ObjectId, ref: 'Accounts' }],
-    idLesson: [{ type: Schema.Types.ObjectId, ref: 'Lessons' }]
+    idAccount: [{ type: Schema.Types.ObjectId, ref: "Accounts" }],
+    idLesson: [{ type: Schema.Types.ObjectId, ref: "Lessons" }]
 });
 
-lessonRecords.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('LessonRecords', lessonRecords);
+lessonRecords.plugin(require("mongoose-autopopulate"));
+module.exports = mongoose.model("LessonRecords", lessonRecords);

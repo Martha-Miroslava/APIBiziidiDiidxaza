@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const discussions = new Schema({
@@ -31,8 +31,8 @@ const discussions = new Schema({
         default: 0,
         require: true
     },
-    idAccount: [{ type: Schema.Types.ObjectId, ref: 'Accounts'}]
+    idAccount: [{ type: Schema.Types.ObjectId, ref: "Accounts"}]
 });
 
-discussions.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Discussions',discussions);
+discussions.plugin(require("mongoose-autopopulate"));
+module.exports = mongoose.model("Discussions",discussions);

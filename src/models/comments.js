@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const comments = new Schema({
@@ -10,9 +10,9 @@ const comments = new Schema({
         type: String, 
         require: true
     },
-    idAccount: [{ type: Schema.Types.ObjectId, ref: 'Accounts' }],
-    idDiscussion: [{ type: Schema.Types.ObjectId, ref: 'Discussions' }]
+    idAccount: [{ type: Schema.Types.ObjectId, ref: "Accounts" }],
+    idDiscussion: [{ type: Schema.Types.ObjectId, ref: "Discussions" }]
 });
 
-comments.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Comments',comments);
+comments.plugin(require("mongoose-autopopulate"));
+module.exports = mongoose.model("Comments",comments);

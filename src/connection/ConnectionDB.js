@@ -10,8 +10,8 @@ const dataBaseConnect = async () => {
         URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true
-    }).then((database) => console.log("**** CORRECT CONNECTION ****"))
-    .catch((error) => console.log("***** CONNECTION ERROR ****", error.message));
+    }).then((database) => {console.log("**** CORRECT CONNECTION ****")})
+    .catch((error) => {console.log("***** CONNECTION ERROR ****", error.message)});
 };
 
 module.exports = {dataBaseConnect};

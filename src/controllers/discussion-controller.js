@@ -136,7 +136,7 @@ const postDiscussion = async (request, response) => {
 
 
 const patchDiscussion = async (request, response) => {
-    const {_id, idAccount,} = request.body;
+    const {_id, idAccount} = request.body;
     const idAccountConverted  = mongoose.Types.ObjectId(idAccount);
     const idConverted  = mongoose.Types.ObjectId(_id);
     Accounts.findOne({_id:idAccountConverted}, {discussions:1})
