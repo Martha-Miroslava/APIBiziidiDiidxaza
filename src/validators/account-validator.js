@@ -5,12 +5,12 @@ const {validateResult} = require("../helpers/response-result");
 
 const validationAccount = [
     check("lastname")
-        .notEmpty().withMessage("El campo no debe estar vacío")
+        .trim().notEmpty().withMessage("El campo no debe estar vacío")
         .isString().withMessage("El campo debe ser una cadena")
         .isLength({ min: 2, max: 150}).withMessage("El apellido(s) deben tener un mínimo de 2 caracteres y un máximo de 150 caracteres")
         .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü ]+$/).withMessage("Solo se permiten letras y espacios"),
     check("name")
-        .notEmpty().withMessage("El campo no debe estar vacío")
+        .trim().notEmpty().withMessage("El campo no debe estar vacío")
         .isString().withMessage("El campo debe ser una cadena")
         .isLength({ min: 2, max: 150}).withMessage("El nombre(s) deben tener un mínimo de 2 caracteres y un máximo de 150 caracteres")
         .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü ]+$/).withMessage("Solo se permiten letras y espacios"),
@@ -64,7 +64,7 @@ const validationPassword = [
         .exists().withMessage("El campo debe existir")
         .notEmpty().withMessage("El campo no debe estar vacío")
         .isString().withMessage("El campo debe ser una cadena")
-        .isLength({ min: 8, max:254 }).trim().withMessage("Password must have a minimum of 8 characters and a maximum of 254 characters")
+        .isLength({min: 8, max:254}).trim().withMessage("Password must have a minimum of 8 characters and a maximum of 254 characters")
 ]
 
 
@@ -98,15 +98,15 @@ const validationSendEmail = [
 const validationAccountEmail = [
     validationEmail,
     check("title")
-        .notEmpty().withMessage("El campo no debe estar vacío")
+        .trim().notEmpty().withMessage("El campo no debe estar vacío")
         .isString().withMessage("El campo debe ser una cadena")
         .isLength({ min: 5, max: 100}).withMessage("El titulo del mensaje debe tener un mínimo de 5 caracteres y un máximo de 100 caracteres")
-        .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]+(\s*[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]*){5,600}/).withMessage("Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios"), 
+        .matches(/^[\wÑñÁáÉéÍíÓóÚúÜü.,# ]+$/).withMessage("Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios"), 
     check("message")
-        .notEmpty().withMessage("El campo no debe estar vacío")
+        .trim().notEmpty().withMessage("El campo no debe estar vacío")
         .isString().withMessage("El campo debe ser una cadena")
         .isLength({ min: 5, max: 600}).withMessage("El mensaje debe tener un mínimo de 5 caracteres y un máximo de 600 caracteres")
-        .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]+(\s*[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]*){5,600}/).withMessage("Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios"), 
+        .matches(/^[\wÑñÁáÉéÍíÓóÚúÜü.,# ]+$/).withMessage("Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios"), 
     (request, response, next) => {
         validateResult(request, response, next);
     }

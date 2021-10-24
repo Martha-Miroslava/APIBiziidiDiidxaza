@@ -33,8 +33,8 @@ const postComment = async (request, response) => {
         idDiscussion: idDiscussionConverted
     });
     await newComment.save()
-    .then(function (comment) {  
-        response.status(StatusCodes.CREATED).json(comment);
+    .then(function (commentSave) {  
+        response.status(StatusCodes.CREATED).json(commentSave);
     })
     .catch(function (error){
         responseServer(response, error);

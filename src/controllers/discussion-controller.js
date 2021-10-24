@@ -117,7 +117,7 @@ const postDiscussion = async (request, response) => {
     const idAccountConverted  = mongoose.Types.ObjectId(idAccount);
     const dateNow = new Date();
     const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
-    const discussion = new Discussions ({
+    const newDiscussion = new Discussions ({
         title: title,
         comment: comment,
         dateCreation: dateCreation,
@@ -125,7 +125,7 @@ const postDiscussion = async (request, response) => {
         theme: theme,
         idAccount: idAccountConverted
     });
-    await discussion.save()
+    await newDiscussion.save()
     .then(function (discussion) {  
         response.status(StatusCodes.CREATED).json(discussion);
     })

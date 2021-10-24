@@ -38,11 +38,11 @@ const getCities = async (request, response) => {
 const postCity = async (request, response) => {
     const {nameCity,idState} = request.body;
     const idStateConverted  = mongoose.Types.ObjectId(idState);
-    const city = new Cities ({
+    const newCity = new Cities ({
         nameCity: nameCity,
         idState:idStateConverted
     });
-    await city.save()
+    await newCity.save()
     .then(function (city) {  
         response.status(StatusCodes.CREATED).json(city);
     })

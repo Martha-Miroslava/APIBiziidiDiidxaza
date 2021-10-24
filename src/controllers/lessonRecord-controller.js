@@ -6,13 +6,13 @@ const postLessonRecord = async (request, response) => {
     const {pointsObtained, idAccount, idLesson} = request.body;
     const dateNow = new Date();
     const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
-    const lessonRecord = new LessonRecords ({
+    const newLessonRecord = new LessonRecords ({
         pointsObtained: pointsObtained,
         dateCreation:dateCreation,
         idAccount: idAccount,
         idLesson: idLesson
     });
-    await lessonRecord.save()
+    await newLessonRecord.save()
     .then(async (lessonRecord)  =>{
         response.status(StatusCodes.CREATED).json(lessonRecord);
     })

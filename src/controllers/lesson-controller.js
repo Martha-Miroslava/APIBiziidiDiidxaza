@@ -37,12 +37,12 @@ const postLesson = async (request, response) => {
     const {
         name, description, pointsTotal
     } = request.body;
-    const lesson = new Lessons ({
+    const newLesson = new Lessons ({
         name: name,
         description: description,
         pointsTotal: pointsTotal
     });
-    await lesson.save()
+    await newLesson.save()
     .then(async (lesson)  =>{
         response.status(StatusCodes.CREATED).json(lesson);
     })

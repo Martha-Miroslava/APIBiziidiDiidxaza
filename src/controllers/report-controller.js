@@ -9,14 +9,14 @@ const postReport = async (request, response) => {
     const accountReportedConverted  = mongoose.Types.ObjectId(accountReported);
     const dateNow = new Date();
     const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
-    const report = new Reports ({
+    const newReport = new Reports ({
         reason: reason,
         context:context,
         dateCreation: dateCreation,
         idAccount: idAcountConverted,
         accountReported:accountReportedConverted
     });
-    await report.save()
+    await newReport.save()
     .then(function (report) {  
         response.status(StatusCodes.CREATED).json(report);
     })

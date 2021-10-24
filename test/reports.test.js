@@ -280,7 +280,7 @@ describe("POST Tests Report",() =>{
     it("POST /Reports", (done) =>{
         const report = {
             reason: "Malas pralabras en su comentario",
-	        context: "La discusion tiene muchos comentarios malos por parte de este usuario",
+	        context: "La discusion tiene mañanita comentarios malos por parte de este usuario",
 	        idAccount: "6168cf9563929f8f000c7614",
 	        accountReported: "6168d4975471a4bcc2b17445"
         }
@@ -294,7 +294,7 @@ describe("POST Tests Report",() =>{
             response.body.should.have.property("context");
             response.body.should.have.property("idAccount");
             response.body.should.have.property("dateCreation");
-            response.body.should.have.property("accountReported");;
+            response.body.should.have.property("accountReported");
             idReport = response.body._id;
             done();
         });
@@ -302,8 +302,8 @@ describe("POST Tests Report",() =>{
 
     it("POST /Reports Bad Request", (done) =>{
         const report = {
-            reason: 12345,
-	        context: 23233,
+            reason: "          ",
+	        context: "        ",
 	        idAccount: 3233,
 	        accountReported: 61620
         }

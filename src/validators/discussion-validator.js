@@ -30,7 +30,7 @@ const validationDiscussionCriterion  = [
 const validationCriterion = (request, response, next) =>{
     const filter = request.params.filter;
     const criterion = request.params.criterion;
-    var expReg =  new RegExp(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!?¡¿.,#]+(\s*[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9!?¡¿.,#]*){4,200}/);
+    var expReg =  new RegExp(/^[\wÑñÁáÉéÍíÓóÚúÜü.,#¿?¡!]+(\s*[\wÑñÁáÉéÍíÓóÚúÜü.,#¿?¡!]*){4,200}/);
     let message = "Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios. Se permite de 4 a 200 caracteres";
     if(filter === "tracing"){
         expReg = new RegExp(/^[a-z0-9]{24}$/);
@@ -63,18 +63,18 @@ const validationAccountId = [
 
 const validationComment = [
     check("comment")
-        .notEmpty().withMessage("El campo no debe estar vacío")
+        .trim().notEmpty().withMessage("El campo no debe estar vacío")
         .isString().withMessage("El campo debe ser una cadena")
         .isLength({ min: 5, max: 600}).withMessage("El comentario debe tener un mínimo de 5 caracteres y un máximo de 600 caracteres")
-        .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.¿¡?!,#]+(\s*[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.¿¡?!,#]*){5,600}/).withMessage("Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios"), 
+        .matches(/^[\wÑñÁáÉéÍíÓóÚúÜü!?¡¿.,# ]+$/).withMessage("Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios"), 
 ]
 
 const validationDiscussion = [
     check("title")
-        .notEmpty().withMessage("El campo no debe estar vacío")
+        .trim().notEmpty().withMessage("El campo no debe estar vacío")
         .isString().withMessage("El campo debe ser una cadena")
         .isLength({ min: 4, max: 200}).withMessage("El titulo debe tener un mínimo de 4 caracteres y un máximo de 200 caracteres")
-        .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.?¡¿!,#]+(\s*[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.?¡¿!,#]*){4,200}/).withMessage("Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios"),
+        .matches(/^[\wÑñÁáÉéÍíÓóÚúÜü!?¡¿.,# ]+$/).withMessage("Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios"),
     validationComment,
     check("theme")
         .notEmpty().withMessage("El campo no debe estar vacío")

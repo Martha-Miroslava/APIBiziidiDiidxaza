@@ -5,15 +5,15 @@ const {validateResult} = require("../helpers/response-result");
 
 const validationReport = [
     check("reason")
-        .notEmpty().withMessage("El campo no debe estar vacío")
+        .trim().notEmpty().withMessage("El campo no debe estar vacío")
         .isString().withMessage("El campo debe ser una cadena")
         .isLength({ min: 5, max: 200}).withMessage("La razón debe tener un mínimo de 5 caracteres y un máximo de 200 caracteres")
-        .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]+(\s*[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]*){5,200}/).withMessage("Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios"),
+        .matches(/^[\wÑñÁáÉéÍíÓóÚúÜü!?¡¿.,# ]+$/).withMessage("Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios"),
     check("context")
-        .notEmpty().withMessage("El campo no debe estar vacío")
+        .trim().notEmpty().withMessage("El campo no debe estar vacío")
         .isString().withMessage("El campo debe ser una cadena")
         .isLength({ min: 5, max: 500}).withMessage("El contexto debe tener un mínimo de 5 caracteres y un máximo de 500 caracteres")
-        .matches(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]+(\s*[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9.,#]*){5,500}/).withMessage("Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios"),
+        .matches(/^[\wÑñÁáÉéÍíÓóÚúÜü!?¡¿.,# ]+$/).withMessage("Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios"),
     validationAccountId,
     check("accountReported")
         .exists().withMessage("El campo debe existir")

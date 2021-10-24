@@ -140,7 +140,7 @@ const postAccount = async (request, response) => {
     const idCityConverted  = mongoose.Types.ObjectId(idCity);
     const dateNow = new Date();
     const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
-    const account = new Accounts ({
+    const newAccount = new Accounts ({
         lastname: lastname,
         name: name,
         age: age,
@@ -154,8 +154,8 @@ const postAccount = async (request, response) => {
         dateCreation: dateCreation,
         idCity: idCityConverted
     });
-    account.password = await account.encrypPassword(account.password);
-    await account.save()
+    newAccount.password = await newAccount.encrypPassword(newAccount.password);
+    await newAccount.save()
     .then(async (account)  =>{  
         const title = "Código de Confirmación de la cuenta"
         const message = "Estimado usuario "+name+" "+lastname+
