@@ -1,6 +1,6 @@
-const States = require('../models/states');
-const {StatusCodes} = require ('http-status-codes');
-const {responseServer, responseNotFound, responseGeneral} = require('../helpers/response-result');
+const States = require("../models/states");
+const {StatusCodes} = require ("http-status-codes");
+const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
 
 const validateExistState = (request, response, next) => {
     const {idState} = request.body;
@@ -14,7 +14,7 @@ const validateExistState = (request, response, next) => {
     .catch(function (error){
         return responseServer(response, error);
     });
-}
+};
 
 const getStates = async (request, response) => {        
     States.find()
@@ -29,6 +29,6 @@ const getStates = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 module.exports = {getStates, validateExistState};

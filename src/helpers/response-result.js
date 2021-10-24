@@ -1,5 +1,5 @@
-const {StatusCodes} = require ('http-status-codes');
-const {validationResult} = require('express-validator');
+const {StatusCodes} = require ("http-status-codes");
+const {validationResult} = require("express-validator");
 
 const validateResult = (request, response, next) => {
     const errors = validationResult(request);
@@ -21,4 +21,4 @@ const responseGeneral = (response, status, message) => {
     return response.status(status).json({message: message});
 }
 
-module.exports = {validateResult, responseNotFound, responseServer, responseGeneral}
+module.exports = {validateResult, responseNotFound, responseServer, responseGeneral};

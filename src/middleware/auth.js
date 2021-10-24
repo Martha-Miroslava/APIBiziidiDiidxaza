@@ -1,5 +1,5 @@
-const {verifyToken} = require('../helpers/generateToken');
-const {StatusCodes} = require ('http-status-codes');
+const {verifyToken} = require("../helpers/generateToken");
+const {StatusCodes} = require ("http-status-codes");
 
 
 const checkAuth = async (request, response, next) => {

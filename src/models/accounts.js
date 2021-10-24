@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 
 const accounts = new Schema({
     lastname: {
@@ -56,8 +56,8 @@ const accounts = new Schema({
         type: String,
         require: true
     },
-    idCity: [{ type: Schema.Types.ObjectId, ref: 'Cities'}],
-    discussions: [{ type: Schema.Types.ObjectId, ref: 'Discussions'}]
+    idCity: [{ type: Schema.Types.ObjectId, ref: "Cities"}],
+    discussions: [{ type: Schema.Types.ObjectId, ref: "Discussions"}]
 });
 
 accounts.methods.encrypPassword = async (password) =>{
@@ -69,6 +69,6 @@ accounts.methods.matchPassword = async (password, passwordCurrent) =>{
     return await bcrypt.compare(password, passwordCurrent);
 }
 
-accounts.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Accounts',accounts);
+accounts.plugin(require("mongoose-autopopulate"));
+module.exports = mongoose.model("Accounts",accounts);
 

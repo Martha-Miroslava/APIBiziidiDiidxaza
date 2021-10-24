@@ -1,7 +1,7 @@
-const Accounts = require('../models/accounts');
-const {tokenSing}= require('../helpers/generateToken');
-const {StatusCodes} = require ('http-status-codes');
-const {responseServer, responseGeneral} = require('../helpers/response-result');
+const Accounts = require("../models/accounts");
+const {tokenSing}= require("../helpers/generateToken");
+const {StatusCodes} = require ("http-status-codes");
+const {responseServer, responseGeneral} = require("../helpers/response-result");
 
 const postLogin = async (request, response) => {
     const {username, password} = request.body;
@@ -30,7 +30,7 @@ const postLogin = async (request, response) => {
         console.log(error);
         responseServer(response, error);
     });
-}
+};
 
 
 const patchLogin = async (request, response) => {
@@ -53,6 +53,6 @@ const patchLogin = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 module.exports = {postLogin, patchLogin};

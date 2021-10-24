@@ -1,7 +1,7 @@
-const Cities = require('../models/cities');
-const mongoose = require('mongoose');
-const {StatusCodes} = require ('http-status-codes');
-const {responseServer, responseNotFound, responseGeneral} = require('../helpers/response-result');
+const Cities = require("../models/cities");
+const mongoose = require("mongoose");
+const {StatusCodes} = require ("http-status-codes");
+const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
 
 const validateExistsCity = (request, response, next) => {
     const {idCity} = request.body;
@@ -15,7 +15,7 @@ const validateExistsCity = (request, response, next) => {
     .catch(function (error){
         return responseServer(response, error);
     });
-}
+};
 
 const getCities = async (request, response) => {
     const stateID = request.params.stateID;
@@ -32,25 +32,23 @@ const getCities = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 
 const postCity = async (request, response) => {
-    const {
-        nameCity,idState
-    } = request.body;
+    const {nameCity,idState} = request.body;
     const idStateConverted  = mongoose.Types.ObjectId(idState);
-    const city = new Cities ({
+    const newCity = new Cities ({
         nameCity: nameCity,
         idState:idStateConverted
     });
-    await city.save()
+    await newCity.save()
     .then(function (city) {  
         response.status(StatusCodes.CREATED).json(city);
     })
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 module.exports = {getCities, postCity, validateExistsCity};

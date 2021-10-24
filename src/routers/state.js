@@ -1,7 +1,6 @@
-const {Router} = require('express');
-const router = Router();
-const {getStates} = require('../controllers/state-controller');
+const router = require("express").Router();
+const {getStates} = require("../controllers/state-controller");
 
-router.get('/states', getStates);
+router.get("/states", getStates);
 
 module.exports = router;

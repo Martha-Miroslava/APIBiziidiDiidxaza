@@ -1,8 +1,8 @@
-const Discussions = require('../models/discussions');
-const Accounts = require('../models/accounts');
-const {StatusCodes} = require ('http-status-codes');
-const mongoose = require('mongoose');
-const {responseServer, responseNotFound, responseGeneral} = require('../helpers/response-result');
+const Discussions = require("../models/discussions");
+const Accounts = require("../models/accounts");
+const {StatusCodes} = require ("http-status-codes");
+const mongoose = require("mongoose");
+const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
 
 const validateExistsDiscussion = (request, response, next) => {
     const {idDiscussion} = request.body;
@@ -16,7 +16,7 @@ const validateExistsDiscussion = (request, response, next) => {
     .catch(function (error){
         return responseServer(response, error);
     });
-}
+};
 
 const getDiscussionsFilters = async (request, response) => {
     const filter = request.params.filter;
@@ -38,7 +38,7 @@ const getDiscussionsFilters = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 const getDiscussionsCriterion = async (request, response) => {
     const filter = request.params.filter;
@@ -77,7 +77,7 @@ const getDiscussionsCriterion = async (request, response) => {
             responseServer(response, error);
         }); 
     } 
-}
+};
 
 const getDiscussions = async (request, response) => {
     Discussions.find(null,{title:1, dateCreation:1, numberComments:1, theme:1})
@@ -92,7 +92,7 @@ const getDiscussions = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 const getDiscussion = async (request, response) => {
     const discussionID = request.params.discussionID;
@@ -109,17 +109,15 @@ const getDiscussion = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 
 const postDiscussion = async (request, response) => {
-    const {
-        title,comment, theme, idAccount
-    } = request.body;
+    const {title,comment, theme, idAccount} = request.body;
     const idAccountConverted  = mongoose.Types.ObjectId(idAccount);
     const dateNow = new Date();
     const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
-    const discussion = new Discussions ({
+    const newDiscussion = new Discussions ({
         title: title,
         comment: comment,
         dateCreation: dateCreation,
@@ -127,20 +125,18 @@ const postDiscussion = async (request, response) => {
         theme: theme,
         idAccount: idAccountConverted
     });
-    await discussion.save()
+    await newDiscussion.save()
     .then(function (discussion) {  
         response.status(StatusCodes.CREATED).json(discussion);
     })
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 
 const patchDiscussion = async (request, response) => {
-    const {
-        _id, idAccount,
-    } = request.body;
+    const {_id, idAccount} = request.body;
     const idAccountConverted  = mongoose.Types.ObjectId(idAccount);
     const idConverted  = mongoose.Types.ObjectId(_id);
     Accounts.findOne({_id:idAccountConverted}, {discussions:1})
@@ -162,7 +158,7 @@ const patchDiscussion = async (request, response) => {
     .catch(function (error){
         responseServer(response, error);
     });
-}
+};
 
 module.exports = {getDiscussions, getDiscussionsFilters, getDiscussionsCriterion, getDiscussion, 
     postDiscussion, patchDiscussion, validateExistsDiscussion};

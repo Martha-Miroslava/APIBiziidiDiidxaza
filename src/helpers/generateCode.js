@@ -5,4 +5,4 @@ const generateCode = () => {
     return 100000 + numberRandom;
 }
 
-module.exports = {generateCode}
+module.exports = {generateCode};
