@@ -4,9 +4,12 @@ const app = express();
 const morgan = require("morgan");
 const {dataBaseConnect} = require("./connection/ConnectionDB");
 const upload = require("express-fileupload");
+const helmet = require("helmet");
 
 //setting
 app.set("port", process.env.PORT);
+app.disable("x-powered-by");
+app.use(helmet());
 
 //middleware
 app.use(morgan(`dev`));

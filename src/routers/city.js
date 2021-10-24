@@ -1,5 +1,4 @@
-const {Router} = require("express");
-const router = Router();
+const router = require("express").Router();
 const {getCities, postCity} = require("../controllers/city-controller");
 const {validateExistState} = require("../controllers/state-controller");
 const {validationStateId, validationCity}= require("../validators/city-validator");
