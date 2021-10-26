@@ -52,7 +52,7 @@ const validateExistsAccountUpdate = (request, response, next) => {
     Accounts.find({$and :[{$or:[{username:username},{email:email}]}, {_id:{$ne: _id}}]}, {_id:1})
     .then(function (accounts) {  
         if(accounts.length){
-            return responseGeneral(response, StatusCodes.CONFLICT, "Existe una cuenta con el mismo nombre de usuario o correo");
+            return responseGeneral(response, StatusCodes.CONFLICT, "Existe otra cuenta con el mismo nombre de usuario o correo");
         }
         return next();
     })
@@ -191,7 +191,7 @@ const patchAccount = async (request, response) => {
     const queryAccount = {_id:idAccount};
     const newValuesAccount = {status:status};
     Accounts.updateOne(queryAccount, newValuesAccount)
-    .then(async (document) =>{  
+    .then(async (document) => {  
         responseGeneral(response, StatusCodes.OK, "La cuenta cambio su estado exitosamente");
     })
     .catch(function (error){

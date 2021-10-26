@@ -119,7 +119,7 @@ describe("GET Tests Accounts Filters",() => {
             .end( (error, response) => {
                 response.should.have.status(400);
                 response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("El campo debe ser un número");
+                response.body.should.have.property("message").eq("El criterio de la edad debe ser un número");
                 done();
             });
         });
@@ -692,7 +692,7 @@ describe("PUT Tests Accounts",() => {
         .end( (error, response) => {
             response.should.have.status(409);
             response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("Existe una cuenta con el mismo nombre de usuario o correo");
+            response.body.should.have.property("message").eq("Existe otra cuenta con el mismo nombre de usuario o correo");
             done();
         });
     });
