@@ -1,34 +1,33 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const questions = new Schema({
-    _id: Schema.Types.ObjectId,
     score: { 
-        type: Int32,
+        type: Number,
         require: true
     },
     level: { 
-        type: Number,
-        min: 1,
-        max: 3,
+        type: String,
+        default: "easy",
+        enum: ["easy", "half", "difficult"],
         require: true
     },
-    type: { 
-        type: Number,
-        min: 1,
-        max: 2,
+    typeQuestion: { 
+        type: String,
+        default: "only",
+        enum: ["only", "multiple"],
         require: true 
     },
     question: { 
         type: String,
         require: true
     },
-    URLQuestion: { 
+    URL: { 
         type: String,
         require: true
     },
-    idLesson: [{ type: Schema.Types.ObjectId, ref: 'Lessons' }]
+    idLesson: [{ type: Schema.Types.ObjectId, ref: "Lessons" }]
 });
 
-questions.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Questions',questions);
+questions.plugin(require("mongoose-autopopulate"));
+module.exports = mongoose.model("Questions",questions);
