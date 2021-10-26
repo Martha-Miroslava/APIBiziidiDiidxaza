@@ -45,19 +45,18 @@ const getReportsFilters = async (request, response) => {
     }
     else{
         let queryAccountReported = null;
-        const regExp = new RegExp(criterion, "i");
         switch(filter){
             case "nameAccount":
-                queryAccountReported = {$match:{"idAccount.name": { $regex : regExp}}};
+                queryAccountReported = {$match:{"idAccount.name": { $regex : new RegExp(criterion, "i")}}};
                 break;
             case "lastnameAccount":
-                queryAccountReported = {$match:{"idAccount.lastname": { $regex : regExp}}};
+                queryAccountReported = {$match:{"idAccount.lastname": { $regex : new RegExp(criterion, "i")}}};
                 break;
             case "nameReported":
-                queryAccountReported = {$match:{"accountReported.name": { $regex : regExp}}};
+                queryAccountReported = {$match:{"accountReported.name": { $regex : new RegExp(criterion, "i")}}};
                 break;
             case "lastnameReported":
-                queryAccountReported = {$match:{"accountReported.lastname": { $regex : regExp}}};
+                queryAccountReported = {$match:{"accountReported.lastname": { $regex : new RegExp(criterion, "i")}}};
                 break;
         }
         Reports.aggregate([
