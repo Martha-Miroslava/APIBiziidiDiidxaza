@@ -6,7 +6,7 @@ const {responseServer, responseNotFound, responseGeneral} = require("../helpers/
 const getComments = async (request, response) => {
     const discussionID = request.params.discussionID;
     Comments.find({idDiscussion: discussionID}, {idDiscussion:0})
-    .populate({path: 'idAccount', select: 'name lastname'})
+    .populate({path: "idAccount", select: "name lastname"})
     .then(function (comments) {  
         if(comments.length){
             response.status(StatusCodes.OK).json(comments);

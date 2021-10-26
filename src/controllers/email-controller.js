@@ -29,7 +29,7 @@ const postEmail = async (request, response) => {
 const postAccountEmail = async (request, response) => {
     const {email, title, message} = request.body;
     await sendEmail(email, title, message)
-    .then(async (information) =>{  
+    .then(async (information) => {  
         responseGeneral(response, StatusCodes.CREATED, "El mensaje se envio exitosamente");
     })
     .catch(function (error){
@@ -50,7 +50,7 @@ const sendEmail = async (toEmail, subject, content) => {
     await transport.sendMail({
         from: '"Biziidi Diidxazá " <'+process.env.USER_EMAIL+'>',
         to: toEmail, subject: subject, text: content
-    })
+    });
 };
 
 module.exports = {sendEmail, postAccountEmail, postEmail};

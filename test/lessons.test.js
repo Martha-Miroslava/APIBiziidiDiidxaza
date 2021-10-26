@@ -60,8 +60,8 @@ describe("POST Tests Lessons",() => {
 
     it("Post /Lesson Bad Request Points", (done) => {
         const lesson = {
-            name: 'Números',
-            description: 'Aprender los números en Zapoteco',
+            name: "Números",
+            description: "Aprender los números en Zapoteco",
             pointsTotal: 4
         }
         chai.request(server).post("/lessons").send(lesson)

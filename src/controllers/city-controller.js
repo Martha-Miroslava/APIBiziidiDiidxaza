@@ -10,7 +10,7 @@ const validateExistsCity = (request, response, next) => {
         if(city){
             return next();
         }
-        return responseGeneral(response, StatusCodes.BAD_REQUEST, "La ciudad no existe")
+        return responseGeneral(response, StatusCodes.BAD_REQUEST, "La ciudad no existe");
     })
     .catch(function (error){
         return responseServer(response, error);

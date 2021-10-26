@@ -25,7 +25,7 @@ describe("POST Tests Discussion",() => {
             comment: "Me gustaría saber que opinan de los cuentos que esta y donde puede encontrar más",
             theme: "doubt",
             idAccount: "6168cf9563929f8f000c7614"
-        }
+        };
         chai.request(server).post("/discussions").send(discussion)
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {

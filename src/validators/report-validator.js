@@ -1,4 +1,4 @@
-const  {check, param}  =  require ("express-validator")
+const  {check, param}  =  require ("express-validator");
 const {StatusCodes} = require ("http-status-codes");
 const {validationAccountId} = require("../validators/discussion-validator");
 const {validateResult} = require("../helpers/response-result");
@@ -39,12 +39,12 @@ const validationReportFilters  = [
 ];
 
 
-const validationCriterion = (request, response, next) =>{
+const validationCriterion = (request, response, next) => {
     const filter = request.params.filter;
     const criterion = request.params.criterion;
     var expReg =  new RegExp(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü ]{2,150}$/);
     let message = "Solo letras de la A a la Z. Caracteres de 2 a 150";
-    if(filter =="dateCreation"){
+    if(filter === "dateCreation"){
         expReg = new RegExp(/^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/);
         message = "La fecha debe tener el formato YYYY-MM-DD";
     }

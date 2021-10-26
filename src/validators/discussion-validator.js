@@ -1,4 +1,4 @@
-const  {check, param}  =  require ("express-validator")
+const  {check, param}  =  require ("express-validator");
 const {StatusCodes} = require ("http-status-codes");
 const {validateResult} = require("../helpers/response-result");
 const {validationId} = require("../validators/account-validator");
@@ -27,7 +27,7 @@ const validationDiscussionCriterion  = [
     }
 ];
 
-const validationCriterion = (request, response, next) =>{
+const validationCriterion = (request, response, next) => {
     const filter = request.params.filter;
     const criterion = request.params.criterion;
     var expReg =  new RegExp(/^[\wÑñÁáÉéÍíÓóÚúÜü.,#¿?¡!]+(\s*[\wÑñÁáÉéÍíÓóÚúÜü.,#¿?¡!]*){4,200}/);
@@ -36,7 +36,7 @@ const validationCriterion = (request, response, next) =>{
         expReg = new RegExp(/^[a-z0-9]{24}$/);
         message = "El ID debe tener números y letras minúsculas";
     }
-    if( !expReg.test(criterion)) {
+    if(!expReg.test(criterion)) {
         return response.status(StatusCodes.BAD_REQUEST).json({errors: message});
     }
     return next();

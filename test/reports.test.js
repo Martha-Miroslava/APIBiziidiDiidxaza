@@ -283,7 +283,7 @@ describe("POST Tests Report",() => {
 	        context:"La discusion tiene mañanita comentarios malos por parte de este usuario",
 	        idAccount:"6168cf9563929f8f000c7614",
 	        accountReported:"6168d4975471a4bcc2b17445"
-        }
+        };
         chai.request(server).post("/reports").send(report)
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
