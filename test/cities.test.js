@@ -2,7 +2,7 @@ const chai = require("chai");
 const chaiHttp = require("chai-http");
 const mongoose = require("mongoose");
 const {server} = require("../src/app");
-responseGeneral(response, StatusCodes.NOT_FOUND, "No se encontro la cuenta");
+const Cities = require("../src/models/cities");
 chai.should();
 chai.use(chaiHttp);
 
