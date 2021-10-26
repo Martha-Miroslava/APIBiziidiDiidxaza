@@ -14,7 +14,7 @@ const tokenSing = async (account) => {
 };
 
 const verifyToken = async (token) => {
-    token = await token.replace('Bearer ', ''); 
+    token = await token.replace("Bearer ", ""); 
     const tokenVerified = jsonwebtoken.verify(token, process.env.ACCESS_TOKEN_SECRET);
     return tokenVerified;
 };

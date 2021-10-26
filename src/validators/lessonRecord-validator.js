@@ -2,7 +2,7 @@ const  {check}  =  require ("express-validator");
 const {validateResult} = require("../helpers/response-result");
 const {validationAccountId} = require("../validators/discussion-validator");
 
-const validationLessonRecord= [
+const validationLessonRecord = [
     check("pointsObtained")
         .exists().withMessage("El campo debe existir")
         .notEmpty().withMessage("El campo no debe estar vacío")

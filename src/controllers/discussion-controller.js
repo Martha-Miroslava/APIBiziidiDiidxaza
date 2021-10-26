@@ -59,8 +59,8 @@ const getDiscussionsCriterion = async (request, response) => {
     } 
     else{
         Accounts.findOne({_id:criterion}, {_id:0, discussions:1})
-        .then(async (account) =>{
-            if(!account || account.discussions === '[]'){
+        .then(async (account) => {
+            if(!account || account.discussions === "[]"){
                 responseNotFound(response);
             }
             else{
@@ -136,7 +136,7 @@ const patchDiscussion = async (request, response) => {
     .then(async (account) => {
         const discussion = await Discussions.findOne({_id:idConverted});
         if(discussion){
-            if(account.discussions == "[]"){  
+            if(account.discussions === "[]"){  
                 await Accounts.updateOne({_id:idAccountConverted}, {discussions:idConverted});
             }
             else{

@@ -12,7 +12,7 @@ describe("POST Tests Resource Account",() => {
         chai.request(server).post("/resources/account")
         .field("Content-Type", "multipart/form-data")
         .field("idAccount", "6164db5")
-        .attach("file", `${__dirname}/resources/imageAccount.png`, 'imageAccount.png')
+        .attach("file", `${__dirname}/resources/imageAccount.png`, "imageAccount.png")
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");
@@ -77,7 +77,7 @@ describe("POST Tests Resource Lesson",() => {
         chai.request(server).post("/resources/lesson")
         .field("Content-Type", "multipart/form-data")
         .field("idLesson", "6164vrfdb5")
-        .attach("file", `${__dirname}/resources/image.png`, 'image.png')
+        .attach("file", `${__dirname}/resources/image.png`, "image.png")
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
@@ -118,7 +118,7 @@ describe("POST Tests Resource Lesson",() => {
         chai.request(server).post("/resources/lesson")
         .field("Content-Type", "multipart/form-data")
         .field("idLesson", "6171fb2eeb326a2f1850c22e")
-        .attach("file", `${__dirname}/resources/imageError.bmp`, 'imageError.bmp')
+        .attach("file", `${__dirname}/resources/imageError.bmp`, "imageError.bmp")
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
@@ -146,7 +146,7 @@ describe("POST Tests Resource Audio",() => {
         chai.request(server).post("/resources/audio")
         .field("Content-Type", "multipart/form-data")
         .field("idQuestion", "6164vrfdb5")
-        .attach("file", `${__dirname}/resources/audio.mp3`, 'audio.mp3')
+        .attach("file", `${__dirname}/resources/audio.mp3`, "audio.mp3")
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
@@ -199,7 +199,7 @@ describe("POST Tests Resource Audio",() => {
 });
 
 
-describe("PATCH Tests Resource",()=> {
+describe("PATCH Tests Resource", () => {
     before((done) => {
         const login = {
             username:"Karla",
@@ -226,7 +226,7 @@ describe("PATCH Tests Resource",()=> {
     it("PATCH /Resource Not Found", (done) => {
         const url = {
             URL: "../images/accounts/6164db5823242f430c487fcb.png"
-        }
+        };
         chai.request(server).patch("/resources").send(url)
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {

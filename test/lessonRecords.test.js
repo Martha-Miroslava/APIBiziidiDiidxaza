@@ -7,7 +7,7 @@ chai.should();
 chai.use(chaiHttp);
 let accessToken= null;
 
-describe("GET Tests LessonRecords",()=> {
+describe("GET Tests LessonRecords", () => {
     before((done) => {
         const login = {
             username:"MiroStar",
@@ -74,7 +74,7 @@ describe("POST Tests LessonReport",() => {
             pointsObtained:45,
             idAccount:"6168cf9563929f8f000c7614",
             idLesson:"6171fb7deb326a2f1850c22f"
-        }
+        };
         chai.request(server).post("/lessonRecords").send(lessonRecord)
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
