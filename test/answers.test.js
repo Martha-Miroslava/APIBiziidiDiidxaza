@@ -1,13 +1,13 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const mongoose = require('mongoose');
-const {server} = require('../src/app');
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const mongoose = require("mongoose");
+const {server} = require("../src/app");
 chai.should();
 chai.use(chaiHttp);
 let accessToken= null;
 
-describe("GET Tests Answers",()=>{
-    before((done) =>{
+describe("GET Tests Answers",() => {
+    before((done) => {
         const login = {
             username: "MiroStar",
 	        password: "Marst1245#" 
@@ -19,7 +19,7 @@ describe("GET Tests Answers",()=>{
         });
     });
 
-    it("GET /Answers Bad Request", (done) =>{
+    it("GET /Answers Bad Request", (done) => {
         chai.request(server).get("/answers/6171f")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -30,7 +30,7 @@ describe("GET Tests Answers",()=>{
         });
     });
 
-    it("GET /Answers Not Found", (done) =>{
+    it("GET /Answers Not Found", (done) => {
         chai.request(server).get("/answers/6171fb2eeb326a2f1850c22c")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -41,7 +41,7 @@ describe("GET Tests Answers",()=>{
         });
     });
 
-    it("GET /Answers", (done) =>{
+    it("GET /Answers", (done) => {
         chai.request(server).get("/answers/6173660d944b5e03bc7ddf3c")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {

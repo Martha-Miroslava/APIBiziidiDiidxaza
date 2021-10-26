@@ -11,13 +11,13 @@ const tokenSing = async (account) => {
             expiresIn: 60 * 5,
         }
     );
-}
+};
 
 const verifyToken = async (token) => {
     token = await token.replace('Bearer ', ''); 
     const tokenVerified = jsonwebtoken.verify(token, process.env.ACCESS_TOKEN_SECRET);
     return tokenVerified;
-}
+};
 
 
 module.exports = {tokenSing, verifyToken};

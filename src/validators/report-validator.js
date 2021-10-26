@@ -23,7 +23,7 @@ const validationReport = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationReportFilters  = [
     param("filter")
@@ -36,7 +36,7 @@ const validationReportFilters  = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 
 const validationCriterion = (request, response, next) =>{
@@ -52,7 +52,7 @@ const validationCriterion = (request, response, next) =>{
         return response.status(StatusCodes.BAD_REQUEST).json({message: message});
     }
     return next();
-}
+};
 
 const validationReportId  = [
     param("reportID")
@@ -63,6 +63,6 @@ const validationReportId  = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 module.exports = {validationReport, validationReportFilters, validationCriterion, validationReportId};

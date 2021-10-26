@@ -1,14 +1,14 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const Accounts = require('../src/models/accounts');
-const mongoose = require('mongoose');
-const {server} = require('../src/app');
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const Accounts = require("../src/models/accounts");
+const mongoose = require("mongoose");
+const {server} = require("../src/app");
 chai.should();
 chai.use(chaiHttp);
 let accessToken= null;
 
-describe("GET Tests Accounts Filters",()=>{
-    before((done) =>{
+describe("GET Tests Accounts Filters",() => {
+    before((done) => {
         const login = {
             username: "Karla",
 	        password: "Marst1245#"
@@ -21,7 +21,7 @@ describe("GET Tests Accounts Filters",()=>{
     });
 
     describe("GET Tests Accounts Lastname", () => {
-        it("GET /Accounts Lastname", (done) =>{
+        it("GET /Accounts Lastname", (done) => {
             chai.request(server).get("/accounts/lastname/Ortiz")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -32,7 +32,7 @@ describe("GET Tests Accounts Filters",()=>{
             });
         });
 
-        it("GET /Accounts Lastname Not Found", (done) =>{
+        it("GET /Accounts Lastname Not Found", (done) => {
             chai.request(server).get("/accounts/lastname/Gonzalez")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -43,7 +43,7 @@ describe("GET Tests Accounts Filters",()=>{
             });
         });
 
-        it("GET /Accounts Lastname Bad Request", (done) =>{
+        it("GET /Accounts Lastname Bad Request", (done) => {
             chai.request(server).get("/accounts/lastname/12352")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -56,7 +56,7 @@ describe("GET Tests Accounts Filters",()=>{
     });
 
     describe("GET Tests Accounts Name", () => {
-        it("GET /Accounts Name", (done) =>{
+        it("GET /Accounts Name", (done) => {
             chai.request(server).get("/accounts/name/Karla")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -67,7 +67,7 @@ describe("GET Tests Accounts Filters",()=>{
             });
         });
 
-        it("GET /Accounts Name Not Found", (done) =>{
+        it("GET /Accounts Name Not Found", (done) => {
             chai.request(server).get("/accounts/name/Luisa")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -78,7 +78,7 @@ describe("GET Tests Accounts Filters",()=>{
             });
         });
 
-        it("GET /Accounts Name Bad Request", (done) =>{
+        it("GET /Accounts Name Bad Request", (done) => {
             chai.request(server).get("/accounts/name/12352")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -91,7 +91,7 @@ describe("GET Tests Accounts Filters",()=>{
     });
     
     describe("GET Tests Accounts AGE", () => {
-        it("GET /Accounts Age", (done) =>{
+        it("GET /Accounts Age", (done) => {
             chai.request(server).get("/accounts/age/21")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -102,7 +102,7 @@ describe("GET Tests Accounts Filters",()=>{
             });
         });
 
-        it("GET /Accounts Age Not Found", (done) =>{
+        it("GET /Accounts Age Not Found", (done) => {
             chai.request(server).get("/accounts/age/14")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -113,7 +113,7 @@ describe("GET Tests Accounts Filters",()=>{
             });
         });
 
-        it("GET /Accounts Age Bad Request", (done) =>{
+        it("GET /Accounts Age Bad Request", (done) => {
             chai.request(server).get("/accounts/age/Martha")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -126,7 +126,7 @@ describe("GET Tests Accounts Filters",()=>{
     });
 
     describe("GET Tests Accounts DateBirth", () => {
-        it("GET /Accounts DateBirth", (done) =>{
+        it("GET /Accounts DateBirth", (done) => {
             chai.request(server).get("/accounts/dateBirth/2000-07-05")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -137,7 +137,7 @@ describe("GET Tests Accounts Filters",()=>{
             });
         });
 
-        it("GET /Accounts DateBirth Not Found", (done) =>{
+        it("GET /Accounts DateBirth Not Found", (done) => {
             chai.request(server).get("/accounts/dateBirth/2000-07-16")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -148,7 +148,7 @@ describe("GET Tests Accounts Filters",()=>{
             });
         });
 
-        it("GET /Accounts DateBirth Bad Request", (done) =>{
+        it("GET /Accounts DateBirth Bad Request", (done) => {
             chai.request(server).get("/accounts/dateBirth/Martha")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -161,7 +161,7 @@ describe("GET Tests Accounts Filters",()=>{
     });
 
     describe("GET Tests Accounts Email", () => {
-        it("GET /Accounts Email", (done) =>{
+        it("GET /Accounts Email", (done) => {
             chai.request(server).get("/accounts/email/martha_15_7@outlook.com")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -172,7 +172,7 @@ describe("GET Tests Accounts Filters",()=>{
             });
         });
 
-        it("GET /Accounts Email Not Found", (done) =>{
+        it("GET /Accounts Email Not Found", (done) => {
             chai.request(server).get("/accounts/email/martha_15_78@outlook.com")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -183,7 +183,7 @@ describe("GET Tests Accounts Filters",()=>{
             });
         });
 
-        it("GET /Accounts Email Bad Request", (done) =>{
+        it("GET /Accounts Email Bad Request", (done) => {
             chai.request(server).get("/accounts/email/123")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -196,7 +196,7 @@ describe("GET Tests Accounts Filters",()=>{
     });
 
     describe("GET Tests Accounts Username", () => {
-        it("GET /Accounts Username", (done) =>{
+        it("GET /Accounts Username", (done) => {
             chai.request(server).get("/accounts/username/Karla")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -207,7 +207,7 @@ describe("GET Tests Accounts Filters",()=>{
             });
         });
 
-        it("GET /Accounts Username Not Found", (done) =>{
+        it("GET /Accounts Username Not Found", (done) => {
             chai.request(server).get("/accounts/username/Karla123")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -218,7 +218,7 @@ describe("GET Tests Accounts Filters",()=>{
             });
         });
 
-        it("GET /Accounts Username Bad Request", (done) =>{
+        it("GET /Accounts Username Bad Request", (done) => {
             chai.request(server).get("/accounts/username/  ")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -231,7 +231,7 @@ describe("GET Tests Accounts Filters",()=>{
     });
 
     describe("GET Tests Accounts DateCreation", () => {
-        it("GET /Accounts DateCreation", (done) =>{
+        it("GET /Accounts DateCreation", (done) => {
             chai.request(server).get("/accounts/dateCreation/2021-09-14")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -242,7 +242,7 @@ describe("GET Tests Accounts Filters",()=>{
             });
         });
 
-        it("GET /Accounts DateCreation Not Found", (done) =>{
+        it("GET /Accounts DateCreation Not Found", (done) => {
             chai.request(server).get("/accounts/dateCreation/2021-05-14")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -253,7 +253,7 @@ describe("GET Tests Accounts Filters",()=>{
             });
         });
 
-        it("GET /Accounts DateCreation Bad Request", (done) =>{
+        it("GET /Accounts DateCreation Bad Request", (done) => {
             chai.request(server).get("/accounts/dateCreation/123")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -266,8 +266,8 @@ describe("GET Tests Accounts Filters",()=>{
     });
 });
 
-describe("GET Tests Accounts",()=>{
-    before((done) =>{
+describe("GET Tests Accounts",() => {
+    before((done) => {
         const login = {
             username: "Karla",
 	        password: "Marst1245#"
@@ -279,7 +279,7 @@ describe("GET Tests Accounts",()=>{
         });
     });
 
-    it("GET /Accounts", (done) =>{
+    it("GET /Accounts", (done) => {
         chai.request(server).get("/accounts")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -291,8 +291,8 @@ describe("GET Tests Accounts",()=>{
     });
 });
 
-describe("GET Tests Account",()=>{
-    before((done) =>{
+describe("GET Tests Account",() => {
+    before((done) => {
         const login = {
             username: "Karla",
 	        password: "Marst1245#"
@@ -304,7 +304,7 @@ describe("GET Tests Account",()=>{
         });
     });
 
-    it("GET /Accounts/ID", (done) =>{
+    it("GET /Accounts/ID", (done) => {
         chai.request(server).get("/accounts/6164db5823242f430c487fca")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -324,7 +324,7 @@ describe("GET Tests Account",()=>{
         });
     });
 
-    it("GET /Accounts/ID Not Found", (done) =>{
+    it("GET /Accounts/ID Not Found", (done) => {
         chai.request(server).get("/accounts/6164db5823242f430c487fcb")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -335,7 +335,7 @@ describe("GET Tests Account",()=>{
         });
     });
 
-    it("GET /Accounts/ID Bad Request", (done) =>{
+    it("GET /Accounts/ID Bad Request", (done) => {
         chai.request(server).get("/accounts/6343455")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -347,10 +347,10 @@ describe("GET Tests Account",()=>{
     });
 });
 
-describe("POST Tests Accounts",()=>{
+describe("POST Tests Accounts",() => { 
     let idAccount = null;
 
-    it("POST /Accounts Bad Request All", (done) =>{
+    it("POST /Accounts Bad Request All", (done) => {
         const account = {};
         chai.request(server).post("/accounts").send(account)
         .end( (error, response) => {
@@ -361,7 +361,7 @@ describe("POST Tests Accounts",()=>{
         });
     });
     
-    it("POST /Accounts Bad Request Name", (done) =>{
+    it("POST /Accounts Bad Request Name", (done) => {
         const account = {
             lastname: 354,
 	        name: 123,
@@ -382,7 +382,7 @@ describe("POST Tests Accounts",()=>{
         });
     });
 
-    it("POST /Accounts Bad Request Age", (done) =>{
+    it("POST /Accounts Bad Request Age", (done) => {
         const account = {
             lastname: "Ortiz",
 	        name: "Miroslava",
@@ -403,17 +403,17 @@ describe("POST Tests Accounts",()=>{
         });
     });
 
-    it("POST /Accounts Bad Request DateBirth", (done) =>{
+    it("POST /Accounts Bad Request DateBirth", (done) => {
         const account = {
-            lastname: "Ortiz",
-	        name: "Miroslava",
+            lastname:"Ortiz",
+	        name:"Miroslava",
 	        age: 13,
-	        dateBirth: "2021/08/05",
-	        email: "miroslava_19_7@outlook.es",
-	        username: "Miroslava123",
-	        password: "Marst1245#",
-	        role: "user",
-	        idCity: "61645a7c0879b0c15c7116f7"
+	        dateBirth:"2021/08/05",
+	        email:"miroslava_19_7@outlook.es",
+	        username:"Miroslava123",
+	        password:"Marst1245#",
+	        role:"user",
+	        idCity:"61645a7c0879b0c15c7116f7"
         };
         chai.request(server).post("/accounts").send(account)
         .end( (error, response) => {
@@ -424,7 +424,7 @@ describe("POST Tests Accounts",()=>{
         });
     });
 
-    it("POST /Accounts Bad Request Email", (done) =>{
+    it("POST /Accounts Bad Request Email", (done) => {
         const account = {
             lastname: "Ortiz",
 	        name: "Miroslava",
@@ -445,7 +445,7 @@ describe("POST Tests Accounts",()=>{
         });
     });
 
-    it("POST /Accounts Bad Request City", (done) =>{
+    it("POST /Accounts Bad Request City", (done) => {
         const account = {
             lastname: "Ortiz",
 	        name: "Miroslava",
@@ -466,7 +466,7 @@ describe("POST Tests Accounts",()=>{
         });
     });
 
-    it("POST /Accounts", (done) =>{
+    it("POST /Accounts", (done) => {
         const account = {
             lastname: "Ortiz",
 	        name: "Miroslava",
@@ -498,7 +498,7 @@ describe("POST Tests Accounts",()=>{
     });
 
 
-    it("POST /Accounts Duplicate", (done) =>{
+    it("POST /Accounts Duplicate", (done) => {
         const account = {
             lastname: "Ortiz",
 	        name: "Miroslava",
@@ -524,8 +524,8 @@ describe("POST Tests Accounts",()=>{
     });
 });
 
-describe("PUT Tests Accounts",()=>{
-    before((done) =>{
+describe("PUT Tests Accounts",() => {
+    before((done) => {
         const login = {
             username: "MiroStar",
 	        password: "Marst1245#"
@@ -537,7 +537,7 @@ describe("PUT Tests Accounts",()=>{
         });
     });
 
-    it("PUT /Accounts Bad Request All", (done) =>{
+    it("PUT /Accounts Bad Request All", (done) => {
         const account = {};
         chai.request(server).put("/accounts").send(account)
         .auth(accessToken, { type: 'bearer' })
@@ -549,7 +549,7 @@ describe("PUT Tests Accounts",()=>{
         });
     });
     
-    it("PUT /Accounts Bad Request Name", (done) =>{
+    it("PUT /Accounts Bad Request Name", (done) => {
         const account = {
             _id: "6168cf9563929f8f000c7614",
             lastname: 354,
@@ -570,7 +570,7 @@ describe("PUT Tests Accounts",()=>{
         });
     });
 
-    it("PUT /Accounts Bad Request Age", (done) =>{
+    it("PUT /Accounts Bad Request Age", (done) => {
         const account = {
             _id: "6168cf9563929f8f000c7614",
             lastname: "Ortiz",
@@ -591,7 +591,7 @@ describe("PUT Tests Accounts",()=>{
         });
     });
 
-    it("PUT /Accounts Bad Request DateBirth", (done) =>{
+    it("PUT /Accounts Bad Request DateBirth", (done) => {
         const account = {
             _id: "6168cf9563929f8f000c7614",
             lastname: "Ortiz",
@@ -612,7 +612,7 @@ describe("PUT Tests Accounts",()=>{
         });
     });
 
-    it("PUT /Accounts Bad Request Email", (done) =>{
+    it("PUT /Accounts Bad Request Email", (done) => {
         const account = {
             _id: "6168cf9563929f8f000c7614",
             lastname: "Ortiz",
@@ -633,7 +633,7 @@ describe("PUT Tests Accounts",()=>{
         });
     });
 
-    it("PUT /Accounts Bad Request City", (done) =>{
+    it("PUT /Accounts Bad Request City", (done) => {
         const account = {
             _id: "6168cf9563929f8f000c7614",
             lastname: "Ortiz",
@@ -654,7 +654,7 @@ describe("PUT Tests Accounts",()=>{
         });
     });
 
-    it("PUT /Accounts", (done) =>{
+    it("PUT /Accounts", (done) => {
         const account = {
             _id: "6168cf9563929f8f000c7614",
             lastname: "Gomez",
@@ -676,7 +676,7 @@ describe("PUT Tests Accounts",()=>{
     });
 
 
-    it("PUT /Accounts Duplicate", (done) =>{
+    it("PUT /Accounts Duplicate", (done) => {
         const account = {
             _id: "6168cf9563929f8f000c7614",
             lastname: "Ortiz",
@@ -716,8 +716,8 @@ describe("PUT Tests Accounts",()=>{
     });
 });
 
-describe("PATCH Tests Account", ()=>{
-    before((done) =>{
+describe("PATCH Tests Account", () => {
+    before((done) => {
         const login = {
             username: "Karla",
 	        password: "Marst1245#"
@@ -729,7 +729,7 @@ describe("PATCH Tests Account", ()=>{
         });
     });
 
-    it("PATCH /Accounts", (done) =>{
+    it("PATCH /Accounts", (done) => {
         const account = {
             _id: "6168cf9563929f8f000c7614",
 	        status: 1
@@ -744,7 +744,7 @@ describe("PATCH Tests Account", ()=>{
         });
     });
 
-    it("PATCH /Accounts Bad Request", (done) =>{
+    it("PATCH /Accounts Bad Request", (done) => {
         const account = {
             _id: "616err",
 	        status: 1

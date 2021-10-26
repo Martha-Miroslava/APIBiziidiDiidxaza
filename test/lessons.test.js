@@ -1,14 +1,14 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const Lessons = require('../src/models/lessons');
-const mongoose = require('mongoose');
-const {server} = require('../src/app');
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const mongoose = require("mongoose");
+const {server} = require("../src/app");
+const Lessons = require("../src/models/lessons");
 chai.should();
 chai.use(chaiHttp);
 let accessToken= null;
 
-describe("GET Tests Lessons",()=>{
-    before((done) =>{
+describe("GET Tests Lessons",() => {
+    before((done) => {
         const login = {
             username: "MiroStar",
 	        password: "Marst1245#" 
@@ -20,7 +20,7 @@ describe("GET Tests Lessons",()=>{
         });
     });
 
-    it("GET /Lessons", (done) =>{
+    it("GET /Lessons", (done) => {
         chai.request(server).get("/lessons")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -32,10 +32,10 @@ describe("GET Tests Lessons",()=>{
     });
 });
 
-describe("POST Tests Lessons",()=>{
+describe("POST Tests Lessons",() => {
     let idLesson = null;
 
-    before((done) =>{
+    before((done) => {
         const login = {
             username: "Karla",
 	        password: "Marst1245#"
@@ -47,7 +47,7 @@ describe("POST Tests Lessons",()=>{
         });
     });
 
-    it("Post /Lesson Bad request", (done) =>{
+    it("Post /Lesson Bad request", (done) => {
         chai.request(server).post("/lessons")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -58,7 +58,7 @@ describe("POST Tests Lessons",()=>{
         });
     });
 
-    it("Post /Lesson Bad Request Points", (done) =>{
+    it("Post /Lesson Bad Request Points", (done) => {
         const lesson = {
             name: 'Números',
             description: 'Aprender los números en Zapoteco',
@@ -75,7 +75,7 @@ describe("POST Tests Lessons",()=>{
         });
     });
 
-    it("Post /Lesson", (done) =>{
+    it("Post /Lesson", (done) => {
         const lesson = {
             name: 'Números',
             description: 'Aprender los números en Zapoteco',

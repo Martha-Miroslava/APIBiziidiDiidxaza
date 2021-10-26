@@ -14,14 +14,14 @@ const validationCreationComment = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationDeleteComment = [
     validationId,
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 
 module.exports = {validationCreationComment, validationDeleteComment};

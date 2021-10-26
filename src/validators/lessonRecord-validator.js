@@ -16,6 +16,6 @@ const validationLessonRecord= [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 module.exports = {validationLessonRecord};

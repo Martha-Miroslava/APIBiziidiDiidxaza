@@ -1,16 +1,16 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const mongoose = require('mongoose');
-const Discussions = require('../src/models/discussions');
-const Accounts = require('../src/models/accounts');
-const {server} = require('../src/app');
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const mongoose = require("mongoose");
+const {server} = require("../src/app");
+const Discussions = require("../src/models/discussions");
+const Accounts = require("../src/models/accounts");
 chai.should();
 chai.use(chaiHttp);
 let accessToken= null;
 let idDiscussion = null;
 
-describe("POST Tests Discussion",() =>{
-    before((done) =>{
+describe("POST Tests Discussion",() => {
+    before((done) => {
         const login = {
             username: "MiroStar",
 	        password: "Marst1245#"
@@ -22,7 +22,7 @@ describe("POST Tests Discussion",() =>{
         });
     });
 
-    it("POST /Discussions", (done) =>{
+    it("POST /Discussions", (done) => {
         const discussion = {
             title: "¿Qué opinan de los cuentos en zapoteco?",
             comment: "Me gustaría saber que opinan de los cuentos que esta y donde puede encontrar más",
@@ -46,7 +46,7 @@ describe("POST Tests Discussion",() =>{
         });
     });
 
-    it("POST /Discussions Bad Request", (done) =>{
+    it("POST /Discussions Bad Request", (done) => {
         const discussion = {
             title: "   ",
             comment: " ",
@@ -63,7 +63,7 @@ describe("POST Tests Discussion",() =>{
         });
     });
 
-    it("POST /Discussions Bad Request Account", (done) =>{
+    it("POST /Discussions Bad Request Account", (done) => {
         const discussion = {
             title: "¿Qué opinan de los cuentos en zapoteco?",
             comment: "Me gustaría saber que opinan de los cuentos que esta y donde puede encontrar más",
@@ -81,8 +81,8 @@ describe("POST Tests Discussion",() =>{
     });
 });
 
-describe("GET Tests Discussions Filters",() =>{
-    before((done) =>{
+describe("GET Tests Discussions Filters",() => {
+    before((done) => {
         const login = {
             username: "MiroStar",
 	        password: "Marst1245#"
@@ -94,7 +94,7 @@ describe("GET Tests Discussions Filters",() =>{
         });
     });
 
-    it("GET /Discussions News", (done) =>{
+    it("GET /Discussions News", (done) => {
         chai.request(server).get("/discussions/filters/news")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -105,7 +105,7 @@ describe("GET Tests Discussions Filters",() =>{
         });
     });
 
-    it("GET /Discussions Populars", (done) =>{
+    it("GET /Discussions Populars", (done) => {
         chai.request(server).get("/discussions/filters/populars")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -121,8 +121,8 @@ describe("GET Tests Discussions Filters",() =>{
     });
 });
 
-describe("GET Tests Discussions Filters Criterion",() =>{
-    before((done) =>{
+describe("GET Tests Discussions Filters Criterion",() => {
+    before((done) => {
         const login = {
             username: "MiroStar",
 	        password: "Marst1245#"
@@ -134,7 +134,7 @@ describe("GET Tests Discussions Filters Criterion",() =>{
         });
     });
 
-    it("GET /Discussions Title", (done) =>{
+    it("GET /Discussions Title", (done) => {
         chai.request(server).get("/discussions/title/¿Qué opinan")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -145,7 +145,7 @@ describe("GET Tests Discussions Filters Criterion",() =>{
         });
     });
 
-    it("GET /Discussions Title Not Found", (done) =>{
+    it("GET /Discussions Title Not Found", (done) => {
         chai.request(server).get("/discussions/title/Canciones")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -156,7 +156,7 @@ describe("GET Tests Discussions Filters Criterion",() =>{
         });
     });
 
-    it("GET /Discussions Title Bad Request", (done) =>{
+    it("GET /Discussions Title Bad Request", (done) => {
         chai.request(server).get("/discussions/title/    ")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -167,7 +167,7 @@ describe("GET Tests Discussions Filters Criterion",() =>{
         });
     });
 
-    it("GET /Discussions Tracing", (done) =>{
+    it("GET /Discussions Tracing", (done) => {
         chai.request(server).get("/discussions/tracing/6168cf9563929f8f000c7614")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -178,7 +178,7 @@ describe("GET Tests Discussions Filters Criterion",() =>{
         });
     });
 
-    it("GET /Discussions Tracing Not Found", (done) =>{
+    it("GET /Discussions Tracing Not Found", (done) => {
         chai.request(server).get("/discussions/tracing/6168d4975471a4bcc2b17446")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -189,7 +189,7 @@ describe("GET Tests Discussions Filters Criterion",() =>{
         });
     });
 
-    it("GET /Discussions Tracing Bad Request", (done) =>{
+    it("GET /Discussions Tracing Bad Request", (done) => {
         chai.request(server).get("/discussions/tracing/6168cf9")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -201,8 +201,8 @@ describe("GET Tests Discussions Filters Criterion",() =>{
     });
 });
 
-describe("GET Tests Discussion",() =>{
-    before((done) =>{
+describe("GET Tests Discussion",() => {
+    before((done) => {
         const login = {
             username: "MiroStar",
 	        password: "Marst1245#"
@@ -214,7 +214,7 @@ describe("GET Tests Discussion",() =>{
         });
     });
 
-    it("GET /Discussions/ID", (done) =>{
+    it("GET /Discussions/ID", (done) => {
         chai.request(server).get("/discussions/616b0efeba862c9a697da9db")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -231,7 +231,7 @@ describe("GET Tests Discussion",() =>{
         });
     });
 
-    it("GET /Discussions/ID Not Found", (done) =>{
+    it("GET /Discussions/ID Not Found", (done) => {
         chai.request(server).get("/discussions/616b0efeba862c9a697da9dc")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -242,7 +242,7 @@ describe("GET Tests Discussion",() =>{
         });
     });
 
-    it("GET /Discussions/ID Bad Request", (done) =>{
+    it("GET /Discussions/ID Bad Request", (done) => {
         chai.request(server).get("/discussions/616b0efeba862c9a697")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -254,8 +254,8 @@ describe("GET Tests Discussion",() =>{
     });
 });
 
-describe("GET Tests Discussions",() =>{
-    before((done) =>{
+describe("GET Tests Discussions",() => {
+    before((done) => {
         const login = {
             username: "MiroStar",
 	        password: "Marst1245#"
@@ -267,7 +267,7 @@ describe("GET Tests Discussions",() =>{
         });
     });
 
-    it("GET /Discussions", (done) =>{
+    it("GET /Discussions", (done) => {
         chai.request(server).get("/discussions")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -279,8 +279,8 @@ describe("GET Tests Discussions",() =>{
     });
 });
 
-describe("PATCH Tests Discussion",() =>{
-    before((done) =>{
+describe("PATCH Tests Discussion",() => {
+    before((done) => {
         const login = {
             username: "MiroStar",
 	        password: "Marst1245#"
@@ -292,7 +292,7 @@ describe("PATCH Tests Discussion",() =>{
         });
     });
 
-    it("PATCH /Discussion", (done) =>{
+    it("PATCH /Discussion", (done) => {
         const discussion = {
             _id: "616b0efeba862c9a697da9db",
             idAccount: "6168d4975471a4bcc2b17445"
@@ -307,7 +307,7 @@ describe("PATCH Tests Discussion",() =>{
         });
     });
 
-    it("PATCH /Discussion Bad Request Account", (done) =>{
+    it("PATCH /Discussion Bad Request Account", (done) => {
         const discussion = {
             _id: "616b0efeba862c9a697da9db",
             idAccount: "6168d4975471a4bcc2b17443"
@@ -322,7 +322,7 @@ describe("PATCH Tests Discussion",() =>{
         });
     });
 
-    it("PATCH /Discussion Bad Request Discussion", (done) =>{
+    it("PATCH /Discussion Bad Request Discussion", (done) => {
         const discussion = {
             _id: "616b0efeba862c9a697da9cf",
             idAccount: "6168d4975471a4bcc2b17445"
@@ -337,7 +337,7 @@ describe("PATCH Tests Discussion",() =>{
         });
     });
 
-    it("PATCH /Discussion Bad Request", (done) =>{
+    it("PATCH /Discussion Bad Request", (done) => {
         const discussion = {
             _id: "616b0e",
             idAccount: "6168d4975"

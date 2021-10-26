@@ -16,6 +16,6 @@ const checkRoleAuth = (roles) => async (request, response, next) => {
     .catch ((error) => {
         return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "No se pudo validar la autorización del token"});
     });
-}
+};
 
 module.exports = checkRoleAuth;

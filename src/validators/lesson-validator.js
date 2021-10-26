@@ -25,7 +25,7 @@ const validationLesson= [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationLessonID = [
     param("lessonID")
@@ -36,6 +36,6 @@ const validationLessonID = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 module.exports = {validationLesson, validationLessonID};

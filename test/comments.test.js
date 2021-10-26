@@ -1,14 +1,14 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const mongoose = require('mongoose');
-const {server} = require('../src/app');
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const mongoose = require("mongoose");
+const {server} = require("../src/app");
 chai.should();
 chai.use(chaiHttp);
 let accessToken= null;
 let idComment= null;
 
-describe("GET Tests Comments ID discussion",() =>{
-    before((done) =>{
+describe("GET Tests Comments ID discussion",() => {
+    before((done) => {
         const login = {
             username: "Karla",
 	        password: "Marst1245#"
@@ -20,7 +20,7 @@ describe("GET Tests Comments ID discussion",() =>{
         });
     });
 
-    it("GET /Comments", (done) =>{
+    it("GET /Comments", (done) => {
         chai.request(server).get("/comments/616b0efeba862c9a697da9db")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -31,7 +31,7 @@ describe("GET Tests Comments ID discussion",() =>{
         });
     });
 
-    it("GET /Comments Not Found", (done) =>{
+    it("GET /Comments Not Found", (done) => {
         chai.request(server).get("/comments/616b0efeba862c9a697da9dc")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -42,7 +42,7 @@ describe("GET Tests Comments ID discussion",() =>{
         });
     });
 
-    it("GET /Comments Bad Request", (done) =>{
+    it("GET /Comments Bad Request", (done) => {
         chai.request(server).get("/comments/616b0efeb")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -54,8 +54,8 @@ describe("GET Tests Comments ID discussion",() =>{
     });
 });
 
-describe("POST Tests Comments",() =>{
-    before((done) =>{
+describe("POST Tests Comments",() => {
+    before((done) => {
         const login = {
             username: "MiroStar",
 	        password: "Marst1245#"
@@ -67,7 +67,7 @@ describe("POST Tests Comments",() =>{
         });
     });
 
-    it("POST /Comments", (done) =>{
+    it("POST /Comments", (done) => {
         const comment = {
             comment: "Creo que los cuentos son un poco largos", 
             idAccount: "6168cf9563929f8f000c7614", 
@@ -88,7 +88,7 @@ describe("POST Tests Comments",() =>{
         });
     });
 
-    it("POST /Comments Bad Request Account", (done) =>{
+    it("POST /Comments Bad Request Account", (done) => {
         const comment = {
             comment: "Creo que los cuentos son un poco largos", 
             idAccount: "6168cf9563929f8f000c7616", 
@@ -104,7 +104,7 @@ describe("POST Tests Comments",() =>{
         });
     });
 
-    it("POST /Comments Bad Request Disccussion", (done) =>{
+    it("POST /Comments Bad Request Disccussion", (done) => {
         const comment = {
             comment: "Creo que los cuentos son un poco largos", 
             idAccount: "6168cf9563929f8f000c7614", 
@@ -120,7 +120,7 @@ describe("POST Tests Comments",() =>{
         });
     });
 
-    it("POST /Comments Bad Request", (done) =>{
+    it("POST /Comments Bad Request", (done) => {
         const comment = {
             comment: "  ", 
             idAccount: "6168cf94", 
@@ -137,8 +137,8 @@ describe("POST Tests Comments",() =>{
     });
 });
 
-describe("DELETE Tests Comments",()=>{
-    before((done) =>{
+describe("DELETE Tests Comments",() => {
+    before((done) => {
         const login = {
             username: "MiroStar",
 	        password: "Marst1245#"
@@ -150,7 +150,7 @@ describe("DELETE Tests Comments",()=>{
         });
     });
 
-    it("DELETE /Comments", (done) =>{
+    it("DELETE /Comments", (done) => {
         const comment = {
             _id: idComment
         };
@@ -164,7 +164,7 @@ describe("DELETE Tests Comments",()=>{
         });
     });
 
-    it("DELETE /Comments Bad Request", (done) =>{
+    it("DELETE /Comments Bad Request", (done) => {
         const comment = {
             _id: "616b4ae0609441"
         };

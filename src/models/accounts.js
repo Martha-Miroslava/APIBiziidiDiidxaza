@@ -63,11 +63,11 @@ const accounts = new Schema({
 accounts.methods.encrypPassword = async (password) =>{
     const salt = await bcrypt.genSalt(10);
     return await bcrypt.hash(password,salt);
-}
+};
 
 accounts.methods.matchPassword = async (password, passwordCurrent) =>{
     return await bcrypt.compare(password, passwordCurrent);
-}
+};
 
 accounts.plugin(require("mongoose-autopopulate"));
 module.exports = mongoose.model("Accounts",accounts);

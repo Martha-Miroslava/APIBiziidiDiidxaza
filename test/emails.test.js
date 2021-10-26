@@ -1,12 +1,12 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const mongoose = require('mongoose');
-const {server} = require('../src/app');
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const mongoose = require("mongoose");
+const {server} = require("../src/app");
 chai.should();
 chai.use(chaiHttp);
 
-describe("POST Tests Emails",()=>{
-    it("POST /emails Not Found", (done) =>{
+describe("POST Tests Emails",() => {
+    it("POST /emails Not Found", (done) => {
         const email = {
             email: "martha_13_7@gmail.com"
         };
@@ -19,7 +19,7 @@ describe("POST Tests Emails",()=>{
         });
      });
 
-    it("POST /emails Bad Request", (done) =>{
+    it("POST /emails Bad Request", (done) => {
         const email = {
             email: 1223
         };
@@ -32,7 +32,7 @@ describe("POST Tests Emails",()=>{
         });
     });
 
-    it("POST /emails", (done) =>{
+    it("POST /emails", (done) => {
         const email = {
             email: "martha_15_7@outlook.com"
         };
@@ -47,10 +47,10 @@ describe("POST Tests Emails",()=>{
 });
 
 
-describe("POST Tests Emails Accounts",()=>{
+describe("POST Tests Emails Accounts",() => {
     let accessToken= null;
 
-    before((done) =>{
+    before((done) => {
         const login = {
             username: "Karla",
 	        password: "Marst1245#"
@@ -65,7 +65,7 @@ describe("POST Tests Emails Accounts",()=>{
         });
     });
 
-    it("POST /emails Bad Request", (done) =>{
+    it("POST /emails Bad Request", (done) => {
         const email = {
             email: 245,
             title: 245,
@@ -81,7 +81,7 @@ describe("POST Tests Emails Accounts",()=>{
         });
     });
 
-    it("POST /emails/account", (done) =>{
+    it("POST /emails/account", (done) => {
         const email = {
             email: "martha_15_7@outlook.com",
             title: "Cuenta bloqueda",

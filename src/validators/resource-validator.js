@@ -1,4 +1,4 @@
-const  {check}  =  require ("express-validator")
+const  {check}  =  require ("express-validator");
 const {validationAccountId} = require("../validators/discussion-validator");
 const {validateResult} = require("../helpers/response-result");
 
