@@ -38,7 +38,7 @@ const patchResource = (request, response, next) => {
         response.sendFile(path.join(__dirname,URL));
     })
     .catch((error) => {
-        if(error.code == "ENOENT"){
+        if(error.code === "ENOENT"){
             responseNotFound(response);
         }
         else{
