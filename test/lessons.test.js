@@ -22,7 +22,7 @@ describe("GET Tests Lessons",() => {
 
     it("GET /Lessons", (done) => {
         chai.request(server).get("/lessons")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.be.a("array");
@@ -49,7 +49,7 @@ describe("POST Tests Lessons",() => {
 
     it("Post /Lesson Bad request", (done) => {
         chai.request(server).post("/lessons")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");
@@ -65,7 +65,7 @@ describe("POST Tests Lessons",() => {
             pointsTotal: 4
         }
         chai.request(server).post("/lessons").send(lesson)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");
@@ -82,7 +82,7 @@ describe("POST Tests Lessons",() => {
             pointsTotal: 5
         }
         chai.request(server).post("/lessons").send(lesson)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(201);
             response.body.should.be.a("object");

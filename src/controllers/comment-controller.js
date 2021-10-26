@@ -26,12 +26,7 @@ const postComment = async (request, response) => {
     const idDiscussionConverted  = mongoose.Types.ObjectId(idDiscussion);
     const dateNow = new Date();
     const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
-    const newComment = new Comments ({
-        comment: comment,
-        dateCreation: dateCreation,
-        idAccount: idAccountConverted,
-        idDiscussion: idDiscussionConverted
-    });
+    const newComment = new Comments ({comment: comment, dateCreation: dateCreation, idAccount: idAccountConverted, idDiscussion: idDiscussionConverted});
     await newComment.save()
     .then(function (commentSave) {  
         response.status(StatusCodes.CREATED).json(commentSave);
@@ -43,7 +38,7 @@ const postComment = async (request, response) => {
 
 
 const deleteComment = async (request, response) => {
-    const {_id} = request.body;
+    const _id = request.body._id;
     const idComment  = mongoose.Types.ObjectId(_id);
     Comments.deleteOne({_id:idComment})
     .then(function (document) {  

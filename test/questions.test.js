@@ -21,7 +21,7 @@ describe("GET Tests Questions",() => {
 
     it("GET /Questions Bad Request", (done) => {
         chai.request(server).get("/questions/6171f")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");
@@ -32,7 +32,7 @@ describe("GET Tests Questions",() => {
 
     it("GET /Questions Not Found", (done) => {
         chai.request(server).get("/questions/6171fb2eeb326a2f1850c22c")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
             response.body.should.have.property("message");
@@ -43,7 +43,7 @@ describe("GET Tests Questions",() => {
 
     it("GET /Questions", (done) => {
         chai.request(server).get("/questions/6171fb2eeb326a2f1850c22e")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.be.a("array");

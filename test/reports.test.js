@@ -23,7 +23,7 @@ describe("GET Tests Reports Filters",() => {
     describe("GET Tests Reports LastnameAccount", () => {
         it("GET /Reports LastnameAccount", (done) => {
             chai.request(server).get("/reports/lastnameAccount/Ortiz")
-            .auth(accessToken, { type: 'bearer' })
+            .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(200);
                 response.body.should.be.a("array");
@@ -34,7 +34,7 @@ describe("GET Tests Reports Filters",() => {
 
         it("GET /Reports LastnameAccount Not Found", (done) => {
             chai.request(server).get("/reports/lastnameAccount/Gonzalez")
-            .auth(accessToken, { type: 'bearer' })
+            .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
                 response.body.should.have.property("message");
@@ -45,7 +45,7 @@ describe("GET Tests Reports Filters",() => {
 
         it("GET /Reports LastnameAccount Bad Request", (done) => {
             chai.request(server).get("/reports/lastnameAccount/12352")
-            .auth(accessToken, { type: 'bearer' })
+            .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(400);
                 response.body.should.have.property("message");
@@ -58,7 +58,7 @@ describe("GET Tests Reports Filters",() => {
     describe("GET Tests Reports NameAccount", () => {
         it("GET /Reports NameAccount", (done) => {
             chai.request(server).get("/reports/nameAccount/Miroslava")
-            .auth(accessToken, { type: 'bearer' })
+            .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(200);
                 response.body.should.be.a("array");
@@ -69,7 +69,7 @@ describe("GET Tests Reports Filters",() => {
     
         it("GET /Reports NameAccount Not Found", (done) => {
             chai.request(server).get("/reports/nameAccount/Mariana")
-            .auth(accessToken, { type: 'bearer' })
+            .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
                 response.body.should.have.property("message");
@@ -80,7 +80,7 @@ describe("GET Tests Reports Filters",() => {
     
         it("GET /Reports NameAccount Bad Request", (done) => {
             chai.request(server).get("/reports/nameAccount/12352")
-            .auth(accessToken, { type: 'bearer' })
+            .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(400);
                 response.body.should.have.property("message");
@@ -93,7 +93,7 @@ describe("GET Tests Reports Filters",() => {
     describe("GET Tests Reports NameReported", () => {
         it("GET /Reports NameReported", (done) => {
             chai.request(server).get("/reports/nameReported/Mariana")
-            .auth(accessToken, { type: 'bearer' })
+            .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(200);
                 response.body.should.be.a("array");
@@ -104,7 +104,7 @@ describe("GET Tests Reports Filters",() => {
     
         it("GET /Reports NameReported Not Found", (done) => {
             chai.request(server).get("/reports/nameReported/Miroslava")
-            .auth(accessToken, { type: 'bearer' })
+            .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
                 response.body.should.have.property("message");
@@ -115,7 +115,7 @@ describe("GET Tests Reports Filters",() => {
     
         it("GET /Reports NameReported Bad Request", (done) => {
             chai.request(server).get("/reports/nameReported/12352")
-            .auth(accessToken, { type: 'bearer' })
+            .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(400);
                 response.body.should.have.property("message");
@@ -128,7 +128,7 @@ describe("GET Tests Reports Filters",() => {
     describe("GET Tests Reports LastnameReported", () => {
         it("GET /Reports LastnameReported", (done) => {
             chai.request(server).get("/reports/lastnameReported/Lopez")
-            .auth(accessToken, { type: 'bearer' })
+            .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(200);
                 response.body.should.be.a("array");
@@ -139,7 +139,7 @@ describe("GET Tests Reports Filters",() => {
     
         it("GET /Reports LastnameReported Not Found", (done) => {
             chai.request(server).get("/reports/lastnameReported/Ortiz")
-            .auth(accessToken, { type: 'bearer' })
+            .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
                 response.body.should.have.property("message");
@@ -152,7 +152,7 @@ describe("GET Tests Reports Filters",() => {
     describe("GET Tests Reports DateCreation", () => {
         it("GET /Reports DateCreation", (done) => {
             chai.request(server).get("/reports/dateCreation/2021-10-15")
-            .auth(accessToken, { type: 'bearer' })
+            .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(200);
                 response.body.should.be.a("array");
@@ -163,7 +163,7 @@ describe("GET Tests Reports Filters",() => {
     
         it("GET /Reports DateCreation Not Found", (done) => {
             chai.request(server).get("/reports/dateCreation/2021-05-17")
-            .auth(accessToken, { type: 'bearer' })
+            .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
                 response.body.should.have.property("message");
@@ -174,7 +174,7 @@ describe("GET Tests Reports Filters",() => {
     
         it("GET /Reports DateCreation Bad Request", (done) => {
             chai.request(server).get("/reports/dateCreation/Martha")
-            .auth(accessToken, { type: 'bearer' })
+            .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(400);
                 response.body.should.have.property("message");
@@ -200,7 +200,7 @@ describe("GET Tests Reports",() => {
 
     it("GET /Reports", (done) => {
         chai.request(server).get("/reports")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.be.a("array");
@@ -225,7 +225,7 @@ describe("GET Tests Report",() => {
 
     it("GET /Reports/ID", (done) => {
         chai.request(server).get("/reports/6169cc2ca32bd265c102ff31")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.be.a("object");
@@ -241,7 +241,7 @@ describe("GET Tests Report",() => {
 
     it("GET /Reports/ID Not Found", (done) => {
         chai.request(server).get("/reports/616b0efeba862c9a697da9dc")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
             response.body.should.have.property("message");
@@ -252,7 +252,7 @@ describe("GET Tests Report",() => {
 
     it("GET /Reports/ID Bad Request", (done) => {
         chai.request(server).get("/reports/616b0efeba862c9a697")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");
@@ -279,13 +279,13 @@ describe("POST Tests Report",() => {
 
     it("POST /Reports", (done) => {
         const report = {
-            reason: "Malas pralabras en su comentario",
-	        context: "La discusion tiene mañanita comentarios malos por parte de este usuario",
-	        idAccount: "6168cf9563929f8f000c7614",
-	        accountReported: "6168d4975471a4bcc2b17445"
+            reason:"Malas pralabras en su comentario",
+	        context:"La discusion tiene mañanita comentarios malos por parte de este usuario",
+	        idAccount:"6168cf9563929f8f000c7614",
+	        accountReported:"6168d4975471a4bcc2b17445"
         }
         chai.request(server).post("/reports").send(report)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(201);
             response.body.should.be.a("object");
@@ -308,7 +308,7 @@ describe("POST Tests Report",() => {
 	        accountReported: 61620
         }
         chai.request(server).post("/reports").send(report)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");
@@ -319,13 +319,13 @@ describe("POST Tests Report",() => {
 
     it("POST /Reports Bad Request Account", (done) => {
         const report = {
-            reason: "Malas pralabras en su comentario",
-	        context: "La discusion tiene muchos comentarios malos por parte de este usuario",
-	        idAccount: "6168cf9563929f8f000b7618",
-	        accountReported: "6168d4975471a4bcc2b17445"
+            reason:"Malas pralabras en su comentario",
+	        context:"La discusion tiene muchos comentarios malos por parte de este usuario",
+	        idAccount:"6168cf9563929f8f000b7618",
+	        accountReported:"6168d4975471a4bcc2b17445"
         }
         chai.request(server).post("/reports").send(report)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.have.property("message");

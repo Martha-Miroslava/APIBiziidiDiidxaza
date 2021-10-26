@@ -9,8 +9,8 @@ let accessToken= null;
 describe("GET Tests Answers",() => {
     before((done) => {
         const login = {
-            username: "MiroStar",
-	        password: "Marst1245#" 
+            username:"MiroStar",
+	        password:"Marst1245#" 
         };
         chai.request(server).post("/login").send(login)
         .end( (error, response) => {
@@ -21,7 +21,7 @@ describe("GET Tests Answers",() => {
 
     it("GET /Answers Bad Request", (done) => {
         chai.request(server).get("/answers/6171f")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");
@@ -32,7 +32,7 @@ describe("GET Tests Answers",() => {
 
     it("GET /Answers Not Found", (done) => {
         chai.request(server).get("/answers/6171fb2eeb326a2f1850c22c")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
             response.body.should.have.property("message");
@@ -43,7 +43,7 @@ describe("GET Tests Answers",() => {
 
     it("GET /Answers", (done) => {
         chai.request(server).get("/answers/6173660d944b5e03bc7ddf3c")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.be.a("array");

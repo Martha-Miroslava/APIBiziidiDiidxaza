@@ -22,7 +22,7 @@ describe("GET Tests Comments ID discussion",() => {
 
     it("GET /Comments", (done) => {
         chai.request(server).get("/comments/616b0efeba862c9a697da9db")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.be.a("array");
@@ -33,7 +33,7 @@ describe("GET Tests Comments ID discussion",() => {
 
     it("GET /Comments Not Found", (done) => {
         chai.request(server).get("/comments/616b0efeba862c9a697da9dc")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
             response.body.should.have.property("message");
@@ -44,7 +44,7 @@ describe("GET Tests Comments ID discussion",() => {
 
     it("GET /Comments Bad Request", (done) => {
         chai.request(server).get("/comments/616b0efeb")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");
@@ -74,7 +74,7 @@ describe("POST Tests Comments",() => {
             idDiscussion: "616b0efeba862c9a697da9db"
         };
         chai.request(server).post("/comments").send(comment)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(201);
             response.body.should.be.a("object");
@@ -95,7 +95,7 @@ describe("POST Tests Comments",() => {
             idDiscussion: "616b0efeba862c9a697da9db"
         };
         chai.request(server).post("/comments").send(comment)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.have.property("message");
@@ -111,7 +111,7 @@ describe("POST Tests Comments",() => {
             idDiscussion: "616b0efeba862c9a697da9dc"
         };
         chai.request(server).post("/comments").send(comment)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.have.property("message");
@@ -127,7 +127,7 @@ describe("POST Tests Comments",() => {
             idDiscussion: "616b0efeba86"
         };
         chai.request(server).post("/comments").send(comment)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");
@@ -155,7 +155,7 @@ describe("DELETE Tests Comments",() => {
             _id: idComment
         };
         chai.request(server).delete("/comments").send(comment)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.have.property("message");
@@ -169,7 +169,7 @@ describe("DELETE Tests Comments",() => {
             _id: "616b4ae0609441"
         };
         chai.request(server).delete("/comments").send(comment)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");

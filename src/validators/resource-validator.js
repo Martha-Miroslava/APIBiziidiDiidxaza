@@ -7,7 +7,7 @@ const validationAccount  = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationLesson  = [
     check("idLesson")
@@ -18,7 +18,7 @@ const validationLesson  = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationQuestion  = [
     check("idQuestion")
@@ -29,6 +29,6 @@ const validationQuestion  = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 module.exports = {validationAccount, validationLesson, validationQuestion};

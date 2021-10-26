@@ -5,17 +5,17 @@ const nodemailer = require("nodemailer");
 const {responseServer, responseGeneral} = require("../helpers/response-result");
 
 const postEmail = async (request, response) => {
-    const {email} = request.body;
+    const email = request.body.email;
     let codeConfirmation = generateCode();
     Accounts.findOne({email:email}, {_id:1, name:1, lastname:1})
-    .then(async (account) =>{  
+    .then(async (account) => {  
         if(account){
             await Accounts.updateOne({_id:account._id}, {codeConfirmation:codeConfirmation});
-            const title = "Código de Confirmación de la cuenta"
+            const title = "Código de Confirmación de la cuenta";
             const message = "Estimado usuario "+account.name+" "+account.lastname+
             " para terminar el proceso de creación de su cuenta le reenviamos su código de confirmación: "+ codeConfirmation;
             await sendEmail(email,title,message);
-            responseGeneral(response, StatusCodes.CREATED, "El código de confirmación se reenvio exitosamente")
+            responseGeneral(response, StatusCodes.CREATED, "El código de confirmación se reenvio exitosamente");
         }
         else{
             responseGeneral(response, StatusCodes.NOT_FOUND, "No se encontro la cuenta");
@@ -49,9 +49,7 @@ const sendEmail = async (toEmail, subject, content) => {
     });
     await transport.sendMail({
         from: '"Biziidi Diidxazá " <'+process.env.USER_EMAIL+'>',
-        to: toEmail,
-        subject: subject,
-        text: content
+        to: toEmail, subject: subject, text: content
     })
 };
 
