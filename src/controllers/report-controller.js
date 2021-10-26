@@ -9,7 +9,12 @@ const postReport = async (request, response) => {
     const accountReportedConverted  = mongoose.Types.ObjectId(accountReported);
     const dateNow = new Date();
     const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
-    const newReport = new Reports ({reason:reason, context:context,dateCreation:dateCreation, idAccount:idAcountConverted, accountReported:accountReportedConverted});
+    const newReport = new Reports ({
+        reason:reason,
+        context:context,
+        dateCreation:dateCreation, 
+        idAccount:idAcountConverted, 
+        accountReported:accountReportedConverted});
     await newReport.save()
     .then(function (report) {  
         response.status(StatusCodes.CREATED).json(report);
@@ -22,7 +27,7 @@ const postReport = async (request, response) => {
 const getReportsFilters = async (request, response) => {
     const filter = request.params.filter;
     const criterion = request.params.criterion;
-    if(filter == "dateCreation"){
+    if(filter === "dateCreation"){
         Reports.find({dateCreation: criterion}, {dateCreation:1, idAccount:1, accountReported:1})
         .populate({path: "idAccount", select: "name lastname -_id"})
         .populate({path: "accountReported", select: "name lastname -_id"})
@@ -40,18 +45,19 @@ const getReportsFilters = async (request, response) => {
     }
     else{
         let queryAccountReported = null;
+        const regExp = new RegExp(criterion, "i");
         switch(filter){
             case "nameAccount":
-                queryAccountReported = {$match:{"idAccount.name": { $regex : new RegExp(criterion, "i")}}};
+                queryAccountReported = {$match:{"idAccount.name": { $regex : regExp}}};
                 break;
             case "lastnameAccount":
-                queryAccountReported = {$match:{"idAccount.lastname": { $regex : new RegExp(criterion, "i")}}};
+                queryAccountReported = {$match:{"idAccount.lastname": { $regex : regExp}}};
                 break;
             case "nameReported":
-                queryAccountReported = {$match:{"accountReported.name": { $regex : new RegExp(criterion, "i")}}};
+                queryAccountReported = {$match:{"accountReported.name": { $regex : regExp}}};
                 break;
             case "lastnameReported":
-                queryAccountReported = {$match:{"accountReported.lastname": { $regex : new RegExp(criterion, "i")}}};
+                queryAccountReported = {$match:{"accountReported.lastname": { $regex : regExp}}};
                 break;
         }
         Reports.aggregate([

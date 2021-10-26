@@ -68,10 +68,12 @@ const getAccountsFilters = async (request, response) => {
     let queryAccounts = null;
     switch(filter){
         case "lastname":
-            queryAccounts = {lastname:{$regex : new RegExp(criterion, "i")}};
+            const regExp = new RegExp(criterion, "i");
+            queryAccounts = {lastname:{$regex : regExp}};
             break;
         case "name":
-            queryAccounts = {name:{ $regex : new RegExp(criterion, "i")}};
+            const regExp = new RegExp(criterion, "i");
+            queryAccounts = {name:{ $regex : regExp}};
             break;
         case "age":
             queryAccounts = {age: criterion};
