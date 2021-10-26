@@ -12,7 +12,7 @@ app.disable("x-powered-by");
 app.use(helmet());
 
 //middleware
-app.use(morgan(`dev`));
+app.use(morgan("dev"));
 app.use(upload());
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());

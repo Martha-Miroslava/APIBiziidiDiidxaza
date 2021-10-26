@@ -10,8 +10,8 @@ let accessToken= null;
 describe("GET Tests LessonRecords",()=> {
     before((done) => {
         const login = {
-            username: "MiroStar",
-	        password: "Marst1245#" 
+            username:"MiroStar",
+	        password:"Marst1245#" 
         };
         chai.request(server).post("/login").send(login)
         .end( (error, response) => {
@@ -22,7 +22,7 @@ describe("GET Tests LessonRecords",()=> {
 
     it("GET /LessonRecords Bad Request", (done) => {
         chai.request(server).get("/lessonRecords/6171f")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");
@@ -33,7 +33,7 @@ describe("GET Tests LessonRecords",()=> {
 
     it("GET /LessonRecords Not Found", (done) => {
         chai.request(server).get("/lessonRecords/6171fb2eeb326a2f1850c22c")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
             response.body.should.have.property("message");
@@ -44,7 +44,7 @@ describe("GET Tests LessonRecords",()=> {
 
     it("GET /LessonRecords", (done) => {
         chai.request(server).get("/lessonRecords/6168cf9563929f8f000c7614")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.be.a("array");
@@ -59,8 +59,8 @@ describe("POST Tests LessonReport",() => {
     
     before((done) => {
         const login = {
-            username: "MiroStar",
-	        password: "Marst1245#"
+            username:"MiroStar",
+	        password:"Marst1245#"
         };
         chai.request(server).post("/login").send(login)
         .end( (error, response) => {
@@ -71,12 +71,12 @@ describe("POST Tests LessonReport",() => {
 
     it("POST /LessonRecords", (done) => {
         const lessonRecord = {
-            pointsObtained: 45,
-            idAccount: "6168cf9563929f8f000c7614",
-            idLesson: "6171fb7deb326a2f1850c22f"
+            pointsObtained:45,
+            idAccount:"6168cf9563929f8f000c7614",
+            idLesson:"6171fb7deb326a2f1850c22f"
         }
         chai.request(server).post("/lessonRecords").send(lessonRecord)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(201);
             response.body.should.be.a("object");
@@ -92,12 +92,12 @@ describe("POST Tests LessonReport",() => {
 
     it("POST /LessonRecords Bad Request", (done) => {
         const lessonRecord = {
-            pointsObtained: "Martha",
-            idAccount: 'vjfnjvnfj',
-            idLesson: 'nvjfnvnfj'
+            pointsObtained:"Martha",
+            idAccount:"vjfnjvnfj",
+            idLesson:"nvjfnvnfj"
         }
         chai.request(server).post("/lessonRecords").send(lessonRecord)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");
@@ -108,12 +108,12 @@ describe("POST Tests LessonReport",() => {
 
     it("POST /LessonRecords Bad Request Account", (done) => {
         const lessonRecord = {
-            pointsObtained: 45,
-	        idAccount: "6168cf9563929f8f000b7618",
-	        idLesson: '6171fb7deb326a2f1850c22f'
+            pointsObtained:45,
+	        idAccount:"6168cf9563929f8f000b7618",
+	        idLesson:"6171fb7deb326a2f1850c22f"
         }
         chai.request(server).post("/lessonRecords").send(lessonRecord)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.have.property("message");
@@ -125,11 +125,11 @@ describe("POST Tests LessonReport",() => {
     it("POST /LessonRecords Bad Request Lesson", (done) => {
         const lessonRecord = {
             pointsObtained: 45,
-	        idAccount: "6168cf9563929f8f000c7614",
-	        idLesson: '6168cf9563929f8f000b7618'
+	        idAccount:"6168cf9563929f8f000c7614",
+	        idLesson:"6168cf9563929f8f000b7618"
         }
         chai.request(server).post("/lessonRecords").send(lessonRecord)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.have.property("message");

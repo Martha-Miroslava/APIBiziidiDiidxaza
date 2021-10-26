@@ -60,12 +60,12 @@ const accounts = new Schema({
     discussions: [{ type: Schema.Types.ObjectId, ref: "Discussions"}]
 });
 
-accounts.methods.encrypPassword = async (password) =>{
+accounts.methods.encrypPassword = async (password) => {
     const salt = await bcrypt.genSalt(10);
     return await bcrypt.hash(password,salt);
 };
 
-accounts.methods.matchPassword = async (password, passwordCurrent) =>{
+accounts.methods.matchPassword = async (password, passwordCurrent) => {
     return await bcrypt.compare(password, passwordCurrent);
 };
 

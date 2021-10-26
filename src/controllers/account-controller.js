@@ -141,23 +141,23 @@ const postAccount = async (request, response) => {
     const dateNow = new Date();
     const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
     const newAccount = new Accounts ({
-        lastname: lastname,
-        name: name,
-        age: age,
-        dateBirth: dateBirth,
-        email: email,
-        username: username,
-        password: password,
-        role: role,
-        status: 2,
-        codeConfirmation: codeConfirmation,
-        dateCreation: dateCreation,
-        idCity: idCityConverted
+        lastname:lastname,
+        name:name,
+        age:age,
+        dateBirth:dateBirth,
+        email:email,
+        username:username,
+        password:password,
+        role:role,
+        status:2,
+        codeConfirmation:codeConfirmation,
+        dateCreation:dateCreation,
+        idCity:idCityConverted
     });
     newAccount.password = await newAccount.encrypPassword(newAccount.password);
     await newAccount.save()
-    .then(async (account)  =>{  
-        const title = "Código de Confirmación de la cuenta"
+    .then(async (account)  => {  
+        const title = "Código de Confirmación de la cuenta";
         const message = "Estimado usuario "+name+" "+lastname+
         " para terminar el proceso de creación de su cuenta le enviamos su código de confirmación: "+ codeConfirmation;
         await sendEmail(email,title,message);

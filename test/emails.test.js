@@ -52,8 +52,8 @@ describe("POST Tests Emails Accounts",() => {
 
     before((done) => {
         const login = {
-            username: "Karla",
-	        password: "Marst1245#"
+            username:"Karla",
+	        password:"Marst1245#"
         };
         chai.request(server).post("/login").send(login)
         .end( (error, response) => {
@@ -72,7 +72,7 @@ describe("POST Tests Emails Accounts",() => {
             message: "    "
         };
         chai.request(server).post("/emails").send(email)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");
@@ -88,7 +88,7 @@ describe("POST Tests Emails Accounts",() => {
             message: "Estimado usuario su cuenta esta bloqueda"
         };
         chai.request(server).post("/emails/account").send(email)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(201);
             response.body.should.have.property("message");

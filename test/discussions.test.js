@@ -11,10 +11,7 @@ let idDiscussion = null;
 
 describe("POST Tests Discussion",() => {
     before((done) => {
-        const login = {
-            username: "MiroStar",
-	        password: "Marst1245#"
-        };
+        const login = { username: "MiroStar", password: "Marst1245#"};
         chai.request(server).post("/login").send(login)
         .end( (error, response) => {
             accessToken = response.body.token;
@@ -30,7 +27,7 @@ describe("POST Tests Discussion",() => {
             idAccount: "6168cf9563929f8f000c7614"
         }
         chai.request(server).post("/discussions").send(discussion)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(201);
             response.body.should.be.a("object");
@@ -54,7 +51,7 @@ describe("POST Tests Discussion",() => {
             idAccount: "6168cf"
         }
         chai.request(server).post("/discussions").send(discussion)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");
@@ -71,7 +68,7 @@ describe("POST Tests Discussion",() => {
             idAccount: "6168cf9563929f8f000c7679"
         }
         chai.request(server).post("/discussions").send(discussion)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.have.property("message");
@@ -96,7 +93,7 @@ describe("GET Tests Discussions Filters",() => {
 
     it("GET /Discussions News", (done) => {
         chai.request(server).get("/discussions/filters/news")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.be.a("array");
@@ -107,7 +104,7 @@ describe("GET Tests Discussions Filters",() => {
 
     it("GET /Discussions Populars", (done) => {
         chai.request(server).get("/discussions/filters/populars")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.be.a("array");
@@ -136,7 +133,7 @@ describe("GET Tests Discussions Filters Criterion",() => {
 
     it("GET /Discussions Title", (done) => {
         chai.request(server).get("/discussions/title/¿Qué opinan")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.be.a("array");
@@ -147,7 +144,7 @@ describe("GET Tests Discussions Filters Criterion",() => {
 
     it("GET /Discussions Title Not Found", (done) => {
         chai.request(server).get("/discussions/title/Canciones")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
             response.body.should.have.property("message");
@@ -158,7 +155,7 @@ describe("GET Tests Discussions Filters Criterion",() => {
 
     it("GET /Discussions Title Bad Request", (done) => {
         chai.request(server).get("/discussions/title/    ")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");
@@ -169,7 +166,7 @@ describe("GET Tests Discussions Filters Criterion",() => {
 
     it("GET /Discussions Tracing", (done) => {
         chai.request(server).get("/discussions/tracing/6168cf9563929f8f000c7614")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.be.a("array");
@@ -180,7 +177,7 @@ describe("GET Tests Discussions Filters Criterion",() => {
 
     it("GET /Discussions Tracing Not Found", (done) => {
         chai.request(server).get("/discussions/tracing/6168d4975471a4bcc2b17446")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
             response.body.should.have.property("message");
@@ -191,7 +188,7 @@ describe("GET Tests Discussions Filters Criterion",() => {
 
     it("GET /Discussions Tracing Bad Request", (done) => {
         chai.request(server).get("/discussions/tracing/6168cf9")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");
@@ -216,7 +213,7 @@ describe("GET Tests Discussion",() => {
 
     it("GET /Discussions/ID", (done) => {
         chai.request(server).get("/discussions/616b0efeba862c9a697da9db")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.be.a("object");
@@ -233,7 +230,7 @@ describe("GET Tests Discussion",() => {
 
     it("GET /Discussions/ID Not Found", (done) => {
         chai.request(server).get("/discussions/616b0efeba862c9a697da9dc")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
             response.body.should.have.property("message");
@@ -244,7 +241,7 @@ describe("GET Tests Discussion",() => {
 
     it("GET /Discussions/ID Bad Request", (done) => {
         chai.request(server).get("/discussions/616b0efeba862c9a697")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");
@@ -269,7 +266,7 @@ describe("GET Tests Discussions",() => {
 
     it("GET /Discussions", (done) => {
         chai.request(server).get("/discussions")
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.be.a("array");
@@ -298,7 +295,7 @@ describe("PATCH Tests Discussion",() => {
             idAccount: "6168d4975471a4bcc2b17445"
         }
         chai.request(server).patch("/discussions").send(discussion)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.have.property("message");
@@ -313,7 +310,7 @@ describe("PATCH Tests Discussion",() => {
             idAccount: "6168d4975471a4bcc2b17443"
         }
         chai.request(server).patch("/discussions").send(discussion)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.have.property("message");
@@ -328,7 +325,7 @@ describe("PATCH Tests Discussion",() => {
             idAccount: "6168d4975471a4bcc2b17445"
         }
         chai.request(server).patch("/discussions").send(discussion)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.have.property("message");
@@ -343,7 +340,7 @@ describe("PATCH Tests Discussion",() => {
             idAccount: "6168d4975"
         }
         chai.request(server).patch("/discussions").send(discussion)
-        .auth(accessToken, { type: 'bearer' })
+        .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");

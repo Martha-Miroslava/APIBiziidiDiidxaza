@@ -21,7 +21,7 @@ const validateExistsDiscussion = (request, response, next) => {
 const getDiscussionsFilters = async (request, response) => {
     const filter = request.params.filter;
     let queryDiscussions = {numberComments:{ $gte: 15 }};
-    if(filter == "news"){
+    if(filter === "news"){
         const dateNow = new Date();
         const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
         queryDiscussions = {dateCreation:dateCreation};
@@ -43,7 +43,7 @@ const getDiscussionsFilters = async (request, response) => {
 const getDiscussionsCriterion = async (request, response) => {
     const filter = request.params.filter;
     const criterion = request.params.criterion;
-    if(filter == "title"){
+    if(filter === "title"){
         Discussions.find({title:{$regex : new RegExp(criterion, "i")}}, {title:1, dateCreation:1, numberComments:1, theme:1})
         .then(function (discussions) {  
             if(discussions.length){
@@ -97,7 +97,7 @@ const getDiscussions = async (request, response) => {
 const getDiscussion = async (request, response) => {
     const discussionID = request.params.discussionID;
     Discussions.findById(discussionID)
-    .populate({path: 'idAccount', select: 'name lastname'})
+    .populate({path: "idAccount", select: "name lastname"})
     .then(function (discussion) {  
         if(discussion){
             response.status(StatusCodes.OK).json(discussion);
@@ -136,7 +136,7 @@ const patchDiscussion = async (request, response) => {
     .then(async (account) => {
         const discussion = await Discussions.findOne({_id:idConverted});
         if(discussion){
-            if(account.discussions == '[]'){  
+            if(account.discussions == "[]"){  
                 await Accounts.updateOne({_id:idAccountConverted}, {discussions:idConverted});
             }
             else{
