@@ -35,7 +35,7 @@ const postLogin = async (request, response) => {
 const patchLogin = async (request, response) => {
     const {username, codeConfirmation} = request.body;
     await Accounts.findOne({$and:[{username: username}, {status:[ 1,2]}]}, {_id:1, codeConfirmation:1})
-    .then( async (account) =>{ 
+    .then( async (account) => { 
         if(account){
             if(account.codeConfirmation === codeConfirmation){
                 await Accounts.updateOne({_id: account._id}, {status:1})
