@@ -1,18 +1,18 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const mongoose = require('mongoose');
-const {server} = require('../src/app');
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const mongoose = require("mongoose");
+const {server} = require("../src/app");
 chai.should();
 chai.use(chaiHttp);
 
 let accessToken = null;
 
-describe("POST Tests Resource Account",()=>{
-    it("POST /Resource Account Bad Request", (done) =>{
+describe("POST Tests Resource Account",() => {
+    it("POST /Resource Account Bad Request", (done) => {
         chai.request(server).post("/resources/account")
-        .field('Content-Type', 'multipart/form-data')
-        .field('idAccount', '6164db5')
-        .attach('file', `${__dirname}/resources/imageAccount.png`, 'imageAccount.png')
+        .field("Content-Type", "multipart/form-data")
+        .field("idAccount", "6164db5")
+        .attach("file", `${__dirname}/resources/imageAccount.png`, 'imageAccount.png')
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.be.a("object");
@@ -21,11 +21,11 @@ describe("POST Tests Resource Account",()=>{
         });
     });
 
-    it("POST /Resource Account Bad Request Account", (done) =>{
+    it("POST /Resource Account Bad Request Account", (done) => {
         chai.request(server).post("/resources/account")
-        .field('Content-Type', 'multipart/form-data')
-        .field('idAccount', '6164db5823242f430c487fcb')
-        .attach('file', `${__dirname}/resources/imageAccount.png`, 'imageAccount.png')
+        .field("Content-Type", "multipart/form-data")
+        .field("idAccount", "6164db5823242f430c487fcb")
+        .attach("file", `${__dirname}/resources/imageAccount.png`, 'imageAccount.png')
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.have.property("message");
@@ -34,10 +34,10 @@ describe("POST Tests Resource Account",()=>{
         });
     });
 
-    it("POST /Resource Account Bad Request File", (done) =>{
+    it("POST /Resource Account Bad Request File", (done) => {
         chai.request(server).post("/resources/account")
-        .field('Content-Type', 'multipart/form-data')
-        .field('idAccount', '6164db5823242f430c487fca')
+        .field("Content-Type", "multipart/form-data")
+        .field("idAccount", "6164db5823242f430c487fca")
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.have.property("message");
@@ -46,11 +46,11 @@ describe("POST Tests Resource Account",()=>{
         });
     });
 
-    it("POST /Resource Account Bad Request File Extension", (done) =>{
+    it("POST /Resource Account Bad Request File Extension", (done) => {
         chai.request(server).post("/resources/account")
-        .field('Content-Type', 'multipart/form-data')
-        .field('idAccount', '6164db5823242f430c487fca')
-        .attach('file', `${__dirname}/resources/imageError.bmp`, 'imageError.bmp')
+        .field("Content-Type", "multipart/form-data")
+        .field("idAccount", "6164db5823242f430c487fca")
+        .attach("file", `${__dirname}/resources/imageError.bmp`, 'imageError.bmp')
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.have.property("message");
@@ -60,8 +60,8 @@ describe("POST Tests Resource Account",()=>{
     });
 });
 
-describe("POST Tests Resource Lesson",()=>{
-    before((done) =>{
+describe("POST Tests Resource Lesson",() => {
+    before((done) => {
         const login = {
             username: "Karla",
 	        password: "Marst1245#"
@@ -73,11 +73,11 @@ describe("POST Tests Resource Lesson",()=>{
         });
     });
 
-    it("POST /Resource Lesson Bad Request", (done) =>{
+    it("POST /Resource Lesson Bad Request", (done) => {
         chai.request(server).post("/resources/lesson")
-        .field('Content-Type', 'multipart/form-data')
-        .field('idLesson', '6164vrfdb5')
-        .attach('file', `${__dirname}/resources/image.png`, 'image.png')
+        .field("Content-Type", "multipart/form-data")
+        .field("idLesson", "6164vrfdb5")
+        .attach("file", `${__dirname}/resources/image.png`, 'image.png')
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
             response.should.have.status(400);
@@ -87,11 +87,11 @@ describe("POST Tests Resource Lesson",()=>{
         });
     });
 
-    it("POST /Resource Lesson Bad Request Lesson", (done) =>{
+    it("POST /Resource Lesson Bad Request Lesson", (done) => {
         chai.request(server).post("/resources/lesson")
-        .field('Content-Type', 'multipart/form-data')
-        .field('idLesson', '6164db5823242f430c487fcb')
-        .attach('file', `${__dirname}/resources/image.png`, 'image.png')
+        .field("Content-Type", "multipart/form-data")
+        .field("idLesson", "6164db5823242f430c487fcb")
+        .attach("file", `${__dirname}/resources/image.png`, 'image.png')
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
             response.should.have.status(400);
@@ -101,10 +101,10 @@ describe("POST Tests Resource Lesson",()=>{
         });
     });
 
-    it("POST /Resource Lesson Bad Request File", (done) =>{
+    it("POST /Resource Lesson Bad Request File", (done) => {
         chai.request(server).post("/resources/lesson")
-        .field('Content-Type', 'multipart/form-data')
-        .field('idLesson', '6171fb2eeb326a2f1850c22e')
+        .field("Content-Type", "multipart/form-data")
+        .field("idLesson", "6171fb2eeb326a2f1850c22e")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
             response.should.have.status(400);
@@ -114,11 +114,11 @@ describe("POST Tests Resource Lesson",()=>{
         });
     });
 
-    it("POST /Resource Lesson Bad Request File Extension", (done) =>{
+    it("POST /Resource Lesson Bad Request File Extension", (done) => {
         chai.request(server).post("/resources/lesson")
-        .field('Content-Type', 'multipart/form-data')
-        .field('idLesson', '6171fb2eeb326a2f1850c22e')
-        .attach('file', `${__dirname}/resources/imageError.bmp`, 'imageError.bmp')
+        .field("Content-Type", "multipart/form-data")
+        .field("idLesson", "6171fb2eeb326a2f1850c22e")
+        .attach("file", `${__dirname}/resources/imageError.bmp`, 'imageError.bmp')
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
             response.should.have.status(400);
@@ -129,8 +129,8 @@ describe("POST Tests Resource Lesson",()=>{
     });
 });
 
-describe("POST Tests Resource Audio",()=>{
-    before((done) =>{
+describe("POST Tests Resource Audio",() => {
+    before((done) => {
         const login = {
             username: "Karla",
 	        password: "Marst1245#"
@@ -142,11 +142,11 @@ describe("POST Tests Resource Audio",()=>{
         });
     });
 
-    it("POST /Resource Audio Bad Request", (done) =>{
+    it("POST /Resource Audio Bad Request", (done) => {
         chai.request(server).post("/resources/audio")
-        .field('Content-Type', 'multipart/form-data')
-        .field('idQuestion', '6164vrfdb5')
-        .attach('file', `${__dirname}/resources/audio.mp3`, 'audio.mp3')
+        .field("Content-Type", "multipart/form-data")
+        .field("idQuestion", "6164vrfdb5")
+        .attach("file", `${__dirname}/resources/audio.mp3`, 'audio.mp3')
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
             response.should.have.status(400);
@@ -156,11 +156,11 @@ describe("POST Tests Resource Audio",()=>{
         });
     });
 
-    it("POST /Resource Audio Bad Request Question", (done) =>{
+    it("POST /Resource Audio Bad Request Question", (done) => {
         chai.request(server).post("/resources/audio")
-        .field('Content-Type', 'multipart/form-data')
-        .field('idQuestion', '6164db5823242f430c487fcb')
-        .attach('file', `${__dirname}/resources/audio.mp3`, 'audio.mp3')
+        .field("Content-Type", "multipart/form-data")
+        .field("idQuestion", "6164db5823242f430c487fcb")
+        .attach("file", `${__dirname}/resources/audio.mp3`, 'audio.mp3')
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
             response.should.have.status(400);
@@ -170,10 +170,10 @@ describe("POST Tests Resource Audio",()=>{
         });
     });
 
-    it("POST /Resource Audio Bad Request File", (done) =>{
+    it("POST /Resource Audio Bad Request File", (done) => {
         chai.request(server).post("/resources/audio")
-        .field('Content-Type', 'multipart/form-data')
-        .field('idQuestion', '6173660d944b5e03bc7ddf3c')
+        .field("Content-Type", "multipart/form-data")
+        .field("idQuestion", "6173660d944b5e03bc7ddf3c")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
             response.should.have.status(400);
@@ -183,11 +183,11 @@ describe("POST Tests Resource Audio",()=>{
         });
     });
 
-    it("POST /Resource Audio Bad Request File Extension", (done) =>{
+    it("POST /Resource Audio Bad Request File Extension", (done) => {
         chai.request(server).post("/resources/audio")
-        .field('Content-Type', 'multipart/form-data')
-        .field('idQuestion', '6173660d944b5e03bc7ddf3c')
-        .attach('file', `${__dirname}/resources/imageError.bmp`, 'imageError.bmp')
+        .field("Content-Type", "multipart/form-data")
+        .field("idQuestion", "6173660d944b5e03bc7ddf3c")
+        .attach("file", `${__dirname}/resources/imageError.bmp`, 'imageError.bmp')
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
             response.should.have.status(400);
@@ -199,8 +199,8 @@ describe("POST Tests Resource Audio",()=>{
 });
 
 
-describe("PATCH Tests Resource",()=>{
-    before((done) =>{
+describe("PATCH Tests Resource",()=> {
+    before((done) => {
         const login = {
             username: "Karla",
 	        password: "Marst1245#"
@@ -212,7 +212,7 @@ describe("PATCH Tests Resource",()=>{
         });
     });
 
-    it("PATCH /Resource Bad Request", (done) =>{
+    it("PATCH /Resource Bad Request", (done) => {
         chai.request(server).patch("/resources")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -223,7 +223,7 @@ describe("PATCH Tests Resource",()=>{
         });
     });
 
-    it("PATCH /Resource Not Found", (done) =>{
+    it("PATCH /Resource Not Found", (done) => {
         const url = {
             URL: "../images/accounts/6164db5823242f430c487fcb.png"
         }
@@ -239,8 +239,8 @@ describe("PATCH Tests Resource",()=>{
 
 });
 
-describe("DELETE Tests Resource",()=>{
-    before((done) =>{
+describe("DELETE Tests Resource",() => {
+    before((done) => {
         const login = {
             username: "Karla",
 	        password: "Marst1245#"
@@ -252,7 +252,7 @@ describe("DELETE Tests Resource",()=>{
         });
     });
 
-    it("DELETE /Resource Bad Request", (done) =>{
+    it("DELETE /Resource Bad Request", (done) => {
         chai.request(server).delete("/resources")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -263,7 +263,7 @@ describe("DELETE Tests Resource",()=>{
         });
     });
 
-    it("DELETE /Resource Bad Request File", (done) =>{
+    it("DELETE /Resource Bad Request File", (done) => {
         const url = {
             URL: "../images/accounts/6164db5823242f430c487fcb.png"
         }

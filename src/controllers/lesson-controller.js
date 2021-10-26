@@ -34,16 +34,14 @@ const getLessons = async (request, response) => {
 };
 
 const postLesson = async (request, response) => {
-    const {
-        name, description, pointsTotal
-    } = request.body;
+    const {name, description, pointsTotal} = request.body;
     const newLesson = new Lessons ({
         name: name,
         description: description,
         pointsTotal: pointsTotal
     });
     await newLesson.save()
-    .then(async (lesson)  =>{
+    .then(async (lesson)  => {
         response.status(StatusCodes.CREATED).json(lesson);
     })
     .catch(function (error){

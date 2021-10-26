@@ -21,6 +21,6 @@ const checkAuth = async (request, response, next) => {
         }
         return response.status(StatusCodes.UNAUTHORIZED).json({message: "El token no es válido"});
     });
-}
+};
 
 module.exports = checkAuth;

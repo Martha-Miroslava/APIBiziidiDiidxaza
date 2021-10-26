@@ -8,7 +8,7 @@ const postLogin = async (request, response) => {
     await Accounts.findOne({username: username}, {_id:1, status:1, password:1, role:1, name:1, lastname:1, URL:1})
     .then(async (account) =>{  
         if (account) {
-            if(account.status == 1){
+            if(account.status === 1){
                 const isValidPassword = await account.matchPassword(password, account.password);
                 if(!isValidPassword){
                     responseGeneral(response, StatusCodes.BAD_REQUEST, "La contraseña es inválida");
@@ -27,7 +27,6 @@ const postLogin = async (request, response) => {
         }
     })
     .catch(function (error){
-        console.log(error);
         responseServer(response, error);
     });
 };
@@ -38,7 +37,7 @@ const patchLogin = async (request, response) => {
     await Accounts.findOne({$and:[{username: username}, {status:[ 1,2]}]}, {_id:1, codeConfirmation:1})
     .then( async (account) =>{ 
         if(account){
-            if(account.codeConfirmation == codeConfirmation){
+            if(account.codeConfirmation === codeConfirmation){
                 await Accounts.updateOne({_id: account._id}, {status:1})
                 responseGeneral(response, StatusCodes.CREATED, "La confirmación es exitosa");
             }

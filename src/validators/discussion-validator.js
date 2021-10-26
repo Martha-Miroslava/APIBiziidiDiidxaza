@@ -12,7 +12,7 @@ const validationDiscussionFilters  = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationDiscussionCriterion  = [
     param("filter")
@@ -25,7 +25,7 @@ const validationDiscussionCriterion  = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationCriterion = (request, response, next) =>{
     const filter = request.params.filter;
@@ -40,7 +40,7 @@ const validationCriterion = (request, response, next) =>{
         return response.status(StatusCodes.BAD_REQUEST).json({errors: message});
     }
     return next();
-}
+};
 
 const validationDiscussionId  = [
     param("discussionID")
@@ -51,7 +51,7 @@ const validationDiscussionId  = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationAccountId = [
     check("idAccount")
@@ -59,7 +59,7 @@ const validationAccountId = [
         .notEmpty().withMessage("El campo no debe estar vacío")
         .matches(/^[a-z0-9]{24}$/).withMessage("El ID debe tener números y letras minúsculas")
         .isLength(24).withMessage("Debe tener 24 caracteres")
-]
+];
 
 const validationComment = [
     check("comment")
@@ -67,7 +67,7 @@ const validationComment = [
         .isString().withMessage("El campo debe ser una cadena")
         .isLength({ min: 5, max: 600}).withMessage("El comentario debe tener un mínimo de 5 caracteres y un máximo de 600 caracteres")
         .matches(/^[\wÑñÁáÉéÍíÓóÚúÜü!?¡¿.,# ]+$/).withMessage("Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios"), 
-]
+];
 
 const validationDiscussion = [
     check("title")
@@ -84,7 +84,7 @@ const validationDiscussion = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationUpdateDiscussion = [
     validationAccountId,
@@ -92,7 +92,7 @@ const validationUpdateDiscussion = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 module.exports = {validationDiscussionFilters, validationDiscussionCriterion, validationCriterion, 
     validationDiscussionId, validationDiscussion, validationUpdateDiscussion, validationAccountId, 

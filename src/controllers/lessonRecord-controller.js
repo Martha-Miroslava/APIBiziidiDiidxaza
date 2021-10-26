@@ -13,7 +13,7 @@ const postLessonRecord = async (request, response) => {
         idLesson: idLesson
     });
     await newLessonRecord.save()
-    .then(async (lessonRecord)  =>{
+    .then(async (lessonRecord)  => {
         response.status(StatusCodes.CREATED).json(lessonRecord);
     })
     .catch(function (error){

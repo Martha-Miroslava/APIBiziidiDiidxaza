@@ -10,7 +10,7 @@ const validationStateId  = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationCity  = [
     check("nameCity")
@@ -26,6 +26,6 @@ const validationCity  = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 module.exports = {validationStateId, validationCity};

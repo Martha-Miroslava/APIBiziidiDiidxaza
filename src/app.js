@@ -34,7 +34,7 @@ app.use(require("./routers/lessonRecord"));
 dataBaseConnect();
 
 //Starting the server
-const server = app.listen(app.get("port"), ()=>{
+const server = app.listen(app.get("port"), () => {
     console.log(`Server on port ${app.get("port")}`);
 });
 

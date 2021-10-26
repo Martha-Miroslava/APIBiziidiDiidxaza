@@ -1,13 +1,13 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const Cities = require('../src/models/cities');
-const mongoose = require('mongoose');
-const {server} = require('../src/app');
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const mongoose = require("mongoose");
+const {server} = require("../src/app");
+const Cities = require("../src/models/cities");
 chai.should();
 chai.use(chaiHttp);
 
-describe("GET Tests Cities",()=>{
-    it("GET /Cities", (done) =>{
+describe("GET Tests Cities",() => {
+    it("GET /Cities", (done) => {
        chai.request(server).get("/cities/61645a187cab4c38442c4ed6")
         .end( (error, response) => {
             response.should.have.status(200);
@@ -17,7 +17,7 @@ describe("GET Tests Cities",()=>{
         });
     });
 
-    it("GET /Cities Not Found", (done) =>{
+    it("GET /Cities Not Found", (done) => {
         chai.request(server).get("/cities/61645a187cab4c38442c4ed7")
         .end( (error, response) => {
             response.should.have.status(404);
@@ -27,7 +27,7 @@ describe("GET Tests Cities",()=>{
         });
     });
 
-    it("GET /Cities Bad Request", (done) =>{
+    it("GET /Cities Bad Request", (done) => {
         chai.request(server).get("/cities/11")
         .end( (error, response) => {
             response.should.have.status(400);
@@ -38,10 +38,10 @@ describe("GET Tests Cities",()=>{
     });
 });
 
-describe("POST Tests Cities",()=>{
+describe("POST Tests Cities",() => {
     let idCity = null;
 
-    it("POST /Cities Bad Request", (done) =>{
+    it("POST /Cities Bad Request", (done) => {
         const city = {
             nameCity: "  ",
             idState: "  "
@@ -55,7 +55,7 @@ describe("POST Tests Cities",()=>{
         });
     });
 
-    it("POST /Cities Bad Request State", (done) =>{
+    it("POST /Cities Bad Request State", (done) => {
         const city = {
             nameCity: "Veracruz",
             idState: "61645a187cab4c38442c4ed7"
@@ -69,7 +69,7 @@ describe("POST Tests Cities",()=>{
         });
     });
 
-    it("POST /Cities", (done) =>{
+    it("POST /Cities", (done) => {
         const city = {
             nameCity: "Veracruz",
             idState: "61645a187cab4c38442c4ed6"

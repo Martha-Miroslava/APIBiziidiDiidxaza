@@ -1,14 +1,14 @@
-const chai = require('chai');
-const Reports = require('../src/models/reports');
-const chaiHttp = require('chai-http');
-const mongoose = require('mongoose');
-const {server} = require('../src/app');
+const Reports = require("../src/models/reports");
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const mongoose = require("mongoose");
+const {server} = require("../src/app");
 chai.should();
 chai.use(chaiHttp);
 let accessToken= null;
 
-describe("GET Tests Reports Filters",() =>{
-    before((done) =>{
+describe("GET Tests Reports Filters",() => {
+    before((done) => {
         const login = {
             username: "Karla",
 	        password: "Marst1245#"
@@ -21,7 +21,7 @@ describe("GET Tests Reports Filters",() =>{
     });
 
     describe("GET Tests Reports LastnameAccount", () => {
-        it("GET /Reports LastnameAccount", (done) =>{
+        it("GET /Reports LastnameAccount", (done) => {
             chai.request(server).get("/reports/lastnameAccount/Ortiz")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -32,7 +32,7 @@ describe("GET Tests Reports Filters",() =>{
             });
         });
 
-        it("GET /Reports LastnameAccount Not Found", (done) =>{
+        it("GET /Reports LastnameAccount Not Found", (done) => {
             chai.request(server).get("/reports/lastnameAccount/Gonzalez")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -43,7 +43,7 @@ describe("GET Tests Reports Filters",() =>{
             });
         });
 
-        it("GET /Reports LastnameAccount Bad Request", (done) =>{
+        it("GET /Reports LastnameAccount Bad Request", (done) => {
             chai.request(server).get("/reports/lastnameAccount/12352")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -56,7 +56,7 @@ describe("GET Tests Reports Filters",() =>{
     });
 
     describe("GET Tests Reports NameAccount", () => {
-        it("GET /Reports NameAccount", (done) =>{
+        it("GET /Reports NameAccount", (done) => {
             chai.request(server).get("/reports/nameAccount/Miroslava")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -67,7 +67,7 @@ describe("GET Tests Reports Filters",() =>{
             });
         });
     
-        it("GET /Reports NameAccount Not Found", (done) =>{
+        it("GET /Reports NameAccount Not Found", (done) => {
             chai.request(server).get("/reports/nameAccount/Mariana")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -78,7 +78,7 @@ describe("GET Tests Reports Filters",() =>{
             });
         });
     
-        it("GET /Reports NameAccount Bad Request", (done) =>{
+        it("GET /Reports NameAccount Bad Request", (done) => {
             chai.request(server).get("/reports/nameAccount/12352")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -91,7 +91,7 @@ describe("GET Tests Reports Filters",() =>{
     });
 
     describe("GET Tests Reports NameReported", () => {
-        it("GET /Reports NameReported", (done) =>{
+        it("GET /Reports NameReported", (done) => {
             chai.request(server).get("/reports/nameReported/Mariana")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -102,7 +102,7 @@ describe("GET Tests Reports Filters",() =>{
             });
         });
     
-        it("GET /Reports NameReported Not Found", (done) =>{
+        it("GET /Reports NameReported Not Found", (done) => {
             chai.request(server).get("/reports/nameReported/Miroslava")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -113,7 +113,7 @@ describe("GET Tests Reports Filters",() =>{
             });
         });
     
-        it("GET /Reports NameReported Bad Request", (done) =>{
+        it("GET /Reports NameReported Bad Request", (done) => {
             chai.request(server).get("/reports/nameReported/12352")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -126,7 +126,7 @@ describe("GET Tests Reports Filters",() =>{
     });
 
     describe("GET Tests Reports LastnameReported", () => {
-        it("GET /Reports LastnameReported", (done) =>{
+        it("GET /Reports LastnameReported", (done) => {
             chai.request(server).get("/reports/lastnameReported/Lopez")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -137,7 +137,7 @@ describe("GET Tests Reports Filters",() =>{
             });
         });
     
-        it("GET /Reports LastnameReported Not Found", (done) =>{
+        it("GET /Reports LastnameReported Not Found", (done) => {
             chai.request(server).get("/reports/lastnameReported/Ortiz")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -150,7 +150,7 @@ describe("GET Tests Reports Filters",() =>{
     });
 
     describe("GET Tests Reports DateCreation", () => {
-        it("GET /Reports DateCreation", (done) =>{
+        it("GET /Reports DateCreation", (done) => {
             chai.request(server).get("/reports/dateCreation/2021-10-15")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -161,7 +161,7 @@ describe("GET Tests Reports Filters",() =>{
             });
         });
     
-        it("GET /Reports DateCreation Not Found", (done) =>{
+        it("GET /Reports DateCreation Not Found", (done) => {
             chai.request(server).get("/reports/dateCreation/2021-05-17")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -172,7 +172,7 @@ describe("GET Tests Reports Filters",() =>{
             });
         });
     
-        it("GET /Reports DateCreation Bad Request", (done) =>{
+        it("GET /Reports DateCreation Bad Request", (done) => {
             chai.request(server).get("/reports/dateCreation/Martha")
             .auth(accessToken, { type: 'bearer' })
             .end( (error, response) => {
@@ -185,8 +185,8 @@ describe("GET Tests Reports Filters",() =>{
     });
 });
 
-describe("GET Tests Reports",() =>{
-    before((done) =>{
+describe("GET Tests Reports",() => {
+    before((done) => {
         const login = {
             username: "Karla",
 	        password: "Marst1245#"
@@ -198,7 +198,7 @@ describe("GET Tests Reports",() =>{
         });
     });
 
-    it("GET /Reports", (done) =>{
+    it("GET /Reports", (done) => {
         chai.request(server).get("/reports")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -210,8 +210,8 @@ describe("GET Tests Reports",() =>{
     });
 });
 
-describe("GET Tests Report",() =>{
-    before((done) =>{
+describe("GET Tests Report",() => {
+    before((done) => {
         const login = {
             username: "Karla",
 	        password: "Marst1245#"
@@ -223,7 +223,7 @@ describe("GET Tests Report",() =>{
         });
     });
 
-    it("GET /Reports/ID", (done) =>{
+    it("GET /Reports/ID", (done) => {
         chai.request(server).get("/reports/6169cc2ca32bd265c102ff31")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -239,7 +239,7 @@ describe("GET Tests Report",() =>{
         });
     });
 
-    it("GET /Reports/ID Not Found", (done) =>{
+    it("GET /Reports/ID Not Found", (done) => {
         chai.request(server).get("/reports/616b0efeba862c9a697da9dc")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -250,7 +250,7 @@ describe("GET Tests Report",() =>{
         });
     });
 
-    it("GET /Reports/ID Bad Request", (done) =>{
+    it("GET /Reports/ID Bad Request", (done) => {
         chai.request(server).get("/reports/616b0efeba862c9a697")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -262,10 +262,10 @@ describe("GET Tests Report",() =>{
     });
 });
 
-describe("POST Tests Report",() =>{
+describe("POST Tests Report",() => {
     let idReport = null;
     
-    before((done) =>{
+    before((done) => {
         const login = {
             username: "MiroStar",
 	        password: "Marst1245#"
@@ -277,7 +277,7 @@ describe("POST Tests Report",() =>{
         });
     });
 
-    it("POST /Reports", (done) =>{
+    it("POST /Reports", (done) => {
         const report = {
             reason: "Malas pralabras en su comentario",
 	        context: "La discusion tiene mañanita comentarios malos por parte de este usuario",
@@ -300,7 +300,7 @@ describe("POST Tests Report",() =>{
         });
     });
 
-    it("POST /Reports Bad Request", (done) =>{
+    it("POST /Reports Bad Request", (done) => {
         const report = {
             reason: "          ",
 	        context: "        ",
@@ -317,7 +317,7 @@ describe("POST Tests Report",() =>{
         });
     });
 
-    it("POST /Reports Bad Request Account", (done) =>{
+    it("POST /Reports Bad Request Account", (done) => {
         const report = {
             reason: "Malas pralabras en su comentario",
 	        context: "La discusion tiene muchos comentarios malos por parte de este usuario",

@@ -60,7 +60,7 @@ const getDiscussionsCriterion = async (request, response) => {
     else{
         Accounts.findOne({_id:criterion}, {_id:0, discussions:1})
         .then(async (account) =>{
-            if(!account || account.discussions == '[]'){
+            if(!account || account.discussions === '[]'){
                 responseNotFound(response);
             }
             else{
@@ -117,14 +117,7 @@ const postDiscussion = async (request, response) => {
     const idAccountConverted  = mongoose.Types.ObjectId(idAccount);
     const dateNow = new Date();
     const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
-    const newDiscussion = new Discussions ({
-        title: title,
-        comment: comment,
-        dateCreation: dateCreation,
-        status: 1,
-        theme: theme,
-        idAccount: idAccountConverted
-    });
+    const newDiscussion = new Discussions ({title: title,comment: comment,dateCreation: dateCreation,status: 1,theme: theme,idAccount: idAccountConverted});
     await newDiscussion.save()
     .then(function (discussion) {  
         response.status(StatusCodes.CREATED).json(discussion);

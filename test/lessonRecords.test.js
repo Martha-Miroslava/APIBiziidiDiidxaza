@@ -1,14 +1,14 @@
-const chai = require('chai');
-const LessonRecords = require('../src/models/lessonRecords');
-const chaiHttp = require('chai-http');
-const mongoose = require('mongoose');
-const {server} = require('../src/app');
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const mongoose = require("mongoose");
+const {server} = require("../src/app");
+const LessonRecords = require("../src/models/lessonRecords");
 chai.should();
 chai.use(chaiHttp);
 let accessToken= null;
 
-describe("GET Tests LessonRecords",()=>{
-    before((done) =>{
+describe("GET Tests LessonRecords",()=> {
+    before((done) => {
         const login = {
             username: "MiroStar",
 	        password: "Marst1245#" 
@@ -20,7 +20,7 @@ describe("GET Tests LessonRecords",()=>{
         });
     });
 
-    it("GET /LessonRecords Bad Request", (done) =>{
+    it("GET /LessonRecords Bad Request", (done) => {
         chai.request(server).get("/lessonRecords/6171f")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -31,7 +31,7 @@ describe("GET Tests LessonRecords",()=>{
         });
     });
 
-    it("GET /LessonRecords Not Found", (done) =>{
+    it("GET /LessonRecords Not Found", (done) => {
         chai.request(server).get("/lessonRecords/6171fb2eeb326a2f1850c22c")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -42,7 +42,7 @@ describe("GET Tests LessonRecords",()=>{
         });
     });
 
-    it("GET /LessonRecords", (done) =>{
+    it("GET /LessonRecords", (done) => {
         chai.request(server).get("/lessonRecords/6168cf9563929f8f000c7614")
         .auth(accessToken, { type: 'bearer' })
         .end( (error, response) => {
@@ -54,10 +54,10 @@ describe("GET Tests LessonRecords",()=>{
     });
 });
 
-describe("POST Tests LessonReport",() =>{
+describe("POST Tests LessonReport",() => {
     let idLessonRecord = null;
     
-    before((done) =>{
+    before((done) => {
         const login = {
             username: "MiroStar",
 	        password: "Marst1245#"
@@ -69,11 +69,11 @@ describe("POST Tests LessonReport",() =>{
         });
     });
 
-    it("POST /LessonRecords", (done) =>{
+    it("POST /LessonRecords", (done) => {
         const lessonRecord = {
             pointsObtained: 45,
-            idAccount: '6168cf9563929f8f000c7614',
-            idLesson: '6171fb7deb326a2f1850c22f'
+            idAccount: "6168cf9563929f8f000c7614",
+            idLesson: "6171fb7deb326a2f1850c22f"
         }
         chai.request(server).post("/lessonRecords").send(lessonRecord)
         .auth(accessToken, { type: 'bearer' })
@@ -90,7 +90,7 @@ describe("POST Tests LessonReport",() =>{
         });
     });
 
-    it("POST /LessonRecords Bad Request", (done) =>{
+    it("POST /LessonRecords Bad Request", (done) => {
         const lessonRecord = {
             pointsObtained: "Martha",
             idAccount: 'vjfnjvnfj',
@@ -106,7 +106,7 @@ describe("POST Tests LessonReport",() =>{
         });
     });
 
-    it("POST /LessonRecords Bad Request Account", (done) =>{
+    it("POST /LessonRecords Bad Request Account", (done) => {
         const lessonRecord = {
             pointsObtained: 45,
 	        idAccount: "6168cf9563929f8f000b7618",
@@ -122,7 +122,7 @@ describe("POST Tests LessonReport",() =>{
         });
     });
 
-    it("POST /LessonRecords Bad Request Lesson", (done) =>{
+    it("POST /LessonRecords Bad Request Lesson", (done) => {
         const lessonRecord = {
             pointsObtained: 45,
 	        idAccount: "6168cf9563929f8f000c7614",

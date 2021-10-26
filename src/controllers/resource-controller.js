@@ -4,12 +4,12 @@ const Accounts = require("../models/accounts");
 const Lessons = require("../models/lessons");
 const Questions = require("../models/questions");
 const path = require("path");
-const fs = require("fs").promises;
+const fileSystem = require("fs").promises;
 
 const patchResource = (request, response, next) => {
     const URL = request.body.URL;
-    fs.stat(path.join(__dirname,URL))
-    .then( ()=>{
+    fileSystem.stat(path.join(__dirname,URL))
+    .then( () => {
         response.sendFile(path.join(__dirname,URL));
     })
     .catch((error) =>{
@@ -22,19 +22,19 @@ const patchResource = (request, response, next) => {
     });
 };
 
-const postImageLesson = (request, response, next) =>{
+const postImageLesson = (request, response, next) => {
     const idLesson = request.body.idLesson;
     const url = "../images/lessons/"
     postResource(request, response, idLesson,url, Lessons);
 };
 
-const postImageAccount = (request, response, next) =>{
+const postImageAccount = (request, response, next) => {
     const idAccount = request.body.idAccount;
     const url = "../images/accounts/"
     postResource(request, response, idAccount,url, Accounts);
 };
 
-const postAudio = (request, response, next) =>{
+const postAudio = (request, response, next) => {
     if(request.files){
         const file = request.files.file;
         const idQuestion = request.body.idQuestion;
@@ -88,7 +88,7 @@ const postResource = async (request, response, id, URLPhoto, model) => {
 
 const deleteResource = (request, response, next) => {
     const url = request.body.URL;
-    fs.unlink(path.join(__dirname,url))
+    fileSystem.unlink(path.join(__dirname,url))
     .then(() => {
         responseGeneral(response, StatusCodes.OK, "El archivo se eliminó exitosamente");
     }).catch((error) => {

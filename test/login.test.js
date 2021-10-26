@@ -1,13 +1,12 @@
-const chai = require('chai');
-const Reports = require('../src/models/reports');
-const chaiHttp = require('chai-http');
-const mongoose = require('mongoose');
-const {server} = require('../src/app');
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const mongoose = require("mongoose");
+const {server} = require("../src/app");
 chai.should();
 chai.use(chaiHttp);
 
-describe("POST Login",() =>{
-    it("POST /Login", (done) =>{
+describe("POST Login",() => {
+    it("POST /Login", (done) => {
         const login = {
             username: "Karla",
             password: "Marst1245#"
@@ -25,7 +24,7 @@ describe("POST Login",() =>{
         });
     });
 
-    it("POST /Login  Bad Request", (done) =>{
+    it("POST /Login  Bad Request", (done) => {
         const login = {
             username: "    ",
             password: "Marst1245#"
@@ -39,7 +38,7 @@ describe("POST Login",() =>{
         });
     });
 
-    it("POST /Login  Bad Request Password", (done) =>{
+    it("POST /Login  Bad Request Password", (done) => {
         const login = {
             username: "Karla",
             password: "Mmol157200#"
@@ -53,7 +52,7 @@ describe("POST Login",() =>{
         });
     });
 
-    it("POST /Login Forbidden", (done) =>{
+    it("POST /Login Forbidden", (done) => {
         const login = {
             username: "Miroslava25",
             password: "Marst1245#"
@@ -67,7 +66,7 @@ describe("POST Login",() =>{
         });
     });
 
-    it("POST /Login Not Found", (done) =>{
+    it("POST /Login Not Found", (done) => {
         const login = {
             username: "Karls",
             password: "Marst1245#"
@@ -82,8 +81,8 @@ describe("POST Login",() =>{
     });
 });
 
-describe("PATCH Login",() =>{
-    it("PATCH /Login", (done) =>{
+describe("PATCH Login",() => {
+    it("PATCH /Login", (done) => {
         const login = {
             username: "MiroStar",
             codeConfirmation: 234990
@@ -97,7 +96,7 @@ describe("PATCH Login",() =>{
         });
     });
 
-    it("POST /Login  Bad Request", (done) =>{
+    it("POST /Login  Bad Request", (done) => {
         const login = {
             username: "   ",
             codeConfirmation: 123
@@ -111,7 +110,7 @@ describe("PATCH Login",() =>{
         });
     });
 
-    it("POST /Login  Bad Request Code", (done) =>{
+    it("POST /Login  Bad Request Code", (done) => {
         const login = {
             username: "MiroStar",
             codeConfirmation: 234957
@@ -125,7 +124,7 @@ describe("PATCH Login",() =>{
         });
     });
 
-    it("POST /Login Not Found", (done) =>{
+    it("POST /Login Not Found", (done) => {
         const login = {
             username: "Miroslava25",
             codeConfirmation: 234957

@@ -42,7 +42,7 @@ const validationAccount = [
                 return false;
             }     
         }).withMessage("El rango de la fecha actual y la fecha de nacimiento debe estar entre 10 y 100 años.")
-]
+];
 
 const validationUsername = [
     check("username")
@@ -51,13 +51,13 @@ const validationUsername = [
         .isString().withMessage("El campo debe ser una cadena")
         .isLength({ min: 3, max: 20}).withMessage("El nombre de usuario debe tener un mínimo de 3 caracteres y un máximo de 20 caracteres")
         .matches(/^[A-Za-z0-9]{3,20}$/).withMessage("El nombre de usuario debe tener solo letras y números")
-]
+];
 
 const validationEmail = [
     check("email")
         .normalizeEmail()
         .isEmail().withMessage("Debe ser un correo electrónico")
-]
+];
 
 const validationPassword = [
     check("password")
@@ -65,7 +65,7 @@ const validationPassword = [
         .notEmpty().withMessage("El campo no debe estar vacío")
         .isString().withMessage("El campo debe ser una cadena")
         .isLength({min: 8, max:254}).trim().withMessage("Password must have a minimum of 8 characters and a maximum of 254 characters")
-]
+];
 
 
 const validationLogin = [
@@ -74,7 +74,7 @@ const validationLogin = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationConfirmationAccount = [
     validationUsername,
@@ -86,14 +86,14 @@ const validationConfirmationAccount = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationSendEmail = [
     validationEmail,
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationAccountEmail = [
     validationEmail,
@@ -110,7 +110,7 @@ const validationAccountEmail = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationStatusAccount  = [
     check("status")
@@ -118,7 +118,7 @@ const validationStatusAccount  = [
         .notEmpty().withMessage("El campo no debe estar vacío")
         .isNumeric().withMessage("El campo no debe ser un número")
         .matches(/^[1-3]$/).withMessage("Permitir solo números del 1 al 3")
-]
+];
 
 
 const validationCreationAccount = [
@@ -138,7 +138,7 @@ const validationCreationAccount = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 
 const validationId  = [
@@ -147,7 +147,7 @@ const validationId  = [
         .notEmpty().withMessage("El campo no debe estar vacío")
         .matches(/^[a-z0-9]{24}$/).withMessage("El ID debe tener números y letras minúsculas")
         .isLength(24).withMessage("Debe tener 24 caracteres")
-]
+];
 
 const validationURL  = [
     check("URL")
@@ -157,7 +157,7 @@ const validationURL  = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationUpdateAccount  = [
     validationId,
@@ -167,7 +167,7 @@ const validationUpdateAccount  = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationChangeStatusAccount = [
     validationId,
@@ -175,7 +175,7 @@ const validationChangeStatusAccount = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationAccountId  = [
     param("accountID")
@@ -186,7 +186,7 @@ const validationAccountId  = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
 const validationAccountFilters  = [
     param("filter")
@@ -199,9 +199,9 @@ const validationAccountFilters  = [
     (request, response, next) => {
         validateResult(request, response, next);
     }
-]
+];
 
-const validationCriterion = (request, response, next) =>{
+const validationCriterion = (request, response, next) => {
     const filter = request.params.filter;
     const criterion = request.params.criterion;
     var expReg =  new RegExp(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü ]+$/);
@@ -229,9 +229,7 @@ const validationCriterion = (request, response, next) =>{
         return response.status(StatusCodes.BAD_REQUEST).json({message: message});
     }
     return next();
-}
-
-
+};
 
 
 module.exports = {
