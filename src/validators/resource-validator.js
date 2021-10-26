@@ -11,8 +11,8 @@ const validationAccount  = [
 
 const validationLesson  = [
     check("idLesson")
-        .exists().withMessage("El campo debe existir")
-        .notEmpty().withMessage("El campo no debe estar vacío")
+        .exists().withMessage("El ID de la lección debe existir")
+        .notEmpty().withMessage("El ID de la lección no debe estar vacío")
         .matches(/^[a-z0-9]{24}$/).withMessage("El ID debe tener números y letras minúsculas")
         .isLength(24).withMessage("Debe tener 24 caracteres"),
     (request, response, next) => {
@@ -22,8 +22,8 @@ const validationLesson  = [
 
 const validationQuestion  = [
     check("idQuestion")
-        .exists().withMessage("El campo debe existir")
-        .notEmpty().withMessage("El campo no debe estar vacío")
+        .exists().withMessage("El ID de la pregunta debe existir")
+        .notEmpty().withMessage("El ID de la pregunta no debe estar vacío")
         .matches(/^[a-z0-9]{24}$/).withMessage("El ID debe tener números y letras minúsculas")
         .isLength(24).withMessage("Debe tener 24 caracteres"),
     (request, response, next) => {

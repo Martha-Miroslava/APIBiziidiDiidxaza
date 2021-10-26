@@ -1,6 +1,7 @@
 const {verifyToken} = require("../helpers/generateToken");
 const accounts = require("../models/accounts");
 const {StatusCodes} = require ("http-status-codes");
+const {responseGeneral} = require("../helpers/response-result");
 
 const checkRoleAuth = (roles) => async (request, response, next) => {
     const token = request.headers.authorization;
@@ -10,11 +11,11 @@ const checkRoleAuth = (roles) => async (request, response, next) => {
         if ([].concat(roles).includes(accountData.role)) {
             return next();
         } else {
-            return response.status(StatusCodes.FORBIDDEN).json({message: "No tiene permiso para realizar esta funcionalidad"});
+            return responseGeneral(response, StatusCodes.FORBIDDEN, "No tiene permiso para realizar esta funcionalidad");
         }
     })
     .catch ((error) => {
-        return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "No se pudo validar la autorización del token"});
+        return responseGeneral(response, StatusCodes.INTERNAL_SERVER_ERROR, "No se pudo validar la autorización del token");
     });
 };
 

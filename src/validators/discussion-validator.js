@@ -6,8 +6,8 @@ const {validationId} = require("../validators/account-validator");
 
 const validationDiscussionFilters  = [
     param("filter")
-        .exists().withMessage("El campo debe existir")
-        .notEmpty().withMessage("El campo no debe estar vacío")
+        .exists().withMessage("El filtro debe existir")
+        .notEmpty().withMessage("El filtro no debe estar vacío")
         .isIn(["news", "populars"]).withMessage("El filtro es inválido"),
     (request, response, next) => {
         validateResult(request, response, next);
@@ -16,12 +16,12 @@ const validationDiscussionFilters  = [
 
 const validationDiscussionCriterion  = [
     param("filter")
-        .exists().withMessage("El campo debe existir")
-        .notEmpty().withMessage("El campo no debe estar vacío")
+        .exists().withMessage("El filtro debe existir")
+        .notEmpty().withMessage("El filtro no debe estar vacío")
         .isIn(["title", "tracing"]).withMessage("El filtro es inválido"),
     param("criterion")
-        .exists().withMessage("El campo debe existir")
-        .notEmpty().withMessage("El campo no debe estar vacío"),
+        .exists().withMessage("El criterio debe existir")
+        .notEmpty().withMessage("El criterio no debe estar vacío"),
     (request, response, next) => {
         validateResult(request, response, next);
     }
@@ -34,7 +34,7 @@ const validationCriterion = (request, response, next) => {
     let message = "Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios. Se permite de 4 a 200 caracteres";
     if(filter === "tracing"){
         expReg = new RegExp(/^[a-z0-9]{24}$/);
-        message = "El ID debe tener números y letras minúsculas";
+        message = "El ID de la cuenta debe tener números y letras minúsculas";
     }
     if(!expReg.test(criterion)) {
         return response.status(StatusCodes.BAD_REQUEST).json({errors: message});
