@@ -5,11 +5,14 @@ const morgan = require("morgan");
 const {dataBaseConnect} = require("./connection/ConnectionDB");
 const upload = require("express-fileupload");
 const helmet = require("helmet");
+const cors = require("cors");
 
 //setting
 app.set("port", process.env.PORT);
 app.disable("x-powered-by");
 app.use(helmet());
+app.use(cors());
+app.disable("etag");
 
 //middleware
 app.use(morgan("dev"));

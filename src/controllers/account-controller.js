@@ -135,10 +135,10 @@ const getAccount = async (request, response) => {
 };
 
 const postAccount = async (request, response) => {
-    const {lastname,name,age,dateBirth,email,username,password,role,idCity} = request.body;
+    const {lastname,name,dateBirth,age,email,username,password,role,idCity} = request.body;
     let codeConfirmation = generateCode();
-    const idCityConverted  = mongoose.Types.ObjectId(idCity);
     const dateNow = new Date();
+    const idCityConverted  = mongoose.Types.ObjectId(idCity);
     const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
     const newAccount = new Accounts ({
         lastname:lastname,
@@ -170,7 +170,7 @@ const postAccount = async (request, response) => {
 
 
 const putAccount = async (request, response) => {
-    const {_id,lastname, name, age,dateBirth, email, username, idCity} = request.body;
+    const {_id,lastname,name,age,dateBirth,email,username,idCity} = request.body;
     const idAccount  = mongoose.Types.ObjectId(_id);
     const idCityConverted  = mongoose.Types.ObjectId(idCity);
     const queryAccount = {_id:idAccount};
