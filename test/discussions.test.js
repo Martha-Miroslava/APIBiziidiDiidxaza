@@ -23,7 +23,7 @@ describe("POST Tests Discussion",() => {
         const discussion = {
             title: "¿Qué opinan de los cuentos en zapoteco?",
             comment: "Me gustaría saber que opinan de los cuentos que esta y donde puede encontrar más",
-            theme: "doubt",
+            theme: "duda",
             idAccount: "6168cf9563929f8f000c7614"
         };
         chai.request(server).post("/discussions").send(discussion)
@@ -47,7 +47,7 @@ describe("POST Tests Discussion",() => {
         const discussion = {
             title: "   ",
             comment: " ",
-            theme: "duda",
+            theme: "informacion",
             idAccount: "6168cf"
         }
         chai.request(server).post("/discussions").send(discussion)
@@ -64,7 +64,7 @@ describe("POST Tests Discussion",() => {
         const discussion = {
             title: "¿Qué opinan de los cuentos en zapoteco?",
             comment: "Me gustaría saber que opinan de los cuentos que esta y donde puede encontrar más",
-            theme: "doubt",
+            theme: "duda",
             idAccount: "6168cf9563929f8f000c7679"
         }
         chai.request(server).post("/discussions").send(discussion)
@@ -212,7 +212,7 @@ describe("GET Tests Discussion",() => {
     });
 
     it("GET /Discussions/ID", (done) => {
-        chai.request(server).get("/discussions/616b0efeba862c9a697da9db")
+        chai.request(server).get("/discussions/618dc7899d06f2345c3ee84b")
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
@@ -291,7 +291,7 @@ describe("PATCH Tests Discussion",() => {
 
     it("PATCH /Discussion", (done) => {
         const discussion = {
-            _id: "616b0efeba862c9a697da9db",
+            _id: "618dc7969d06f2345c3ee84c",
             idAccount: "6168d4975471a4bcc2b17445"
         }
         chai.request(server).patch("/discussions").send(discussion)
