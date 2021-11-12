@@ -71,7 +71,7 @@ describe("POST Tests Comments",() => {
         const comment = {
             comment: "Creo que los cuentos son un poco largos", 
             idAccount: "6168cf9563929f8f000c7614", 
-            idDiscussion: "616b0efeba862c9a697da9db"
+            idDiscussion: "618dc7969d06f2345c3ee84c"
         };
         chai.request(server).post("/comments").send(comment)
         .auth(accessToken, {type:"bearer"})
