@@ -97,7 +97,7 @@ const getDiscussions = async (request, response) => {
 const getDiscussion = async (request, response) => {
     const discussionID = request.params.discussionID;
     Discussions.findById(discussionID)
-    .populate({path: "idAccount", select: "name lastname"})
+    .populate({path: "idAccount", select: "name lastname URL"})
     .then(function (discussion) {  
         if(discussion){
             response.status(StatusCodes.OK).json(discussion);
