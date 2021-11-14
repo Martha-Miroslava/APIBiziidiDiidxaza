@@ -6,8 +6,9 @@ const {validationCreationComment, validationDeleteComment} = require("../validat
 const {validateExistsAccount} = require("../controllers/account-controller");
 const {validateExistsDiscussion} = require("../controllers/discussion-controller");
 const {validationDiscussionId} = require("../validators/discussion-validator");
+const {cacheInit} = require("../middleware/cache");
 
-router.get("/comments/:discussionID", checkAuth, checkRoleAuth(["manager", "user"]), validationDiscussionId, getComments);
+router.get("/comments/:discussionID", checkAuth, checkRoleAuth(["manager", "user"]), validationDiscussionId, cacheInit, getComments);
 
 router.post("/comments", checkAuth, checkRoleAuth(["user"]), validationCreationComment, validateExistsAccount, validateExistsDiscussion, postComment);
 

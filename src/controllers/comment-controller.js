@@ -1,12 +1,13 @@
 const Comments = require("../models/comments");
 const {StatusCodes} = require ("http-status-codes");
 const mongoose = require("mongoose");
+const Discussions = require("../models/discussions");
 const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
 
 const getComments = async (request, response) => {
     const discussionID = request.params.discussionID;
     Comments.find({idDiscussion: discussionID}, {idDiscussion:0})
-    .populate({path: "idAccount", select: "name lastname"})
+    .populate({path: "idAccount", select: "name lastname URL"})
     .then(function (comments) {  
         if(comments.length){
             response.status(StatusCodes.OK).json(comments);
@@ -28,7 +29,8 @@ const postComment = async (request, response) => {
     const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
     const newComment = new Comments ({comment: comment, dateCreation: dateCreation, idAccount: idAccountConverted, idDiscussion: idDiscussionConverted});
     await newComment.save()
-    .then(function (commentSave) {  
+    .then(async (commentSave) => {  
+        await Discussions.updateOne({_id:idDiscussion}, {$inc:{numberComments:1}})
         response.status(StatusCodes.CREATED).json(commentSave);
     })
     .catch(function (error){
