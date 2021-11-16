@@ -329,7 +329,7 @@ describe("PATCH Tests Discussion",() => {
         .end( (error, response) => {
             response.should.have.status(400);
             response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La discusion no existe");
+            response.body.should.have.property("message").eq("La discusión no existe");
             done();
         });
     });

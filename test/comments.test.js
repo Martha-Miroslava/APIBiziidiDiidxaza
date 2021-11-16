@@ -152,7 +152,8 @@ describe("DELETE Tests Comments",() => {
 
     it("DELETE /Comments", (done) => {
         const comment = {
-            _id: idComment
+            _id: idComment,
+            idDiscussion: "618dc7969d06f2345c3ee84c"
         };
         chai.request(server).delete("/comments").send(comment)
         .auth(accessToken, {type:"bearer"})
