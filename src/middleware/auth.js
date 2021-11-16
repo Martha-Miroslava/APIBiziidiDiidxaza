@@ -17,7 +17,7 @@ const checkAuth = async (request, response, next) => {
     })
     .catch ((error) => {
         if(error.message === "jwt expired"){
-            return responseGeneral(response, StatusCodes.INSUFFICIENT_SPACE_ON_RESOURCE, "Se agotado se tiempo en el sistema, por favor vuelva a iniciar sesión");
+            return responseGeneral(response, StatusCodes.INSUFFICIENT_SPACE_ON_RESOURCE, "Se agotado su tiempo en el sistema, por favor vuelva a iniciar sesión");
         }
         return responseGeneral(response, StatusCodes.UNAUTHORIZED, "El token no es válido");
     });

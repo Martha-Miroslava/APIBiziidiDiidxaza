@@ -3,21 +3,27 @@ const {validationAccountId, validationComment} = require("../validators/discussi
 const {validationId} = require("../validators/account-validator");
 const {validateResult} = require("../helpers/response-result");
 
-const validationCreationComment = [
-    validationComment,
-    validationAccountId,
+const validationIdDiscussion = [
     check("idDiscussion")
         .exists().withMessage("El Identificador de la discusión debe existir")
         .notEmpty().withMessage("El Identificador de la discusión no debe estar vacío")
         .matches(/^[a-z0-9]{24}$/).withMessage("El Identificador de la discusión debe tener números y letras minúsculas")
-        .isLength(24).withMessage("El Identificador de la discusión debe tener 24 caracteres"),
+        .isLength(24).withMessage("El Identificador de la discusión debe tener 24 caracteres")
+]
+
+const validationCreationComment = [
+    validationComment,
+    validationAccountId,
+    validationIdDiscussion,
     (request, response, next) => {
         validateResult(request, response, next);
     }
 ];
 
+
 const validationDeleteComment = [
     validationId,
+    validationIdDiscussion,
     (request, response, next) => {
         validateResult(request, response, next);
     }
