@@ -11,7 +11,7 @@ const checkRoleAuth = (roles) => async (request, response, next) => {
         if ([].concat(roles).includes(accountData.role)) {
             return next();
         } else {
-            return responseGeneral(response, StatusCodes.FORBIDDEN, "No tiene permiso para realizar esta funcionalidad");
+            return responseGeneral(response, StatusCodes.UNAUTHORIZED, "No tiene permiso para realizar esta funcionalidad");
         }
     })
     .catch ((error) => {

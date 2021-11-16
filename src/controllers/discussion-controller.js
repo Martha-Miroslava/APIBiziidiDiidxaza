@@ -81,7 +81,7 @@ const getDiscussionsCriterion = async (request, response) => {
 
 const getDiscussions = async (request, response) => {
     Discussions.find(null,{title:1, dateCreation:1, numberComments:1, theme:1})
-    .then(function (discussions) {  
+    .then(function (discussions){  
         if(discussions.length){
             response.status(StatusCodes.OK).json(discussions);
         }
@@ -98,7 +98,7 @@ const getDiscussion = async (request, response) => {
     const discussionID = request.params.discussionID;
     Discussions.findById(discussionID)
     .populate({path: "idAccount", select: "name lastname URL"})
-    .then(function (discussion) {  
+    .then(function (discussion){  
         if(discussion){
             response.status(StatusCodes.OK).json(discussion);
         }
@@ -138,14 +138,20 @@ const patchDiscussion = async (request, response) => {
         if(discussion){
             if(account.discussions == "[]"){  
                 await Accounts.updateOne({_id:idAccountConverted}, {discussions:idConverted});
+                responseGeneral(response, StatusCodes.OK, "La discusión se segui exitosamente");
             }
             else{
-                await Accounts.updateOne({_id:idAccountConverted}, {$push: {discussions:idConverted}});
+                const discussionFound = account.discussions.find(element => element._id == _id);
+                if(discussionFound){
+                    responseGeneral(response, StatusCodes.BAD_REQUEST, "Esta discusión ya la sigues");
+                }else{
+                    await Accounts.updateOne({_id:idAccountConverted}, {$push: {discussions:idConverted}});
+                    responseGeneral(response, StatusCodes.OK, "La discusión se segui exitosamente");
+                }
             }
-            responseGeneral(response, StatusCodes.OK, "La discusión se segui exitosamente");
         }
         else{
-            return responseGeneral(response, StatusCodes.BAD_REQUEST, "La discusion no existe");
+            return responseGeneral(response, StatusCodes.BAD_REQUEST, "La discusión no existe");
         }
     })
     .catch(function (error){

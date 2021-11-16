@@ -3,10 +3,10 @@ const getExpeditiousCache = require("express-expeditious");
 
 const defaultOptions = {
     namespace: "expresscache",
-    defaultTtl: "1 minute",
+    defaultTtl: 60 * 50,
     statusCodeExpires: {
         500: 0,
-        404: "1 minute"
+        404: 60 * 50
     }
 };
 

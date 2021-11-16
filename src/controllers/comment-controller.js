@@ -4,6 +4,20 @@ const mongoose = require("mongoose");
 const Discussions = require("../models/discussions");
 const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
 
+const validateExistsCommentt = (request, response, next) => {
+    const idComment = request.body._id;
+    Comments.findById(idComment, {_id:1})
+    .then(function (comment) {  
+        if(comment){
+            return next();
+        }
+        return responseGeneral(response, StatusCodes.BAD_REQUEST, "El comentario no existe");
+    })
+    .catch(function (error){
+        return responseServer(response, error);
+    });
+};
+
 const getComments = async (request, response) => {
     const discussionID = request.params.discussionID;
     Comments.find({idDiscussion: discussionID}, {idDiscussion:0})
@@ -41,9 +55,11 @@ const postComment = async (request, response) => {
 
 const deleteComment = async (request, response) => {
     const _id = request.body._id;
+    const idDiscussion = request.body.idDiscussion;
     const idComment  = mongoose.Types.ObjectId(_id);
     Comments.deleteOne({_id:idComment})
-    .then(function (document) {  
+    .then(async (document) => {  
+        await Discussions.updateOne({$and:[{_id:idDiscussion},{numberComments:{$gte: 1}}]}, {$inc:{numberComments:-1}})
         responseGeneral(response, StatusCodes.OK, "El comentario se eliminó exitosamente");
     })
     .catch(function (error){
@@ -51,4 +67,4 @@ const deleteComment = async (request, response) => {
     });
 };
 
-module.exports = {getComments, postComment, deleteComment};
+module.exports = {getComments, postComment, deleteComment, validateExistsCommentt};
