@@ -170,7 +170,7 @@ describe("GET Tests Discussions Filters Criterion",() => {
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.be.a("array");
-            response.body.length.should.be.eq(2);
+            response.body.length.should.be.eq(1);
             done();
         });
     });
@@ -292,7 +292,7 @@ describe("PATCH Tests Discussion",() => {
     it("PATCH /Discussion", (done) => {
         const discussion = {
             _id: "618dc7969d06f2345c3ee84c",
-            idAccount: "6168d4975471a4bcc2b17445"
+            idAccount: "6196ae217efa096f5c673a9f"
         }
         chai.request(server).patch("/discussions").send(discussion)
         .auth(accessToken, {type:"bearer"})
@@ -322,7 +322,7 @@ describe("PATCH Tests Discussion",() => {
     it("PATCH /Discussion Bad Request Discussion", (done) => {
         const discussion = {
             _id: "616b0efeba862c9a697da9cf",
-            idAccount: "6168d4975471a4bcc2b17445"
+            idAccount: "6196ae217efa096f5c673a9f"
         }
         chai.request(server).patch("/discussions").send(discussion)
         .auth(accessToken, {type:"bearer"})
@@ -351,7 +351,7 @@ describe("PATCH Tests Discussion",() => {
 
     after(async () => {
         const account = new Accounts ();
-        await Accounts.updateOne({_id:"6168d4975471a4bcc2b17445"}, { discussions: account.discussions});
+        await Accounts.updateOne({_id:"6196ae217efa096f5c673a9f"}, { discussions: account.discussions});
     });
 });
 
