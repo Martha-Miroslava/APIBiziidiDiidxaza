@@ -27,7 +27,7 @@ describe("GET Tests Accounts Filters",() => {
             .end( (error, response) => {
                 response.should.have.status(200);
                 response.body.should.be.a("array");
-                response.body.length.should.be.eq(1);
+                response.body.length.should.be.eq(2);
                 done();
             });
         });
@@ -237,7 +237,7 @@ describe("GET Tests Accounts Filters",() => {
             .end( (error, response) => {
                 response.should.have.status(200);
                 response.body.should.be.a("array");
-                response.body.length.should.be.eq(2);
+                response.body.length.should.be.eq(1);
                 done();
             });
         });
@@ -305,7 +305,7 @@ describe("GET Tests Account",() => {
     });
 
     it("GET /Accounts/ID", (done) => {
-        chai.request(server).get("/accounts/6164db5823242f430c487fca")
+        chai.request(server).get("/accounts/6196ae217efa096f5c673a9f")
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);

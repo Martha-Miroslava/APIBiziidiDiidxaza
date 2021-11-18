@@ -19,7 +19,6 @@ describe("POST Login",() => {
             response.body.should.have.property("account");
             response.body.should.have.property("account").have.property("name");
             response.body.should.have.property("account").have.property("lastname");
-            response.body.should.have.property("account").have.property("URL");
             done();
         });
     });
@@ -68,8 +67,8 @@ describe("POST Login",() => {
 
     it("POST /Login Not Found", (done) => {
         const login = {
-            username: "Karls",
-            password: "Marst1245#"
+            username: "Karime",
+            password: "Marstfrkmv3245#"
         };
         chai.request(server).post("/login").send(login)
         .end( (error, response) => {
@@ -96,7 +95,7 @@ describe("PATCH Login",() => {
         });
     });
 
-    it("POST /Login  Bad Request", (done) => {
+    it("PATCH /Login  Bad Request", (done) => {
         const login = {
             username: "   ",
             codeConfirmation: 123
@@ -110,7 +109,7 @@ describe("PATCH Login",() => {
         });
     });
 
-    it("POST /Login  Bad Request Code", (done) => {
+    it("PATCH /Login  Bad Request Code", (done) => {
         const login = {
             username: "MiroStar",
             codeConfirmation: 234957
@@ -124,9 +123,9 @@ describe("PATCH Login",() => {
         });
     });
 
-    it("POST /Login Not Found", (done) => {
+    it("PATCH /Login Not Found", (done) => {
         const login = {
-            username: "Miroslava25",
+            username: "Karime",
             codeConfirmation: 234957
         };
         chai.request(server).patch("/login").send(login)
