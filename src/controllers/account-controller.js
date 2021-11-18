@@ -121,6 +121,7 @@ const getAccounts = async (request, response) => {
 const getAccount = async (request, response) => {
     const accountID = request.params.accountID;
     Accounts.findById(accountID)
+    .populate({path: "idCity", select: "idState"})
     .then(function (account) {  
         if(account){
             response.status(StatusCodes.OK).json(account);
