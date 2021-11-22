@@ -29,8 +29,8 @@ const getReportsFilters = async (request, response) => {
     const criterion = request.params.criterion;
     if(filter === "dateCreation"){
         Reports.find({dateCreation: criterion}, {dateCreation:1, idAccount:1, accountReported:1})
-        .populate({path: "idAccount", select: "name lastname -_id"})
-        .populate({path: "accountReported", select: "name lastname -_id"})
+        .populate({path: "idAccount", select: "username -_id"})
+        .populate({path: "accountReported", select: "username -_id"})
         .then(function (reports) {  
             if(reports.length){
                 response.status(StatusCodes.OK).json(reports);
@@ -46,17 +46,11 @@ const getReportsFilters = async (request, response) => {
     else{
         let queryAccountReported = null;
         switch(filter){
-            case "nameAccount":
-                queryAccountReported = {$match:{"idAccount.name": { $regex : new RegExp(criterion, "i")}}};
+            case "usernameAccount":
+                queryAccountReported = {$match:{"idAccount.username": { $regex : new RegExp(criterion, "i")}}};
                 break;
-            case "lastnameAccount":
-                queryAccountReported = {$match:{"idAccount.lastname": { $regex : new RegExp(criterion, "i")}}};
-                break;
-            case "nameReported":
-                queryAccountReported = {$match:{"accountReported.name": { $regex : new RegExp(criterion, "i")}}};
-                break;
-            case "lastnameReported":
-                queryAccountReported = {$match:{"accountReported.lastname": { $regex : new RegExp(criterion, "i")}}};
+            case "usernameReported":
+                queryAccountReported = {$match:{"accountReported.username": { $regex : new RegExp(criterion, "i")}}};
                 break;
         }
         Reports.aggregate([
@@ -73,8 +67,7 @@ const getReportsFilters = async (request, response) => {
             },
             }, 
             queryAccountReported,
-            {$project:{"accountReported.name": 1, "accountReported.lastname": 1, dateCreation:1, "idAccount.name": 1, 
-            "idAccount.lastname": 1}}
+            {$project:{"accountReported.username": 1, dateCreation:1, "idAccount.username": 1}}
         ])
         .then(function (reports) {  
             if(reports.length){

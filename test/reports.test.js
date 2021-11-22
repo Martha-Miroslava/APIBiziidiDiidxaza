@@ -20,20 +20,20 @@ describe("GET Tests Reports Filters",() => {
         });
     });
 
-    describe("GET Tests Reports LastnameAccount", () => {
-        it("GET /Reports LastnameAccount", (done) => {
-            chai.request(server).get("/reports/lastnameAccount/Ortiz")
+    describe("GET Tests Reports usernameAccount", () => {
+        it("GET /Reports usernameAccount", (done) => {
+            chai.request(server).get("/reports/usernameAccount/MiroStar")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(200);
                 response.body.should.be.a("array");
-                response.body.length.should.be.eq(2);
+                response.body.length.should.be.eq(1);
                 done();
             });
         });
 
-        it("GET /Reports LastnameAccount Not Found", (done) => {
-            chai.request(server).get("/reports/lastnameAccount/Gonzalez")
+        it("GET /Reports usernameAccount Not Found", (done) => {
+            chai.request(server).get("/reports/usernameAccount/Gonzalez")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
@@ -43,21 +43,21 @@ describe("GET Tests Reports Filters",() => {
             });
         });
 
-        it("GET /Reports LastnameAccount Bad Request", (done) => {
-            chai.request(server).get("/reports/lastnameAccount/12352")
+        it("GET /Reports usernameAccount Bad Request", (done) => {
+            chai.request(server).get("/reports/usernameAccount/123 52")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(400);
                 response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("Solo letras de la A a la Z. Caracteres de 2 a 150");
+                response.body.should.have.property("message").eq("Solo letras de la A a la Z y números. Caracteres de 3 a 20");
                 done();
             });
         });
     });
 
-    describe("GET Tests Reports NameAccount", () => {
-        it("GET /Reports NameAccount", (done) => {
-            chai.request(server).get("/reports/nameAccount/Miroslava")
+    describe("GET Tests Reports usernameReported", () => {
+        it("GET /Reports usernameReported", (done) => {
+            chai.request(server).get("/reports/usernameReported/Miroslava25")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(200);
@@ -67,8 +67,8 @@ describe("GET Tests Reports Filters",() => {
             });
         });
     
-        it("GET /Reports NameAccount Not Found", (done) => {
-            chai.request(server).get("/reports/nameAccount/Mariana")
+        it("GET /Reports usernameReported Not Found", (done) => {
+            chai.request(server).get("/reports/usernameReported/Miroslava")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
@@ -78,72 +78,13 @@ describe("GET Tests Reports Filters",() => {
             });
         });
     
-        it("GET /Reports NameAccount Bad Request", (done) => {
-            chai.request(server).get("/reports/nameAccount/12352")
+        it("GET /Reports usernameReported Bad Request", (done) => {
+            chai.request(server).get("/reports/usernameReported/12 352")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(400);
                 response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("Solo letras de la A a la Z. Caracteres de 2 a 150");
-                done();
-            });
-        });
-    });
-
-    describe("GET Tests Reports NameReported", () => {
-        it("GET /Reports NameReported", (done) => {
-            chai.request(server).get("/reports/nameReported/Valeria")
-            .auth(accessToken, {type:"bearer"})
-            .end( (error, response) => {
-                response.should.have.status(200);
-                response.body.should.be.a("array");
-                response.body.length.should.be.eq(2);
-                done();
-            });
-        });
-    
-        it("GET /Reports NameReported Not Found", (done) => {
-            chai.request(server).get("/reports/nameReported/Miroslava")
-            .auth(accessToken, {type:"bearer"})
-            .end( (error, response) => {
-                response.should.have.status(404);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("No se encontro registro(s)");
-                done();
-            });
-        });
-    
-        it("GET /Reports NameReported Bad Request", (done) => {
-            chai.request(server).get("/reports/nameReported/12352")
-            .auth(accessToken, {type:"bearer"})
-            .end( (error, response) => {
-                response.should.have.status(400);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("Solo letras de la A a la Z. Caracteres de 2 a 150");
-                done();
-            });
-        });
-    });
-
-    describe("GET Tests Reports LastnameReported", () => {
-        it("GET /Reports LastnameReported", (done) => {
-            chai.request(server).get("/reports/lastnameReported/Ortiz")
-            .auth(accessToken, {type:"bearer"})
-            .end( (error, response) => {
-                response.should.have.status(200);
-                response.body.should.be.a("array");
-                response.body.length.should.be.eq(2);
-                done();
-            });
-        });
-    
-        it("GET /Reports LastnameReported Not Found", (done) => {
-            chai.request(server).get("/reports/lastnameReported/Lopez")
-            .auth(accessToken, {type:"bearer"})
-            .end( (error, response) => {
-                response.should.have.status(404);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("No se encontro registro(s)");
+                response.body.should.have.property("message").eq("Solo letras de la A a la Z y números. Caracteres de 3 a 20");
                 done();
             });
         });
