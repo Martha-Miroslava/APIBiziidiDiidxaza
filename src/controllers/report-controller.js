@@ -28,60 +28,10 @@ const postReport = async (request, response) => {
 const getReportsFilters = async (request, response) => {
     const filter = request.params.filter;
     const criterion = request.params.criterion;
-    console.log(filter);
-    console.log(criterion);
-    // let queryAccountReported = null;
-    // switch (filter) {
-    //     case "nameAccount":
-    //         queryAccountReported = { $match: { "idAccount.name": { $regex: new RegExp(criterion, "i") } } };
-    //         break;
-    //     case "lastnameAccount":
-    //         queryAccountReported = { $match: { "idAccount.lastname": { $regex: new RegExp(criterion, "i") } } };
-    //         break;
-    //     case "nameReported":
-    //         queryAccountReported = { $match: { "accountReported.name": { $regex: new RegExp(criterion, "i") } } };
-    //         break;
-    //     case "lastnameReported":
-    //         queryAccountReported = { $match: { "accountReported.lastname": { $regex: new RegExp(criterion, "i") } } };
-    //         break;
-    // }
-    // Reports.aggregate([
-    //     {
-    //         $lookup: {
-    //             from: "accounts", as: "idAccount",
-    //             localField: "idAccount",
-    //             foreignField: "_id",
-    //         },
-    //     },
-    //     {
-    //         $lookup: {
-    //             from: "accounts", as: "accountReported",
-    //             localField: "accountReported",
-    //             foreignField: "_id",
-    //         },
-    //     },
-    //     queryAccountReported,
-    //     {
-    //         $project: {
-    //             "accountReported.name": 1, "accountReported.lastname": 1, dateCreation: 1, "idAccount.name": 1,
-    //             "idAccount.lastname": 1
-    //         }
-    //     }
-    // ]).then(function (reports) {
-    //         if (reports.length) {
-    //             response.status(StatusCodes.OK).json(reports);
-    //         }
-    //         else {
-    //             responseNotFound(response);
-    //         }
-    //     })
-    //     .catch(function (error) {
-    //         responseServer(response, error);
-    //     });
     if(filter === "dateCreation"){
         Reports.find({dateCreation: criterion}, {dateCreation:1, idAccount:1, accountReported:1})
         .populate({path: "idAccount", select: "username -_id"})
-        .populate({path: "accountReported", select: "username -_id"})
+        .populate({path: "accountReported", select: "username _id"})
         .then(function (reports) {  
             if(reports.length){
                 response.status(StatusCodes.OK).json(reports);
@@ -118,7 +68,7 @@ const getReportsFilters = async (request, response) => {
             },
             }, 
             queryAccountReported,
-            {$project:{"accountReported.username": 1, dateCreation:1, "idAccount.username": 1}}
+            {$project:{"accountReported.username": 1,"accountReported._id": 1, dateCreation:1, "idAccount.username": 1}}
         ])
         .then(function (reports) {  
             if(reports.length){
