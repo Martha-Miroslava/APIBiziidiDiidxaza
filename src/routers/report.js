@@ -6,7 +6,7 @@ const { validationReport, validationReportFilters, validationCriterion, validati
 const { validateExistsAccounts } = require("../controllers/account-controller");
 const {cacheInit} = require("../middleware/cache");
 
-router.get("/reports/:filter/:criterion", checkAuth, checkRoleAuth(["manager"]), getReportsFilters);
+router.get("/reports/:filter/:criterion", checkAuth, checkRoleAuth(["manager"]), validationReportFilters, validationCriterion, getReportsFilters);
 
 router.get("/reports", checkAuth, checkRoleAuth(["manager"]),cacheInit, getReports);
 

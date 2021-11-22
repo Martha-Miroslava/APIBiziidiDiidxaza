@@ -27,7 +27,7 @@ describe("GET Tests Reports Filters",() => {
             .end( (error, response) => {
                 response.should.have.status(200);
                 response.body.should.be.a("array");
-                response.body.length.should.be.eq(1);
+                response.body.length.should.be.eq(2);
                 done();
             });
         });
@@ -44,7 +44,7 @@ describe("GET Tests Reports Filters",() => {
         });
 
         it("GET /Reports usernameAccount Bad Request", (done) => {
-            chai.request(server).get("/reports/usernameAccount/123 52")
+            chai.request(server).get("/reports/usernameAccount/&###%5")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(400);
@@ -68,7 +68,7 @@ describe("GET Tests Reports Filters",() => {
         });
     
         it("GET /Reports usernameReported Not Found", (done) => {
-            chai.request(server).get("/reports/usernameReported/Miroslava")
+            chai.request(server).get("/reports/usernameReported/Francisco")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
@@ -79,7 +79,7 @@ describe("GET Tests Reports Filters",() => {
         });
     
         it("GET /Reports usernameReported Bad Request", (done) => {
-            chai.request(server).get("/reports/usernameReported/12 352")
+            chai.request(server).get("/reports/usernameReported/&###%5")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(400);
