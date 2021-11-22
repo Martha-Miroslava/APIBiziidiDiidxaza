@@ -8,7 +8,7 @@ const tokenSing = async (account) => {
         },
         process.env.ACCESS_TOKEN_SECRET,
         {
-            expiresIn: 3000,
+            expiresIn: "1h",
         }
     );
 };

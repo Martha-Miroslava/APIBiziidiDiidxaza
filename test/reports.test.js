@@ -92,7 +92,7 @@ describe("GET Tests Reports Filters",() => {
 
     describe("GET Tests Reports NameReported", () => {
         it("GET /Reports NameReported", (done) => {
-            chai.request(server).get("/reports/nameReported/Mariana")
+            chai.request(server).get("/reports/nameReported/Valeria")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(200);
@@ -127,7 +127,7 @@ describe("GET Tests Reports Filters",() => {
 
     describe("GET Tests Reports LastnameReported", () => {
         it("GET /Reports LastnameReported", (done) => {
-            chai.request(server).get("/reports/lastnameReported/Lopez")
+            chai.request(server).get("/reports/lastnameReported/Ortiz")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(200);
@@ -138,7 +138,7 @@ describe("GET Tests Reports Filters",() => {
         });
     
         it("GET /Reports LastnameReported Not Found", (done) => {
-            chai.request(server).get("/reports/lastnameReported/Ortiz")
+            chai.request(server).get("/reports/lastnameReported/Lopez")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
@@ -282,7 +282,7 @@ describe("POST Tests Report",() => {
             reason:"Malas pralabras en su comentario",
 	        context:"La discusion tiene mañanita comentarios malos por parte de este usuario",
 	        idAccount:"6168cf9563929f8f000c7614",
-	        accountReported:"6168d4975471a4bcc2b17445"
+	        accountReported:"6196ae217efa096f5c673a9f"
         };
         chai.request(server).post("/reports").send(report)
         .auth(accessToken, {type:"bearer"})

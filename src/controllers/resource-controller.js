@@ -17,7 +17,7 @@ const postResource = async (request, response, id, URLPhoto, model) => {
             const url = URLPhoto+id+extension;
             file.mv(path.join(__dirname, url)).then(async () => {
                 await model.updateOne({_id:id}, {URL:url})
-                return responseGeneral(response, StatusCodes.CREATED, "La imagen se guardo exitosamente");
+                return response.status(StatusCodes.CREATED).json({URL:url});
             }).catch((error) => {
                 return responseServer(response, error);
             });

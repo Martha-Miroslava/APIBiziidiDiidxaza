@@ -9,7 +9,7 @@ const {validateExistsQuestion} = require("../controllers/question-controller");
 const{validationAccount, validationLesson, validationQuestion} = require("../validators/resource-validator");
 const {cacheInit} = require("../middleware/cache");
 
-router.patch("/resources", checkAuth, checkRoleAuth(["manager", "user"]), validationURL, cacheInit, patchResource);
+router.patch("/resources", checkAuth, checkRoleAuth(["manager", "user"]), cacheInit, validationURL, patchResource);
 
 router.post("/resources/lesson", checkAuth, checkRoleAuth(["manager"]), validationLesson, validateExistsLesson, postImageLesson);
 

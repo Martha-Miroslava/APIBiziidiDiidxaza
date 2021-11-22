@@ -16,7 +16,7 @@ router.get("/accounts/:accountID", checkAuth, checkRoleAuth(["manager", "user"])
 
 router.post("/accounts", validationCreationAccount, validateExistsUsernameEmail, validateExistsCity, postAccount);
 
-router.put("/accounts", checkAuth, checkRoleAuth(["user"]), validationUpdateAccount, validateExistsCity, validateExistsAccountUpdate, putAccount);
+router.put("/accounts", checkAuth, checkRoleAuth(["manager","user"]), validationUpdateAccount, validateExistsCity, validateExistsAccountUpdate, putAccount);
 
 router.patch("/accounts", checkAuth, checkRoleAuth(["manager"]), validationChangeStatusAccount, patchAccount);
 
