@@ -37,8 +37,8 @@ describe("GET Tests Reports Filters",() => {
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("No se encontro registro(s)");
+                response.body.should.have.property("messageNotFound");
+                response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
                 done();
             });
         });
@@ -72,8 +72,8 @@ describe("GET Tests Reports Filters",() => {
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("No se encontro registro(s)");
+                response.body.should.have.property("messageNotFound");
+                response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
                 done();
             });
         });
@@ -107,8 +107,8 @@ describe("GET Tests Reports Filters",() => {
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("No se encontro registro(s)");
+                response.body.should.have.property("messageNotFound");
+                response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
                 done();
             });
         });
@@ -185,8 +185,8 @@ describe("GET Tests Report",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro registro(s)");
+            response.body.should.have.property("messageNotFound");
+            response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
             done();
         });
     });
@@ -269,8 +269,8 @@ describe("POST Tests Report",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La cuenta o cuentas no existen");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La cuenta o cuentas no existen");
             done();
         });
     });

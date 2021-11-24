@@ -37,8 +37,8 @@ describe("GET Tests Accounts Filters",() => {
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("No se encontro registro(s)");
+                response.body.should.have.property("messageNotFound");
+                response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
                 done();
             });
         });
@@ -48,8 +48,8 @@ describe("GET Tests Accounts Filters",() => {
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(400);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("Solo se permiten letras y espacios");
+                response.body.should.have.property("messageHappened");
+                response.body.should.have.property("messageHappened").eq("Solo se permiten letras y espacios");
                 done();
             });
         });
@@ -72,8 +72,8 @@ describe("GET Tests Accounts Filters",() => {
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("No se encontro registro(s)");
+                response.body.should.have.property("messageNotFound");
+                response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
                 done();
             });
         });
@@ -83,8 +83,8 @@ describe("GET Tests Accounts Filters",() => {
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(400);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("Solo se permiten letras y espacios");
+                response.body.should.have.property("messageHappened");
+                response.body.should.have.property("messageHappened").eq("Solo se permiten letras y espacios");
                 done();
             });
         });
@@ -107,8 +107,8 @@ describe("GET Tests Accounts Filters",() => {
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("No se encontro registro(s)");
+                response.body.should.have.property("messageNotFound");
+                response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
                 done();
             });
         });
@@ -118,8 +118,8 @@ describe("GET Tests Accounts Filters",() => {
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(400);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("El criterio de la edad debe ser un número");
+                response.body.should.have.property("messageHappened");
+                response.body.should.have.property("messageHappened").eq("El criterio de la edad debe ser un número");
                 done();
             });
         });
@@ -142,8 +142,8 @@ describe("GET Tests Accounts Filters",() => {
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("No se encontro registro(s)");
+                response.body.should.have.property("messageNotFound");
+                response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
                 done();
             });
         });
@@ -153,8 +153,8 @@ describe("GET Tests Accounts Filters",() => {
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(400);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("La fecha debe tener el formato YYYY-MM-DD");
+                response.body.should.have.property("messageHappened");
+                response.body.should.have.property("messageHappened").eq("La fecha debe tener el formato YYYY-MM-DD");
                 done();
             });
         });
@@ -177,8 +177,8 @@ describe("GET Tests Accounts Filters",() => {
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("No se encontro registro(s)");
+                response.body.should.have.property("messageNotFound");
+                response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
                 done();
             });
         });
@@ -188,8 +188,8 @@ describe("GET Tests Accounts Filters",() => {
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(400);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("El correo electrónico debería parecerse al ejemplo martha_15_723@outlook.com");
+                response.body.should.have.property("messageHappened");
+                response.body.should.have.property("messageHappened").eq("El correo electrónico debería parecerse al ejemplo martha_15_723@outlook.com");
                 done();
             });
         });
@@ -212,8 +212,8 @@ describe("GET Tests Accounts Filters",() => {
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("No se encontro registro(s)");
+                response.body.should.have.property("messageNotFound");
+                response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
                 done();
             });
         });
@@ -247,8 +247,8 @@ describe("GET Tests Accounts Filters",() => {
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("No se encontro registro(s)");
+                response.body.should.have.property("messageNotFound");
+                response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
                 done();
             });
         });
@@ -258,8 +258,8 @@ describe("GET Tests Accounts Filters",() => {
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(400);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("La fecha debe tener el formato YYYY-MM-DD");
+                response.body.should.have.property("messageHappened");
+                response.body.should.have.property("messageHappened").eq("La fecha debe tener el formato YYYY-MM-DD");
                 done();
             });
         });
@@ -329,8 +329,8 @@ describe("GET Tests Account",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro registro(s)");
+            response.body.should.have.property("messageNotFound");
+            response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
             done();
         });
     });
@@ -460,8 +460,8 @@ describe("POST Tests Accounts",() => {
         chai.request(server).post("/accounts").send(account)
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La ciudad no existe");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La ciudad no existe");
             done();
         });
     });
@@ -513,8 +513,8 @@ describe("POST Tests Accounts",() => {
         chai.request(server).post("/accounts").send(account)
         .end( (error, response) => {
             response.should.have.status(409);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("Existe una cuenta con el mismo nombre de usuario o correo");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("Existe una cuenta con el mismo nombre de usuario o correo");
             done();
         });
     });
@@ -648,8 +648,8 @@ describe("PUT Tests Accounts",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La ciudad no existe");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La ciudad no existe");
             done();
         });
     });
@@ -669,8 +669,8 @@ describe("PUT Tests Accounts",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La cuenta se edito exitosamente");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La cuenta se edito exitosamente");
             done();
         });
     });
@@ -691,8 +691,8 @@ describe("PUT Tests Accounts",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(409);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("Existe otra cuenta con el mismo nombre de usuario o correo");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("Existe otra cuenta con el mismo nombre de usuario o correo");
             done();
         });
     });
@@ -738,8 +738,8 @@ describe("PATCH Tests Account", () => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La cuenta cambio su estado exitosamente");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La cuenta cambio su estado exitosamente");
             done();
         });
     });

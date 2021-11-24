@@ -7,9 +7,9 @@ const {validationAccountId} = require("../validators/account-validator");
 const {validateExistsAccount} = require("../controllers/account-controller");
 const {validateExistsLesson} = require("../controllers/lesson-controller");
 
-router.post("/lessonRecords", checkAuth, checkRoleAuth(["user"]), validationLessonRecord, validateExistsLesson, validateExistsAccount, postLessonRecord);
+router.post("/lessonRecords", checkAuth, checkRoleAuth(["manager","user"]), validationLessonRecord, validateExistsLesson, validateExistsAccount, postLessonRecord);
 
-router.get("/lessonRecords/:accountID", checkAuth, checkRoleAuth(["user"]), validationAccountId, getLessonRecords);
+router.get("/lessonRecords/:accountID", checkAuth, checkRoleAuth(["manager","user"]), validationAccountId, getLessonRecords);
 
 
 module.exports = router;
