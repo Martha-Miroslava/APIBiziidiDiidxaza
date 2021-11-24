@@ -45,8 +45,8 @@ describe("POST Login",() => {
         chai.request(server).post("/login").send(login)
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La contraseña es inválida");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La contraseña es inválida");
             done();
         });
     });
@@ -59,8 +59,8 @@ describe("POST Login",() => {
         chai.request(server).post("/login").send(login)
         .end( (error, response) => {
             response.should.have.status(403);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La cuenta esta bloqueada o esta inactiva comuniquese con el administrador");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La cuenta esta bloqueada o esta inactiva comuniquese con el administrador");
             done();
         });
     });
@@ -73,8 +73,8 @@ describe("POST Login",() => {
         chai.request(server).post("/login").send(login)
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro la cuenta");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("No se encontro la cuenta");
             done();
         });
     });
@@ -89,8 +89,8 @@ describe("PATCH Login",() => {
         chai.request(server).patch("/login").send(login)
         .end( (error, response) => {
             response.should.have.status(201);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La confirmación es exitosa");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La confirmación es exitosa");
             done();
         });
     });
@@ -117,8 +117,8 @@ describe("PATCH Login",() => {
         chai.request(server).patch("/login").send(login)
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("El código de confimación es inválido");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("El código de confimación es inválido");
             done();
         });
     });
@@ -131,8 +131,8 @@ describe("PATCH Login",() => {
         chai.request(server).patch("/login").send(login)
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro la cuenta o esta bloqueda");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("No se encontro la cuenta o esta bloqueda");
             done();
         });
     });

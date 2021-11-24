@@ -35,8 +35,8 @@ describe("GET Tests Questions",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro registro(s)");
+            response.body.should.have.property("messageNotFound");
+            response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
             done();
         });
     });
@@ -47,7 +47,6 @@ describe("GET Tests Questions",() => {
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.be.a("array");
-            response.body.length.should.be.eq(2);
             done();
         });
     });

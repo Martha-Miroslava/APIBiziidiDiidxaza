@@ -71,8 +71,8 @@ describe("POST Tests Discussion",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La cuenta no existe");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La cuenta no existe");
             done();
         });
     });
@@ -147,8 +147,8 @@ describe("GET Tests Discussions Filters Criterion",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro registro(s)");
+            response.body.should.have.property("messageNotFound");
+            response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
             done();
         });
     });
@@ -180,8 +180,8 @@ describe("GET Tests Discussions Filters Criterion",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro registro(s)");
+            response.body.should.have.property("messageNotFound");
+            response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
             done();
         });
     });
@@ -233,8 +233,8 @@ describe("GET Tests Discussion",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro registro(s)");
+            response.body.should.have.property("messageNotFound");
+            response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
             done();
         });
     });
@@ -298,8 +298,8 @@ describe("PATCH Tests Discussion",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La discusión se segui exitosamente");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La discusión se segui exitosamente");
             done();
         });
     });
@@ -313,8 +313,8 @@ describe("PATCH Tests Discussion",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La cuenta no existe");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La cuenta no existe");
             done();
         });
     });
@@ -328,8 +328,8 @@ describe("PATCH Tests Discussion",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La discusión no existe");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La discusión no existe");
             done();
         });
     });

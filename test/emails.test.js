@@ -13,8 +13,8 @@ describe("POST Tests Emails",() => {
         chai.request(server).post("/emails").send(email)
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro la cuenta");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("No se encontro la cuenta");
             done();
         });
      });
@@ -39,8 +39,8 @@ describe("POST Tests Emails",() => {
         chai.request(server).post("/emails").send(email)
         .end( (error, response) => {
             response.should.have.status(201);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("El código de confirmación se reenvio exitosamente");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("El código de confirmación se reenvio exitosamente");
             done();
         });
      });
@@ -91,8 +91,8 @@ describe("POST Tests Emails Accounts",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(201);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("El mensaje se envio exitosamente");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("El mensaje se envio exitosamente");
             done();
         });
      });

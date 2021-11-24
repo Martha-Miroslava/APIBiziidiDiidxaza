@@ -12,7 +12,7 @@ router.get("/reports", checkAuth, checkRoleAuth(["manager"]),cacheInit, getRepor
 
 router.get("/reports/:reportID", checkRoleAuth(["manager"]), checkAuth, validationReportId, cacheInit, getReport);
 
-router.post("/reports", checkAuth, checkRoleAuth(["user"]), validationReport, validateExistsAccounts, postReport);
+router.post("/reports", checkAuth, checkRoleAuth(["manager","user"]), validationReport, validateExistsAccounts, postReport);
 
 
 module.exports = router;

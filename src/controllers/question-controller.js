@@ -18,18 +18,25 @@ const validateExistsQuestion = (request, response, next) => {
 
 const getQuestions = async (request, response) => {
     const lessonID = request.params.lessonID;
-    Questions.find({idLesson:lessonID})
-    .then((questions) => {  
-        if(questions.length){
-            response.status(StatusCodes.OK).json(questions);
-        }
-        else{
-            responseNotFound(response);
+    Questions.count().exec(function (errorCount, count) {
+        if(errorCount){
+            responseServer(response, errorCount);
+        } else{
+            var rand = Math.floor(Math.random()*count);
+            Questions.find().limit(5).where({idLesson:lessonID}).skip(rand)
+            .then((questions) => {
+                if(questions.length){
+                    response.status(StatusCodes.OK).json(questions);
+                }
+                else{
+                    responseNotFound(response);
+                }
+            })
+            .catch((error) => {
+                responseServer(response, error);
+            });
         }
     })
-    .catch((error) => {
-        responseServer(response, error);
-    });
 };
 
 module.exports = {validateExistsQuestion, getQuestions};
