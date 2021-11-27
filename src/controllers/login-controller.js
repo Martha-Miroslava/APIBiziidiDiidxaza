@@ -1,12 +1,13 @@
 const Accounts = require("../models/accounts");
-const {tokenSing}= require("../helpers/generateToken");
+const {tokenSing}= require("../helpers/generate-token");
 const {StatusCodes} = require ("http-status-codes");
 const {responseServer, responseGeneral} = require("../helpers/response-result");
+const {logError} = require("../helpers/log-error");
 
 const postLogin = async (request, response) => {
     const {username, password} = request.body;
     await Accounts.findOne({username: username}, {_id:1, status:1, password:1, role:1, name:1, lastname:1, URL:1, username:1})
-    .then(async (account) => {  
+    .then(async (account) => {
         if (account) {
             if(account.status === 1){
                 const isValidPassword = await account.matchPassword(password, account.password);
@@ -27,6 +28,7 @@ const postLogin = async (request, response) => {
         }
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };
@@ -50,6 +52,7 @@ const patchLogin = async (request, response) => {
         }
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };

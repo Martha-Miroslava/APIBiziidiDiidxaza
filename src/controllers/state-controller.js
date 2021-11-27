@@ -1,6 +1,7 @@
 const States = require("../models/states");
 const {StatusCodes} = require ("http-status-codes");
 const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
+const {logError} = require("../helpers/log-error");
 
 const validateExistState = (request, response, next) => {
     const {idState} = request.body;
@@ -12,6 +13,7 @@ const validateExistState = (request, response, next) => {
         return responseGeneral(response, StatusCodes.BAD_REQUEST, "El estado no existe");
     })
     .catch(function (error){
+        logError(error);
         return responseServer(response, error);
     });
 };
@@ -27,6 +29,7 @@ const getStates = async (request, response) => {
         }
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };

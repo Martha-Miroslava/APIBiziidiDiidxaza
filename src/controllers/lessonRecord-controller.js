@@ -1,6 +1,7 @@
 const LessonRecords = require("../models/lessonRecords");
 const {StatusCodes} = require ("http-status-codes");
 const {responseServer, responseNotFound} = require("../helpers/response-result");
+const {logError} = require("../helpers/log-error");
 
 const postLessonRecord = async (request, response) => {
     const {pointsObtained, idAccount, idLesson} = request.body;
@@ -17,6 +18,7 @@ const postLessonRecord = async (request, response) => {
         response.status(StatusCodes.CREATED).json(lessonRecord);
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };
@@ -33,6 +35,7 @@ const getLessonRecords = async (request, response) => {
         }
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };

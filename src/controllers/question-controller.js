@@ -1,6 +1,7 @@
 const Questions = require("../models/questions");
 const {StatusCodes} = require ("http-status-codes");
 const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
+const {logError} = require("../helpers/log-error");
 
 const validateExistsQuestion = (request, response, next) => {
     const idQuestion = request.body.idQuestion || request.params.questionID;
@@ -12,6 +13,7 @@ const validateExistsQuestion = (request, response, next) => {
         return responseGeneral(response, StatusCodes.BAD_REQUEST, "La pregunta no existe");
     })
     .catch(function (error){
+        logError(error);
         return responseServer(response, error);
     });
 };
@@ -33,6 +35,7 @@ const getQuestions = async (request, response) => {
                 }
             })
             .catch((error) => {
+                logError(error);
                 responseServer(response, error);
             });
         }

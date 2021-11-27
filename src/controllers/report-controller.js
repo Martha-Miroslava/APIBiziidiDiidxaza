@@ -2,6 +2,7 @@ const Reports = require("../models/reports");
 const { StatusCodes } = require("http-status-codes");
 const mongoose = require("mongoose");
 const { responseServer, responseNotFound } = require("../helpers/response-result");
+const {logError} = require("../helpers/log-error");
 
 const postReport = async (request, response) => {
     const { reason, context, idAccount, accountReported } = request.body;
@@ -21,6 +22,7 @@ const postReport = async (request, response) => {
             response.status(StatusCodes.CREATED).json(report);
         })
         .catch(function (error) {
+            logError(error);
             responseServer(response, error);
         });
 };
@@ -41,6 +43,7 @@ const getReportsFilters = async (request, response) => {
             }
         })
         .catch(function (error){
+            logError(error);
             responseServer(response, error);
         }); 
     }
@@ -79,6 +82,7 @@ const getReportsFilters = async (request, response) => {
             }
         })
         .catch(function (error){
+            logError(error);
             responseServer(response, error);
         });
     }
@@ -98,6 +102,7 @@ const getReports = async (request, response) => {
             }
         })
         .catch(function (error) {
+            logError(error);
             responseServer(response, error);
         });
 };

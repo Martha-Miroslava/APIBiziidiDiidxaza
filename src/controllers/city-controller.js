@@ -2,6 +2,7 @@ const Cities = require("../models/cities");
 const mongoose = require("mongoose");
 const {StatusCodes} = require ("http-status-codes");
 const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
+const {logError} = require("../helpers/log-error");
 
 const validateExistsCity = (request, response, next) => {
     const {idCity} = request.body;
@@ -13,6 +14,7 @@ const validateExistsCity = (request, response, next) => {
         return responseGeneral(response, StatusCodes.BAD_REQUEST, "La ciudad no existe");
     })
     .catch(function (error){
+        logError(error);
         return responseServer(response, error);
     });
 };
@@ -30,6 +32,7 @@ const getCities = async (request, response) => {
         }
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };
@@ -47,6 +50,7 @@ const postCity = async (request, response) => {
         response.status(StatusCodes.CREATED).json(city);
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };

@@ -1,6 +1,7 @@
-const {verifyToken} = require("../helpers/generateToken");
+const {verifyToken} = require("../helpers/generate-token");
 const {StatusCodes} = require ("http-status-codes");
 const {responseGeneral} = require("../helpers/response-result");
+const {logError} = require("../helpers/log-error");
 
 const checkAuth = async (request, response, next) => {
     let token = request.headers.authorization;
@@ -19,6 +20,7 @@ const checkAuth = async (request, response, next) => {
         if(error.message === "jwt expired"){
             return responseGeneral(response, StatusCodes.INSUFFICIENT_SPACE_ON_RESOURCE, "Se agotado su tiempo en el sistema, por favor vuelva a iniciar sesión");
         }
+        logError(error);
         return responseGeneral(response, StatusCodes.UNAUTHORIZED, "El token no es válido");
     });
 };
