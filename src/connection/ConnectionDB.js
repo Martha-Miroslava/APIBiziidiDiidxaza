@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const {logError} = require("../helpers/log-error");
 
 const{NODE_ENV, URI_PRODUCTION, URI_TEST} = process.env;
 
@@ -11,7 +12,10 @@ const dataBaseConnect = async () => {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }).then((database) => {console.log("**** CORRECT CONNECTION ****");})
-    .catch((error) => {console.log("***** CONNECTION ERROR ****", error.message);});
+    .catch((error) => {
+        logError(error);
+        console.log("***** CONNECTION ERROR ****");
+    });
 };
 
 module.exports = {dataBaseConnect};

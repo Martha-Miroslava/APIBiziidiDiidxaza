@@ -1,6 +1,6 @@
 const Accounts = require("../models/accounts");
 const {StatusCodes} = require ("http-status-codes");
-const {generateCode} = require("../helpers/generateCode");
+const {generateCode} = require("../helpers/generate-code");
 const nodemailer = require("nodemailer");
 const {responseServer, responseGeneral} = require("../helpers/response-result");
 

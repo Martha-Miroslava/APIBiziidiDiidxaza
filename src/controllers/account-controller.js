@@ -1,9 +1,10 @@
 const Accounts = require("../models/accounts");
 const {StatusCodes} = require ("http-status-codes");
 const mongoose = require("mongoose");
-const {generateCode} = require("../helpers/generateCode");
+const {generateCode} = require("../helpers/generate-code");
 const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
 const {sendEmail} = require("./email-controller");
+const {logError} = require("../helpers/log-error");
 
 const validateExistsAccount = (request, response, next) => {
     const idAccount = request.body.idAccount;
@@ -15,6 +16,7 @@ const validateExistsAccount = (request, response, next) => {
         return responseGeneral(response, StatusCodes.BAD_REQUEST, "La cuenta no existe");
     })
     .catch(function (error){
+        logError(error);
         return responseServer(response, error);
     });
 };
@@ -29,6 +31,7 @@ const validateExistsAccounts = (request, response, next) => {
         return responseGeneral(response, StatusCodes.BAD_REQUEST, "La cuenta o cuentas no existen");
     })
     .catch(function (error){
+        logError(error);
         return responseServer(response, error);
     });
 };
@@ -43,6 +46,7 @@ const validateExistsUsernameEmail = (request, response, next) => {
         return next();
     })
     .catch(function (error){
+        logError(error);
         return responseServer(response, error);
     });
 };
@@ -57,6 +61,7 @@ const validateExistsAccountUpdate = (request, response, next) => {
         return next();
     })
     .catch(function (error){
+        logError(error);
         return responseServer(response, error);
     });
 };
@@ -99,6 +104,7 @@ const getAccountsFilters = async (request, response) => {
         }
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };
@@ -114,6 +120,7 @@ const getAccounts = async (request, response) => {
         }
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };
@@ -131,6 +138,7 @@ const getAccount = async (request, response) => {
         }
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };
@@ -165,6 +173,7 @@ const postAccount = async (request, response) => {
         response.status(StatusCodes.CREATED).json(account);
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };
@@ -182,6 +191,7 @@ const putAccount = async (request, response) => {
         responseGeneral(response, StatusCodes.OK, "La cuenta se edito exitosamente");
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };
@@ -196,6 +206,7 @@ const patchAccount = async (request, response) => {
         responseGeneral(response, StatusCodes.OK, "La cuenta cambio su estado exitosamente");
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };

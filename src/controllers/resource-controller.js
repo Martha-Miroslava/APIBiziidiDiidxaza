@@ -5,6 +5,7 @@ const Lessons = require("../models/lessons");
 const Questions = require("../models/questions");
 const path = require("path");
 const fileSystem = require("fs").promises;
+const {logError} = require("../helpers/log-error");
 
 const postResource = async (request, response, id, URLPhoto, model) => {
     if(request.files){
@@ -19,6 +20,7 @@ const postResource = async (request, response, id, URLPhoto, model) => {
                 await model.updateOne({_id:id}, {URL:url})
                 return response.status(StatusCodes.CREATED).json({URL:url});
             }).catch((error) => {
+                logError(error);
                 return responseServer(response, error);
             });
         }
@@ -42,6 +44,7 @@ const patchResource = (request, response, next) => {
             responseNotFound(response);
         }
         else{
+            logError(error);
             responseServer(response, error);
         } 
     });
@@ -73,6 +76,7 @@ const postAudio = (request, response, next) => {
                 await Questions.updateOne({_id:idQuestion}, {URL:url});
                 responseGeneral(response, StatusCodes.CREATED, "El audio se guardo exitosamente");
             }).catch((error) => {
+                logError(error);
                 responseServer(response, error);
             });
         }
@@ -95,6 +99,7 @@ const deleteResource = (request, response, next) => {
             responseGeneral(response, StatusCodes.BAD_REQUEST, "No existe el archivo");
         }
         else{
+            logError(error);
             responseServer(response, error);
         } 
     });

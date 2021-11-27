@@ -3,6 +3,7 @@ const {StatusCodes} = require ("http-status-codes");
 const mongoose = require("mongoose");
 const Discussions = require("../models/discussions");
 const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
+const {logError} = require("../helpers/log-error");
 
 const validateExistsCommentt = (request, response, next) => {
     const idComment = request.body._id;
@@ -14,6 +15,7 @@ const validateExistsCommentt = (request, response, next) => {
         return responseGeneral(response, StatusCodes.BAD_REQUEST, "El comentario no existe");
     })
     .catch(function (error){
+        logError(error);
         return responseServer(response, error);
     });
 };
@@ -31,6 +33,7 @@ const getComments = async (request, response) => {
         }
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };
@@ -48,6 +51,7 @@ const postComment = async (request, response) => {
         response.status(StatusCodes.CREATED).json(commentSave);
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };
@@ -63,6 +67,7 @@ const deleteComment = async (request, response) => {
         responseGeneral(response, StatusCodes.OK, "El comentario se eliminó exitosamente");
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };

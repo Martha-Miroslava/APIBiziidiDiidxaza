@@ -3,6 +3,7 @@ const Accounts = require("../models/accounts");
 const {StatusCodes} = require ("http-status-codes");
 const mongoose = require("mongoose");
 const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
+const {logError} = require("../helpers/log-error");
 
 const validateExistsDiscussion = (request, response, next) => {
     const {idDiscussion} = request.body;
@@ -14,6 +15,7 @@ const validateExistsDiscussion = (request, response, next) => {
         return responseGeneral(response, StatusCodes.BAD_REQUEST, "La discusion no existe");
     })
     .catch(function (error){
+        logError(error);
         return responseServer(response, error);
     });
 };
@@ -36,6 +38,7 @@ const getDiscussionsFilters = async (request, response) => {
         }
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };
@@ -54,6 +57,7 @@ const getDiscussionsCriterion = async (request, response) => {
             }
         })
         .catch(function (error){
+            logError(error);
             responseServer(response, error);
         });
     } 
@@ -74,6 +78,7 @@ const getDiscussionsCriterion = async (request, response) => {
             }
         })
         .catch(function (error){
+            logError(error);
             responseServer(response, error);
         }); 
     } 
@@ -90,6 +95,7 @@ const getDiscussions = async (request, response) => {
         }
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };
@@ -107,6 +113,7 @@ const getDiscussion = async (request, response) => {
         }
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };
@@ -123,6 +130,7 @@ const postDiscussion = async (request, response) => {
         response.status(StatusCodes.CREATED).json(discussion);
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };
@@ -155,6 +163,7 @@ const patchDiscussion = async (request, response) => {
         }
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };
