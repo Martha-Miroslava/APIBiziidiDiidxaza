@@ -5,6 +5,7 @@ const {generateCode} = require("../helpers/generate-code");
 const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
 const {sendEmail} = require("./email-controller");
 const {logError} = require("../helpers/log-error");
+const Number = require("../helpers/enum-number");
 
 const validateExistsAccount = (request, response, next) => {
     const idAccount = request.body.idAccount;
@@ -25,7 +26,7 @@ const validateExistsAccounts = (request, response, next) => {
     const {idAccount, accountReported} = request.body;
     Accounts.find({$or:[{_id:accountReported},{_id:idAccount}]}, {_id:1})
     .then(function (accounts) {  
-        if(accounts.length === 2){
+        if(accounts.length === Number.TWO){
             return next();
         }
         return responseGeneral(response, StatusCodes.BAD_REQUEST, "La cuenta o cuentas no existen");

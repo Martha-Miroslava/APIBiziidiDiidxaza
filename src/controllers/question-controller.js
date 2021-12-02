@@ -2,6 +2,7 @@ const Questions = require("../models/questions");
 const {StatusCodes} = require ("http-status-codes");
 const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
 const {logError} = require("../helpers/log-error");
+const Number = require("../helpers/enum-number");
 
 const validateExistsQuestion = (request, response, next) => {
     const idQuestion = request.body.idQuestion || request.params.questionID;
@@ -25,7 +26,7 @@ const getQuestions = async (request, response) => {
             responseServer(response, errorCount);
         } else{
             var rand = 0;
-            if(count>=5){
+            if(count>=Number.FIVE){
                 rand = Math.floor(Math.random()*(count-5));
             }
             Questions.find().limit(5).where({idLesson:lessonID}).skip(rand)

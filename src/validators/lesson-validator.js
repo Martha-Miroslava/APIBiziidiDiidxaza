@@ -1,5 +1,6 @@
 const  {check, param}  =  require ("express-validator");
 const {validateResult} = require("../helpers/response-result");
+const Number = require("../helpers/enum-number");
 
 const validationLesson= [
     check("name")
@@ -17,7 +18,7 @@ const validationLesson= [
         .notEmpty().withMessage("Los puntos que vale la lección no debe estar vacío")
         .not().isString().withMessage("Los puntos que vale la lección debe ser un número")
         .custom((value) => {
-            if (value < 5) {
+            if (value < Number.FIVE) {
                 return false;
             }
             return true;
