@@ -2,7 +2,7 @@ const  {check, param}  =  require ("express-validator");
 const {StatusCodes} = require ("http-status-codes");
 const {validateResult} = require("../helpers/response-result");
 const {responseGeneral} = require("../helpers/response-result");
-
+const Number = require("../helpers/enum-number");
 
 const validationAccount = [
     check("lastname")
@@ -20,7 +20,7 @@ const validationAccount = [
         .notEmpty().withMessage("La edad no debe estar vacío")
         .not().isString().withMessage("La edad debe ser un número")
         .custom((value) => {
-            if (value < 10 || value > 100) {
+            if (value < Number.TEN || value > Number.ONE_HUNDRED) {
                 return false;
             }
             return true;
@@ -35,7 +35,7 @@ const validationAccount = [
                 const dateBirth = new Date(value).getFullYear();
                 const dateNow = new Date().getFullYear();
                 const year = dateNow- dateBirth;
-                if(year < 10 || year > 100 ){
+                if(year < Number.TEN || year > Number.ONE_HUNDRED ){
                     return false;
                 }
                 return true;
