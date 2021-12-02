@@ -24,7 +24,10 @@ const getQuestions = async (request, response) => {
         if(errorCount){
             responseServer(response, errorCount);
         } else{
-            var rand = Math.floor(Math.random()*count);
+            var rand = 0;
+            if(count>=5){
+                rand = Math.floor(Math.random()*(count-5));
+            }
             Questions.find().limit(5).where({idLesson:lessonID}).skip(rand)
             .then((questions) => {
                 if(questions.length){
