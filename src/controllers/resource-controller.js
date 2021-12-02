@@ -6,6 +6,7 @@ const Questions = require("../models/questions");
 const path = require("path");
 const fileSystem = require("fs").promises;
 const {logError} = require("../helpers/log-error");
+const Number = require("../helpers/enum-number");
 
 const postResource = async (request, response, id, URLPhoto, model) => {
     if(request.files){
@@ -14,7 +15,7 @@ const postResource = async (request, response, id, URLPhoto, model) => {
         const extension = path.extname(fileName);
         const allowedExtensions = /png|jpeg|jpg/;
         const size = file.data.length;
-        if(allowedExtensions.test(extension) && size<10000000){
+        if(allowedExtensions.test(extension) && size<Number.SIZE_IMAGE){
             const url = URLPhoto+id+extension;
             file.mv(path.join(__dirname, url)).then(async () => {
                 await model.updateOne({_id:id}, {URL:url})
@@ -70,7 +71,7 @@ const postAudio = (request, response, next) => {
         const extension = path.extname(fileName);
         const allowedExtensions = /mp3|mp4/;
         const size = file.data.length;
-        if(allowedExtensions.test(extension) && size<20000000){
+        if(allowedExtensions.test(extension) && size<Number.SIZE_AUDIO){
             const url = "../audios/"+idQuestion+extension;
             file.mv(path.join(__dirname,url)).then(async () => {
                 await Questions.updateOne({_id:idQuestion}, {URL:url});
