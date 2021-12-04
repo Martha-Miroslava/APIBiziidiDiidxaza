@@ -2,7 +2,7 @@ const router = require("express").Router();
 const checkAuth = require("../middleware/auth");
 const checkRoleAuth = require("../middleware/role-auth");
 const {getDiscussions, getDiscussionsFilters, getDiscussionsCriterion, getDiscussion, postDiscussion, 
-    patchDiscussion} = require("../controllers/discussion-controller");
+    patchDiscussion, validateTitleDiscussion} = require("../controllers/discussion-controller");
 const {validationDiscussionFilters, validationDiscussionCriterion, validationCriterion, validationDiscussionId,
     validationDiscussion, validationUpdateDiscussion} = require("../validators/discussion-validator");
 const {validateExistsAccount} = require("../controllers/account-controller");
@@ -16,8 +16,9 @@ router.get("/discussions", checkAuth, checkRoleAuth(["manager", "user"]), cacheI
 
 router.get("/discussions/:discussionID", checkAuth, checkRoleAuth(["manager", "user"]), validationDiscussionId, cacheInit, getDiscussion);
 
-router.post("/discussions", checkAuth, checkRoleAuth(["manager", "user"]), validationDiscussion, validateExistsAccount, postDiscussion);
+router.post("/discussions", checkAuth, checkRoleAuth(["manager", "user"]), validationDiscussion, validateExistsAccount, validateTitleDiscussion, postDiscussion);
 
 router.patch("/discussions", checkAuth, checkRoleAuth(["manager", "user"]), validationUpdateDiscussion, validateExistsAccount, patchDiscussion);
+
 
 module.exports = router;

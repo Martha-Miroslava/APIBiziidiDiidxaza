@@ -6,6 +6,10 @@ const discussions = new Schema({
         type: String,
         require: true
     },
+    titleUpper: { 
+        type: String,
+        require: true
+    },
     comment: { 
         type: String,
         require: true

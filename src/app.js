@@ -7,14 +7,13 @@ const upload = require("express-fileupload");
 const helmet = require("helmet");
 const cors = require("cors");
 
-//setting
 app.set("port", process.env.PORT);
 app.disable("x-powered-by");
 app.use(helmet());
 app.use(cors());
 app.disable("etag");
 
-//middleware
+
 app.use(morgan("dev"));
 app.use(upload());
 app.use(express.urlencoded({extended: false}));
@@ -33,10 +32,8 @@ app.use(require("./routers/question"));
 app.use(require("./routers/answer"));
 app.use(require("./routers/lessonRecord"));
 
-//Connect the data base
 dataBaseConnect();
 
-//Starting the server
 const server = app.listen(app.get("port"), () => {
     console.log(`Server on port ${app.get("port")}`);
 });
