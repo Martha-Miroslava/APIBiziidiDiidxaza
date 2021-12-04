@@ -5,16 +5,35 @@ const mongoose = require("mongoose");
 const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
 const {logError} = require("../helpers/log-error");
 
+const validateTitleDiscussion = (request, response, next) => {
+    const {title} = request.body;
+    const chars = {'á':'a','é':'e','í':'i','ó':'o','ú':'u','Á':'A','É':'E','Í':'I','Ó':'O','Ú':'U'};
+    var regExpTitle=/[áéíóú]/ig;
+	var titleUpper = title.replace(regExpTitle,function(e){return chars[e]})
+    const tileFinal = titleUpper.toUpperCase();
+    Discussions.findOne({titleUpper:tileFinal.trim()}, {_id:1})
+    .then(function (discussion) { 
+        if(discussion) {
+            return responseGeneral(response, StatusCodes.CONFLICT, "Existe una discusión con el mismo título");
+        }
+        return next();
+    })
+    .catch(function (error){
+        logError(error);
+        return responseServer(response, error);
+    });
+};
+
 const validateExistsDiscussion = (request, response, next) => {
     const {idDiscussion} = request.body;
     Discussions.findById(idDiscussion, {_id:1})
     .then(function (discussion) {  
-        if(discussion){
+        if(discussion) {
             return next();
         }
         return responseGeneral(response, StatusCodes.BAD_REQUEST, "La discusion no existe");
     })
-    .catch(function (error){
+    .catch(function (error) {
         logError(error);
         return responseServer(response, error);
     });
@@ -124,7 +143,10 @@ const postDiscussion = async (request, response) => {
     const idAccountConverted  = mongoose.Types.ObjectId(idAccount);
     const dateNow = new Date();
     const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
-    const newDiscussion = new Discussions ({title: title,comment: comment,dateCreation: dateCreation,status: 1,theme: theme,idAccount: idAccountConverted});
+    const chars = {'á':'a','é':'e','í':'i','ó':'o','ú':'u','Á':'A','É':'E','Í':'I','Ó':'O','Ú':'U'};
+    var regExpTitle=/[áéíóú]/ig;
+	var titleUpper = title.replace(regExpTitle,function(e){return chars[e]})
+    const newDiscussion = new Discussions ({title: title.trim(), titleUpper:titleUpper.trim().toUpperCase(), comment: comment,dateCreation: dateCreation,status: 1,theme: theme,idAccount: idAccountConverted});
     await newDiscussion.save()
     .then(function (discussion) {  
         response.status(StatusCodes.CREATED).json(discussion);
@@ -169,4 +191,4 @@ const patchDiscussion = async (request, response) => {
 };
 
 module.exports = {getDiscussions, getDiscussionsFilters, getDiscussionsCriterion, getDiscussion, 
-    postDiscussion, patchDiscussion, validateExistsDiscussion};
+    postDiscussion, patchDiscussion, validateExistsDiscussion, validateTitleDiscussion};

@@ -21,8 +21,8 @@ describe("POST Tests Discussion",() => {
 
     it("POST /Discussions", (done) => {
         const discussion = {
-            title: "¿Qué opinan de los cuentos en zapoteco?",
-            comment: "Me gustaría saber que opinan de los cuentos que esta y donde puede encontrar más",
+            title: "¿Qué opinan de los canciones en zapoteco?",
+            comment: "Me gustaría saber que opinan de los canciones que esta y donde puede encontrar más",
             theme: "duda",
             idAccount: "6168cf9563929f8f000c7614"
         };
@@ -62,8 +62,8 @@ describe("POST Tests Discussion",() => {
 
     it("POST /Discussions Bad Request Account", (done) => {
         const discussion = {
-            title: "¿Qué opinan de los cuentos en zapoteco?",
-            comment: "Me gustaría saber que opinan de los cuentos que esta y donde puede encontrar más",
+            title: "¿Qué opinan de los canciones en zapoteco?",
+            comment: "Me gustaría saber que opinan de los canciones que esta y donde puede encontrar más",
             theme: "duda",
             idAccount: "6168cf9563929f8f000c7679"
         }
