@@ -8,8 +8,8 @@ const {logError} = require("../helpers/log-error");
 const validateTitleDiscussion = (request, response, next) => {
     const {title} = request.body;
     const chars = {'á':'a','é':'e','í':'i','ó':'o','ú':'u','Á':'A','É':'E','Í':'I','Ó':'O','Ú':'U'};
-    var expr=/[áéíóú]/ig;
-	var titleUpper = title.replace(expr,function(e){return chars[e]})
+    var regExpTitle=/[áéíóú]/ig;
+	var titleUpper = title.replace(regExpTitle,function(e){return chars[e]})
     const tileFinal = titleUpper.toUpperCase();
     Discussions.findOne({titleUpper:tileFinal.trim()}, {_id:1})
     .then(function (discussion) { 
@@ -144,8 +144,8 @@ const postDiscussion = async (request, response) => {
     const dateNow = new Date();
     const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
     const chars = {'á':'a','é':'e','í':'i','ó':'o','ú':'u','Á':'A','É':'E','Í':'I','Ó':'O','Ú':'U'};
-    var expr=/[áéíóú]/ig;
-	var titleUpper = title.replace(expr,function(e){return chars[e]})
+    var regExpTitle=/[áéíóú]/ig;
+	var titleUpper = title.replace(regExpTitle,function(e){return chars[e]})
     const newDiscussion = new Discussions ({title: title.trim(), titleUpper:titleUpper.trim().toUpperCase(), comment: comment,dateCreation: dateCreation,status: 1,theme: theme,idAccount: idAccountConverted});
     await newDiscussion.save()
     .then(function (discussion) {  
