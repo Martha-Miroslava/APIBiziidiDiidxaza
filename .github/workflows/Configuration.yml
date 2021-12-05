@@ -36,6 +36,7 @@ jobs:
       URI_TEST: ${{ secrets.URI_TEST }}
       USER_EMAIL: ${{ secrets.USER_EMAIL }}
       NODE_ENV: test
+      NODE_TEST: backend
     steps:
     - name: Checkhout the code
       uses: actions/checkout@v2

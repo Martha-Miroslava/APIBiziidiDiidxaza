@@ -88,7 +88,7 @@ describe("PATCH Login",() => {
         };
         chai.request(server).patch("/login").send(login)
         .end( (error, response) => {
-            response.should.have.status(201);
+            response.should.have.status(200);
             response.body.should.have.property("messageHappened");
             response.body.should.have.property("messageHappened").eq("La confirmación es exitosa");
             done();

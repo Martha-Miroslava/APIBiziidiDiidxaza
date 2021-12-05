@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
 const {logError} = require("../helpers/log-error");
 
-const{NODE_ENV, URI_PRODUCTION, URI_TEST} = process.env;
+const{NODE_ENV, URI_PRODUCTION, URI_TEST, NODE_TEST, URI_TEST_FRONTEND} = process.env;
 
 const dataBaseConnect = async () => {
     const URI = NODE_ENV === "test"
-    ? URI_TEST
+    ? NODE_TEST === "frontend"
+        ? URI_TEST_FRONTEND
+        : URI_TEST
     : URI_PRODUCTION;
     await mongoose.connect(
         URI, {
