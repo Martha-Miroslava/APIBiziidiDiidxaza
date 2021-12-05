@@ -42,7 +42,7 @@ const patchLogin = async (request, response) => {
         if(account){
             if(account.codeConfirmation === codeConfirmation){
                 await Accounts.updateOne({_id: account._id}, {status:1})
-                responseGeneral(response, StatusCodes.CREATED, "La confirmación es exitosa");
+                responseGeneral(response, StatusCodes.OK, "La confirmación es exitosa");
             }
             else{
                 responseGeneral(response, StatusCodes.BAD_REQUEST, "El código de confimación es inválido");

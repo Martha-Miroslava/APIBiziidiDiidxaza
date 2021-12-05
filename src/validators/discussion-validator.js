@@ -30,12 +30,14 @@ const validationDiscussionCriterion  = [
 const validationCriterion = (request, response, next) => {
     const filter = request.params.filter;
     const criterion = request.params.criterion;
+    let expReg = new RegExp(/^[\wÑñÁáÉéÍíÓóÚúÜü!?¡¿.,# ]{2,200}$/);
+    let message = "Solo letras de la A a la Z, números del 0 al 9, caracteres., # y espacios. Caracteres de 4 a 200";
     if(filter === "tracing"){
         expReg = new RegExp(/^[a-z0-9]{24}$/);
         message = "El ID de la cuenta debe tener números y letras minúsculas";
-        if(!expReg.test(criterion)) {
-            return response.status(StatusCodes.BAD_REQUEST).json({errors: message});
-        }
+    }
+    if( !expReg.test(criterion)) {
+        return response.status(StatusCodes.BAD_REQUEST).json({errors: message});
     }
     return next();
 };
