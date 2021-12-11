@@ -1,6 +1,7 @@
 const Lessons = require("../models/lessons");
 const {StatusCodes} = require ("http-status-codes");
 const {responseServer, responseGeneral, responseNotFound} = require("../helpers/response-result");
+const {logError} = require("../helpers/log-error");
 
 
 const validateExistsLesson = (request, response, next) => {
@@ -13,6 +14,7 @@ const validateExistsLesson = (request, response, next) => {
         return responseGeneral(response, StatusCodes.BAD_REQUEST, "La lección no existe");
     })
     .catch(function (error){
+        logError(error);
         return responseServer(response, error);
     });
 };
@@ -29,6 +31,7 @@ const getLessons = async (request, response) => {
         }
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };
@@ -45,6 +48,7 @@ const postLesson = async (request, response) => {
         response.status(StatusCodes.CREATED).json(lesson);
     })
     .catch(function (error){
+        logError(error);
         responseServer(response, error);
     });
 };

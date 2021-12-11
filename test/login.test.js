@@ -19,7 +19,6 @@ describe("POST Login",() => {
             response.body.should.have.property("account");
             response.body.should.have.property("account").have.property("name");
             response.body.should.have.property("account").have.property("lastname");
-            response.body.should.have.property("account").have.property("URL");
             done();
         });
     });
@@ -46,8 +45,8 @@ describe("POST Login",() => {
         chai.request(server).post("/login").send(login)
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La contraseña es inválida");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La contraseña es inválida");
             done();
         });
     });
@@ -60,22 +59,22 @@ describe("POST Login",() => {
         chai.request(server).post("/login").send(login)
         .end( (error, response) => {
             response.should.have.status(403);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La cuenta esta bloqueada o esta inactiva comuniquese con el administrador");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La cuenta esta bloqueada o esta inactiva comuniquese con el administrador");
             done();
         });
     });
 
     it("POST /Login Not Found", (done) => {
         const login = {
-            username: "Karls",
-            password: "Marst1245#"
+            username: "Karime",
+            password: "Marstfrkmv3245#"
         };
         chai.request(server).post("/login").send(login)
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro la cuenta");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("No se encontro la cuenta");
             done();
         });
     });
@@ -89,14 +88,14 @@ describe("PATCH Login",() => {
         };
         chai.request(server).patch("/login").send(login)
         .end( (error, response) => {
-            response.should.have.status(201);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La confirmación es exitosa");
+            response.should.have.status(200);
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La confirmación es exitosa");
             done();
         });
     });
 
-    it("POST /Login  Bad Request", (done) => {
+    it("PATCH /Login  Bad Request", (done) => {
         const login = {
             username: "   ",
             codeConfirmation: 123
@@ -110,7 +109,7 @@ describe("PATCH Login",() => {
         });
     });
 
-    it("POST /Login  Bad Request Code", (done) => {
+    it("PATCH /Login  Bad Request Code", (done) => {
         const login = {
             username: "MiroStar",
             codeConfirmation: 234957
@@ -118,22 +117,22 @@ describe("PATCH Login",() => {
         chai.request(server).patch("/login").send(login)
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("El código de confimación es inválido");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("El código de confimación es inválido");
             done();
         });
     });
 
-    it("POST /Login Not Found", (done) => {
+    it("PATCH /Login Not Found", (done) => {
         const login = {
-            username: "Miroslava25",
+            username: "Karime",
             codeConfirmation: 234957
         };
         chai.request(server).patch("/login").send(login)
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro la cuenta o esta bloqueda");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("No se encontro la cuenta o esta bloqueda");
             done();
         });
     });

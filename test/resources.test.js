@@ -28,8 +28,8 @@ describe("POST Tests Resource Account",() => {
         .attach("file", `${__dirname}/resources/imageAccount.png`, 'imageAccount.png')
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La cuenta no existe");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La cuenta no existe");
             done();
         });
     });
@@ -40,8 +40,8 @@ describe("POST Tests Resource Account",() => {
         .field("idAccount", "6164db5823242f430c487fca")
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("Necesita subir una imagen");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("Necesita subir una imagen");
             done();
         });
     });
@@ -53,8 +53,8 @@ describe("POST Tests Resource Account",() => {
         .attach("file", `${__dirname}/resources/imageError.bmp`, "imageError.bmp")
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("Extensión no admitida o el archivo debe pesar menos de 10MB");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("Extensión no admitida o el archivo debe pesar menos de 10MB");
             done();
         });
     });
@@ -95,8 +95,8 @@ describe("POST Tests Resource Lesson",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La lección no existe");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La lección no existe");
             done();
         });
     });
@@ -108,8 +108,8 @@ describe("POST Tests Resource Lesson",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("Necesita subir una imagen");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("Necesita subir una imagen");
             done();
         });
     });
@@ -122,8 +122,8 @@ describe("POST Tests Resource Lesson",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("Extensión no admitida o el archivo debe pesar menos de 10MB");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("Extensión no admitida o el archivo debe pesar menos de 10MB");
             done();
         });
     });
@@ -164,8 +164,8 @@ describe("POST Tests Resource Audio",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La pregunta no existe");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La pregunta no existe");
             done();
         });
     });
@@ -177,8 +177,8 @@ describe("POST Tests Resource Audio",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("Necesita subir un audio");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("Necesita subir un audio");
             done();
         });
     });
@@ -191,8 +191,8 @@ describe("POST Tests Resource Audio",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("Extensión no admitida o el archivo debe pesar menos de 20MB");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("Extensión no admitida o el archivo debe pesar menos de 20MB");
             done();
         });
     });
@@ -231,8 +231,8 @@ describe("PATCH Tests Resource", () => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro registro(s)");
+            response.body.should.have.property("messageNotFound");
+            response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
             done();
         });
     });
@@ -271,8 +271,8 @@ describe("DELETE Tests Resource",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No existe el archivo");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("No existe el archivo");
             done();
         });
     });

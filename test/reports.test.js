@@ -20,9 +20,9 @@ describe("GET Tests Reports Filters",() => {
         });
     });
 
-    describe("GET Tests Reports LastnameAccount", () => {
-        it("GET /Reports LastnameAccount", (done) => {
-            chai.request(server).get("/reports/lastnameAccount/Ortiz")
+    describe("GET Tests Reports usernameAccount", () => {
+        it("GET /Reports usernameAccount", (done) => {
+            chai.request(server).get("/reports/usernameAccount/MiroStar")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(200);
@@ -32,32 +32,32 @@ describe("GET Tests Reports Filters",() => {
             });
         });
 
-        it("GET /Reports LastnameAccount Not Found", (done) => {
-            chai.request(server).get("/reports/lastnameAccount/Gonzalez")
+        it("GET /Reports usernameAccount Not Found", (done) => {
+            chai.request(server).get("/reports/usernameAccount/Gonzalez")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("No se encontro registro(s)");
+                response.body.should.have.property("messageNotFound");
+                response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
                 done();
             });
         });
 
-        it("GET /Reports LastnameAccount Bad Request", (done) => {
-            chai.request(server).get("/reports/lastnameAccount/12352")
+        it("GET /Reports usernameAccount Bad Request", (done) => {
+            chai.request(server).get("/reports/usernameAccount/&###%5")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(400);
                 response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("Solo letras de la A a la Z. Caracteres de 2 a 150");
+                response.body.should.have.property("message").eq("Solo letras de la A a la Z y números. Caracteres de 3 a 20");
                 done();
             });
         });
     });
 
-    describe("GET Tests Reports NameAccount", () => {
-        it("GET /Reports NameAccount", (done) => {
-            chai.request(server).get("/reports/nameAccount/Miroslava")
+    describe("GET Tests Reports usernameReported", () => {
+        it("GET /Reports usernameReported", (done) => {
+            chai.request(server).get("/reports/usernameReported/Miroslava25")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(200);
@@ -67,83 +67,24 @@ describe("GET Tests Reports Filters",() => {
             });
         });
     
-        it("GET /Reports NameAccount Not Found", (done) => {
-            chai.request(server).get("/reports/nameAccount/Mariana")
+        it("GET /Reports usernameReported Not Found", (done) => {
+            chai.request(server).get("/reports/usernameReported/Francisco")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("No se encontro registro(s)");
+                response.body.should.have.property("messageNotFound");
+                response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
                 done();
             });
         });
     
-        it("GET /Reports NameAccount Bad Request", (done) => {
-            chai.request(server).get("/reports/nameAccount/12352")
+        it("GET /Reports usernameReported Bad Request", (done) => {
+            chai.request(server).get("/reports/usernameReported/&###%5")
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(400);
                 response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("Solo letras de la A a la Z. Caracteres de 2 a 150");
-                done();
-            });
-        });
-    });
-
-    describe("GET Tests Reports NameReported", () => {
-        it("GET /Reports NameReported", (done) => {
-            chai.request(server).get("/reports/nameReported/Mariana")
-            .auth(accessToken, {type:"bearer"})
-            .end( (error, response) => {
-                response.should.have.status(200);
-                response.body.should.be.a("array");
-                response.body.length.should.be.eq(2);
-                done();
-            });
-        });
-    
-        it("GET /Reports NameReported Not Found", (done) => {
-            chai.request(server).get("/reports/nameReported/Miroslava")
-            .auth(accessToken, {type:"bearer"})
-            .end( (error, response) => {
-                response.should.have.status(404);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("No se encontro registro(s)");
-                done();
-            });
-        });
-    
-        it("GET /Reports NameReported Bad Request", (done) => {
-            chai.request(server).get("/reports/nameReported/12352")
-            .auth(accessToken, {type:"bearer"})
-            .end( (error, response) => {
-                response.should.have.status(400);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("Solo letras de la A a la Z. Caracteres de 2 a 150");
-                done();
-            });
-        });
-    });
-
-    describe("GET Tests Reports LastnameReported", () => {
-        it("GET /Reports LastnameReported", (done) => {
-            chai.request(server).get("/reports/lastnameReported/Lopez")
-            .auth(accessToken, {type:"bearer"})
-            .end( (error, response) => {
-                response.should.have.status(200);
-                response.body.should.be.a("array");
-                response.body.length.should.be.eq(2);
-                done();
-            });
-        });
-    
-        it("GET /Reports LastnameReported Not Found", (done) => {
-            chai.request(server).get("/reports/lastnameReported/Ortiz")
-            .auth(accessToken, {type:"bearer"})
-            .end( (error, response) => {
-                response.should.have.status(404);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("No se encontro registro(s)");
+                response.body.should.have.property("message").eq("Solo letras de la A a la Z y números. Caracteres de 3 a 20");
                 done();
             });
         });
@@ -166,8 +107,8 @@ describe("GET Tests Reports Filters",() => {
             .auth(accessToken, {type:"bearer"})
             .end( (error, response) => {
                 response.should.have.status(404);
-                response.body.should.have.property("message");
-                response.body.should.have.property("message").eq("No se encontro registro(s)");
+                response.body.should.have.property("messageNotFound");
+                response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
                 done();
             });
         });
@@ -244,8 +185,8 @@ describe("GET Tests Report",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro registro(s)");
+            response.body.should.have.property("messageNotFound");
+            response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
             done();
         });
     });
@@ -282,7 +223,7 @@ describe("POST Tests Report",() => {
             reason:"Malas pralabras en su comentario",
 	        context:"La discusion tiene mañanita comentarios malos por parte de este usuario",
 	        idAccount:"6168cf9563929f8f000c7614",
-	        accountReported:"6168d4975471a4bcc2b17445"
+	        accountReported:"6196ae217efa096f5c673a9f"
         };
         chai.request(server).post("/reports").send(report)
         .auth(accessToken, {type:"bearer"})
@@ -328,8 +269,8 @@ describe("POST Tests Report",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La cuenta o cuentas no existen");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La cuenta o cuentas no existen");
             done();
         });
     });

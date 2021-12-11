@@ -36,8 +36,8 @@ describe("GET Tests Comments ID discussion",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro registro(s)");
+            response.body.should.have.property("messageNotFound");
+            response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
             done();
         });
     });
@@ -71,7 +71,7 @@ describe("POST Tests Comments",() => {
         const comment = {
             comment: "Creo que los cuentos son un poco largos", 
             idAccount: "6168cf9563929f8f000c7614", 
-            idDiscussion: "616b0efeba862c9a697da9db"
+            idDiscussion: "618dc7969d06f2345c3ee84c"
         };
         chai.request(server).post("/comments").send(comment)
         .auth(accessToken, {type:"bearer"})
@@ -98,8 +98,8 @@ describe("POST Tests Comments",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La cuenta no existe");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La cuenta no existe");
             done();
         });
     });
@@ -114,8 +114,8 @@ describe("POST Tests Comments",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La discusion no existe");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La discusion no existe");
             done();
         });
     });
@@ -152,14 +152,15 @@ describe("DELETE Tests Comments",() => {
 
     it("DELETE /Comments", (done) => {
         const comment = {
-            _id: idComment
+            _id: idComment,
+            idDiscussion: "618dc7969d06f2345c3ee84c"
         };
         chai.request(server).delete("/comments").send(comment)
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("El comentario se eliminó exitosamente");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("El comentario se eliminó exitosamente");
             done();
         });
     });

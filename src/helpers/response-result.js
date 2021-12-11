@@ -10,15 +10,15 @@ const validateResult = (request, response, next) => {
 };
 
 const responseNotFound = (response) => {
-    return response.status(StatusCodes.NOT_FOUND).json({message: "No se encontro registro(s)"});
+    return response.status(StatusCodes.NOT_FOUND).json({messageNotFound: "No se encontro registro(s)"});
 };
 
 const responseServer = (response, error) => {
-    return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({path: error.path, message: "Error Interno del Servidor"});
+    return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({path: error.path, messageErrorServer: "Error Interno del Servidor"});
 };
 
 const responseGeneral = (response, status, message) => {
-    return response.status(status).json({message: message});
+    return response.status(status).json({messageHappened: message});
 };
 
 module.exports = {validateResult, responseNotFound, responseServer, responseGeneral};

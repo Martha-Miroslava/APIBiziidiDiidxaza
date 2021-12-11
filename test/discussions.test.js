@@ -21,9 +21,9 @@ describe("POST Tests Discussion",() => {
 
     it("POST /Discussions", (done) => {
         const discussion = {
-            title: "¿Qué opinan de los cuentos en zapoteco?",
-            comment: "Me gustaría saber que opinan de los cuentos que esta y donde puede encontrar más",
-            theme: "doubt",
+            title: "¿Qué opinan de los canciones en zapoteco?",
+            comment: "Me gustaría saber que opinan de los canciones que esta y donde puede encontrar más",
+            theme: "duda",
             idAccount: "6168cf9563929f8f000c7614"
         };
         chai.request(server).post("/discussions").send(discussion)
@@ -47,7 +47,7 @@ describe("POST Tests Discussion",() => {
         const discussion = {
             title: "   ",
             comment: " ",
-            theme: "duda",
+            theme: "informacion",
             idAccount: "6168cf"
         }
         chai.request(server).post("/discussions").send(discussion)
@@ -62,17 +62,17 @@ describe("POST Tests Discussion",() => {
 
     it("POST /Discussions Bad Request Account", (done) => {
         const discussion = {
-            title: "¿Qué opinan de los cuentos en zapoteco?",
-            comment: "Me gustaría saber que opinan de los cuentos que esta y donde puede encontrar más",
-            theme: "doubt",
+            title: "¿Qué opinan de los canciones en zapoteco?",
+            comment: "Me gustaría saber que opinan de los canciones que esta y donde puede encontrar más",
+            theme: "duda",
             idAccount: "6168cf9563929f8f000c7679"
         }
         chai.request(server).post("/discussions").send(discussion)
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La cuenta no existe");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La cuenta no existe");
             done();
         });
     });
@@ -147,8 +147,8 @@ describe("GET Tests Discussions Filters Criterion",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro registro(s)");
+            response.body.should.have.property("messageNotFound");
+            response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
             done();
         });
     });
@@ -170,7 +170,7 @@ describe("GET Tests Discussions Filters Criterion",() => {
         .end( (error, response) => {
             response.should.have.status(200);
             response.body.should.be.a("array");
-            response.body.length.should.be.eq(2);
+            response.body.length.should.be.eq(1);
             done();
         });
     });
@@ -180,8 +180,8 @@ describe("GET Tests Discussions Filters Criterion",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro registro(s)");
+            response.body.should.have.property("messageNotFound");
+            response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
             done();
         });
     });
@@ -212,7 +212,7 @@ describe("GET Tests Discussion",() => {
     });
 
     it("GET /Discussions/ID", (done) => {
-        chai.request(server).get("/discussions/616b0efeba862c9a697da9db")
+        chai.request(server).get("/discussions/618dc7899d06f2345c3ee84b")
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
@@ -233,8 +233,8 @@ describe("GET Tests Discussion",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro registro(s)");
+            response.body.should.have.property("messageNotFound");
+            response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
             done();
         });
     });
@@ -291,15 +291,15 @@ describe("PATCH Tests Discussion",() => {
 
     it("PATCH /Discussion", (done) => {
         const discussion = {
-            _id: "616b0efeba862c9a697da9db",
-            idAccount: "6168d4975471a4bcc2b17445"
+            _id: "618dc7969d06f2345c3ee84c",
+            idAccount: "6196ae217efa096f5c673a9f"
         }
         chai.request(server).patch("/discussions").send(discussion)
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(200);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La discusión se segui exitosamente");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La discusión se segui exitosamente");
             done();
         });
     });
@@ -313,8 +313,8 @@ describe("PATCH Tests Discussion",() => {
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La cuenta no existe");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La cuenta no existe");
             done();
         });
     });
@@ -322,14 +322,14 @@ describe("PATCH Tests Discussion",() => {
     it("PATCH /Discussion Bad Request Discussion", (done) => {
         const discussion = {
             _id: "616b0efeba862c9a697da9cf",
-            idAccount: "6168d4975471a4bcc2b17445"
+            idAccount: "6196ae217efa096f5c673a9f"
         }
         chai.request(server).patch("/discussions").send(discussion)
         .auth(accessToken, {type:"bearer"})
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("La discusion no existe");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("La discusión no existe");
             done();
         });
     });
@@ -351,7 +351,7 @@ describe("PATCH Tests Discussion",() => {
 
     after(async () => {
         const account = new Accounts ();
-        await Accounts.updateOne({_id:"6168d4975471a4bcc2b17445"}, { discussions: account.discussions});
+        await Accounts.updateOne({_id:"6196ae217efa096f5c673a9f"}, { discussions: account.discussions});
     });
 });
 

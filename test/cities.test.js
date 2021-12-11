@@ -21,8 +21,8 @@ describe("GET Tests Cities",() => {
         chai.request(server).get("/cities/61645a187cab4c38442c4ed7")
         .end( (error, response) => {
             response.should.have.status(404);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("No se encontro registro(s)");
+            response.body.should.have.property("messageNotFound");
+            response.body.should.have.property("messageNotFound").eq("No se encontro registro(s)");
             done();
         });
     });
@@ -63,8 +63,8 @@ describe("POST Tests Cities",() => {
         chai.request(server).post("/cities").send(city)
         .end( (error, response) => {
             response.should.have.status(400);
-            response.body.should.have.property("message");
-            response.body.should.have.property("message").eq("El estado no existe");
+            response.body.should.have.property("messageHappened");
+            response.body.should.have.property("messageHappened").eq("El estado no existe");
             done();
         });
     });

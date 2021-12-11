@@ -6,6 +6,10 @@ const discussions = new Schema({
         type: String,
         require: true
     },
+    titleUpper: { 
+        type: String,
+        require: true
+    },
     comment: { 
         type: String,
         require: true
@@ -23,7 +27,7 @@ const discussions = new Schema({
     theme: {
         type: String,
         default: "info",
-        enum: ["info", "doubt", "rule"],
+        enum: ["info", "duda", "regla"],
         require: true
     },
     numberComments:{

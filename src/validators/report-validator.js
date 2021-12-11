@@ -29,7 +29,7 @@ const validationReportFilters  = [
     param("filter")
         .exists().withMessage("El filtro debe existir")
         .notEmpty().withMessage("El filtro no debe estar vacío")
-        .isIn(["dateCreation", "nameAccount", "lastnameAccount", "nameReported", "lastnameReported"]).withMessage("El filtro es inválido"),
+        .isIn(["dateCreation", "usernameAccount", "usernameReported"]).withMessage("El filtro es inválido"),
     param("criterion")
         .exists().withMessage("El criterio debe existir")
         .notEmpty().withMessage("El campo no debe estar vacío"),
@@ -42,8 +42,8 @@ const validationReportFilters  = [
 const validationCriterion = (request, response, next) => {
     const filter = request.params.filter;
     const criterion = request.params.criterion;
-    var expReg =  new RegExp(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü ]{2,150}$/);
-    let message = "Solo letras de la A a la Z. Caracteres de 2 a 150";
+    var expReg =  new RegExp(/^[A-Za-z0-9]{3,20}$/);
+    let message = "Solo letras de la A a la Z y números. Caracteres de 3 a 20";
     if(filter === "dateCreation"){
         expReg = new RegExp(/^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/);
         message = "La fecha debe tener el formato YYYY-MM-DD";
