@@ -9,7 +9,7 @@ const validationIdDiscussion = [
         .notEmpty().withMessage("El Identificador de la discusión no debe estar vacío")
         .matches(/^[a-z0-9]{24}$/).withMessage("El Identificador de la discusión debe tener números y letras minúsculas")
         .isLength(24).withMessage("El Identificador de la discusión debe tener 24 caracteres")
-]
+];
 
 const validationCreationComment = [
     validationComment,

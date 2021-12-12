@@ -43,7 +43,7 @@ const getQuestions = async (request, response) => {
                 responseServer(response, error);
             });
         }
-    })
+    });
 };
 
 module.exports = {validateExistsQuestion, getQuestions};
