@@ -1,11 +1,11 @@
 const router = require("express").Router();
-const checkAuth = require("../middleware/auth");
-const checkRoleAuth = require("../middleware/role-auth");
-const {postLessonRecord, getLessonRecords} = require("../controllers/lessonRecord-controller");
-const {validationLessonRecord} = require("../validators/lessonRecord-validator");
-const {validationAccountId} = require("../validators/account-validator");
-const {validateExistsAccount} = require("../controllers/account-controller");
-const {validateExistsLesson} = require("../controllers/lesson-controller");
+const checkAuth = require("../middleware/Auth");
+const checkRoleAuth = require("../middleware/RoleAuth");
+const {postLessonRecord, getLessonRecords} = require("../controllers/LessonRecordController");
+const {validationLessonRecord} = require("../validators/LessonRecordValidator");
+const {validationAccountId} = require("../validators/AccountValidator");
+const {validateExistsAccount} = require("../controllers/AccountController");
+const {validateExistsLesson} = require("../controllers/LessonController");
 
 router.post("/lessonRecords", checkAuth, checkRoleAuth(["manager","user"]), validationLessonRecord, validateExistsLesson, validateExistsAccount, postLessonRecord);
 

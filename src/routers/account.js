@@ -1,11 +1,11 @@
 const router = require("express").Router();
-const checkAuth = require("../middleware/auth");
-const checkRoleAuth = require("../middleware/role-auth");
+const checkAuth = require("../middleware/Auth");
+const checkRoleAuth = require("../middleware/RoleAuth");
 const {getAccounts,getAccountsFilters, postAccount, getAccount, putAccount, patchAccount, 
-    validateExistsUsernameEmail, validateExistsAccountUpdate} = require("../controllers/account-controller");
-const {validateExistsCity} = require("../controllers/city-controller");
+    validateExistsUsernameEmail, validateExistsAccountUpdate} = require("../controllers/AccountController");
+const {validateExistsCity} = require("../controllers/CityController");
 const {validationCreationAccount, validationUpdateAccount, validationChangeStatusAccount, validationAccountId, 
-    validationAccountFilters, validationCriterion} = require("../validators/account-validator");
+    validationAccountFilters, validationCriterion} = require("../validators/AccountValidator");
 
 
 router.get("/accounts/:filter/:criterion", checkAuth, checkRoleAuth(["manager"]), validationAccountFilters, validationCriterion, getAccountsFilters);

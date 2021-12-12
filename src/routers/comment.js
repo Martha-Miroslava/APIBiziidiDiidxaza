@@ -1,11 +1,11 @@
 const router = require("express").Router();
-const checkAuth = require("../middleware/auth");
-const checkRoleAuth = require("../middleware/role-auth");
-const {getComments, postComment, deleteComment, validateExistsCommentt} = require("../controllers/comment-controller");
-const {validationCreationComment, validationDeleteComment} = require("../validators/comment-validator");
-const {validateExistsAccount} = require("../controllers/account-controller");
-const {validateExistsDiscussion} = require("../controllers/discussion-controller");
-const {validationDiscussionId} = require("../validators/discussion-validator");
+const checkAuth = require("../middleware/Auth");
+const checkRoleAuth = require("../middleware/RoleAuth");
+const {getComments, postComment, deleteComment, validateExistsCommentt} = require("../controllers/CommentController");
+const {validationCreationComment, validationDeleteComment} = require("../validators/CommentValidator");
+const {validateExistsAccount} = require("../controllers/AccountController");
+const {validateExistsDiscussion} = require("../controllers/DiscussionController");
+const {validationDiscussionId} = require("../validators/DiscussionValidator");
 
 router.get("/comments/:discussionID", checkAuth, checkRoleAuth(["manager", "user"]), validationDiscussionId, getComments);
 

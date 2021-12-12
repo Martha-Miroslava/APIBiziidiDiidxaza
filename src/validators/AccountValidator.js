@@ -1,8 +1,7 @@
 const  {check, param}  =  require ("express-validator");
 const {StatusCodes} = require ("http-status-codes");
-const {validateResult} = require("../helpers/response-result");
-const {responseGeneral} = require("../helpers/response-result");
-const Number = require("../helpers/enum-number");
+const {validateResult,responseGeneral} = require("../helpers/ResponseResult");
+const Number = require("../helpers/EnumNumber");
 
 const validationAccount = [
     check("lastname")

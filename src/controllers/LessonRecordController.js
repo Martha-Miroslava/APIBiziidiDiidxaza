@@ -1,7 +1,7 @@
-const LessonRecords = require("../models/lessonRecords");
+const LessonRecords = require("../models/LessonRecords");
 const {StatusCodes} = require ("http-status-codes");
-const {responseServer, responseNotFound} = require("../helpers/response-result");
-const {logError} = require("../helpers/log-error");
+const {responseServer, responseNotFound} = require("../helpers/ResponseResult");
+const {logError} = require("../helpers/LogError");
 
 const postLessonRecord = async (request, response) => {
     const {pointsObtained, idAccount, idLesson} = request.body;

@@ -1,12 +1,12 @@
-const {responseServer, responseGeneral, responseNotFound} = require("../helpers/response-result");
+const {responseServer, responseGeneral, responseNotFound} = require("../helpers/ResponseResult");
 const {StatusCodes} = require ("http-status-codes");
-const Accounts = require("../models/accounts");
-const Lessons = require("../models/lessons");
-const Questions = require("../models/questions");
+const Accounts = require("../models/Accounts");
+const Lessons = require("../models/Lessons");
+const Questions = require("../models/Questions");
 const path = require("path");
 const fileSystem = require("fs").promises;
-const {logError} = require("../helpers/log-error");
-const Number = require("../helpers/enum-number");
+const {logError} = require("../helpers/LogError");
+const Number = require("../helpers/EnumNumber");
 
 const postResource = async (request, response, id, URLPhoto, model) => {
     if(request.files){

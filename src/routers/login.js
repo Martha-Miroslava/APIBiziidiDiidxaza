@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const {postLogin, patchLogin} = require("../controllers/login-controller");
-const {validationLogin, validationConfirmationAccount} = require("../validators/account-validator");
+const {postLogin, patchLogin} = require("../controllers/LoginController");
+const {validationLogin, validationConfirmationAccount} = require("../validators/AccountValidator");
 
 router.post("/login", validationLogin, postLogin);
 

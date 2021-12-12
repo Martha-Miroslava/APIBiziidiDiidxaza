@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const checkAuth = require("../middleware/auth");
-const checkRoleAuth = require("../middleware/role-auth");
-const {postEmail, postAccountEmail} = require("../controllers/email-controller");
-const {validationAccountEmail, validationSendEmail} = require("../validators/account-validator");
+const checkAuth = require("../middleware/Auth");
+const checkRoleAuth = require("../middleware/RoleAuth");
+const {postEmail, postAccountEmail} = require("../controllers/EmailController");
+const {validationAccountEmail, validationSendEmail} = require("../validators/AccountValidator");
 
 router.post("/emails", validationSendEmail, postEmail); 
 

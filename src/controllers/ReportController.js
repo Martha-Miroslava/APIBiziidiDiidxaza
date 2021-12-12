@@ -1,8 +1,8 @@
-const Reports = require("../models/reports");
+const Reports = require("../models/Reports");
 const { StatusCodes } = require("http-status-codes");
 const mongoose = require("mongoose");
-const { responseServer, responseNotFound } = require("../helpers/response-result");
-const {logError} = require("../helpers/log-error");
+const { responseServer, responseNotFound } = require("../helpers/ResponseResult");
+const {logError} = require("../helpers/LogError");
 
 const postReport = async (request, response) => {
     const { reason, context, idAccount, accountReported } = request.body;

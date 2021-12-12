@@ -1,9 +1,9 @@
-const Accounts = require("../models/accounts");
-const {tokenSing}= require("../helpers/generate-token");
+const Accounts = require("../models/Accounts");
+const {tokenSing}= require("../helpers/GenerateToken");
 const {StatusCodes} = require ("http-status-codes");
-const {responseServer, responseGeneral} = require("../helpers/response-result");
-const {logError} = require("../helpers/log-error");
-const Number = require("../helpers/enum-number");
+const {responseServer, responseGeneral} = require("../helpers/ResponseResult");
+const {logError} = require("../helpers/LogError");
+const Number = require("../helpers/EnumNumber");
 
 const postLogin = async (request, response) => {
     const {username, password} = request.body;

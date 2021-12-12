@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const checkAuth = require("../middleware/auth");
-const checkRoleAuth = require("../middleware/role-auth");
-const {postLesson, getLessons} = require("../controllers/lesson-controller");
-const {validationLesson} = require("../validators/lesson-validator");
-const {cacheInit} = require("../middleware/cache");
+const checkAuth = require("../middleware/Auth");
+const checkRoleAuth = require("../middleware/RoleAuth");
+const {postLesson, getLessons} = require("../controllers/LessonController");
+const {validationLesson} = require("../validators/LessonValidator");
+const {cacheInit} = require("../middleware/Cache");
 
 router.post("/lessons", checkAuth, checkRoleAuth(["manager"]), validationLesson, postLesson);
 

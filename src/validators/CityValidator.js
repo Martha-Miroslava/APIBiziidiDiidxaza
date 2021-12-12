@@ -1,5 +1,5 @@
 const  {check, param}  =  require ("express-validator");
-const {validateResult} = require("../helpers/response-result");
+const {validateResult} = require("../helpers/ResponseResult");
 
 const validationStateId  = [
     param("stateID")

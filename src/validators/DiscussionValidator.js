@@ -1,7 +1,7 @@
 const  {check, param}  =  require ("express-validator");
 const {StatusCodes} = require ("http-status-codes");
-const {validateResult} = require("../helpers/response-result");
-const {validationId} = require("../validators/account-validator");
+const {validateResult} = require("../helpers/ResponseResult");
+const {validationId} = require("./AccountValidator");
 
 
 const validationDiscussionFilters  = [

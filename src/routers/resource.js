@@ -1,13 +1,13 @@
 const router = require("express").Router();
-const checkAuth = require("../middleware/auth");
-const checkRoleAuth = require("../middleware/role-auth");
-const {postImageAccount, postImageLesson, deleteResource, patchResource, postAudio} = require("../controllers/resource-controller");
-const {validationURL} = require("../validators/account-validator");
-const {validateExistsAccount} = require("../controllers/account-controller");
-const {validateExistsLesson} = require("../controllers/lesson-controller");
-const {validateExistsQuestion} = require("../controllers/question-controller");
-const{validationAccount, validationLesson, validationQuestion} = require("../validators/resource-validator");
-const {cacheInit} = require("../middleware/cache");
+const checkAuth = require("../middleware/Auth");
+const checkRoleAuth = require("../middleware/RoleAuth");
+const {postImageAccount, postImageLesson, deleteResource, patchResource, postAudio} = require("../controllers/ResourceController");
+const {validationURL} = require("../validators/AccountValidator");
+const {validateExistsAccount} = require("../controllers/AccountController");
+const {validateExistsLesson} = require("../controllers/LessonController");
+const {validateExistsQuestion} = require("../controllers/QuestionController");
+const{validationAccount, validationLesson, validationQuestion} = require("../validators/ResourceValidator");
+const {cacheInit} = require("../middleware/Cache");
 
 router.patch("/resources", checkAuth, checkRoleAuth(["manager", "user"]), cacheInit, validationURL, patchResource);
 

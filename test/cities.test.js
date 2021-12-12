@@ -1,8 +1,8 @@
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const mongoose = require("mongoose");
-const {server} = require("../src/app");
-const Cities = require("../src/models/cities");
+const {server} = require("../src/App");
+const Cities = require("../src/models/Cities");
 chai.should();
 chai.use(chaiHttp);
 

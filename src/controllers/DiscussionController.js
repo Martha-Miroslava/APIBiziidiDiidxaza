@@ -1,9 +1,9 @@
-const Discussions = require("../models/discussions");
-const Accounts = require("../models/accounts");
+const Discussions = require("../models/Discussions");
+const Accounts = require("../models/Accounts");
 const {StatusCodes} = require ("http-status-codes");
 const mongoose = require("mongoose");
-const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
-const {logError} = require("../helpers/log-error");
+const {responseServer, responseNotFound, responseGeneral} = require("../helpers/ResponseResult");
+const {logError} = require("../helpers/LogError");
 
 const validateTitleDiscussion = (request, response, next) => {
     const {title} = request.body;

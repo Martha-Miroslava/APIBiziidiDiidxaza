@@ -1,7 +1,7 @@
-const {verifyToken} = require("../helpers/generate-token");
+const {verifyToken} = require("../helpers/GenerateToken");
 const {StatusCodes} = require ("http-status-codes");
-const {responseGeneral} = require("../helpers/response-result");
-const {logError} = require("../helpers/log-error");
+const {responseGeneral} = require("../helpers/ResponseResult");
+const {logError} = require("../helpers/LogError");
 
 const checkAuth = async (request, response, next) => {
     let token = request.headers.authorization;

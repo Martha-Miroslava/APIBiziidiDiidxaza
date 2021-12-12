@@ -1,8 +1,8 @@
-const {verifyToken} = require("../helpers/generate-token");
-const accounts = require("../models/accounts");
+const {verifyToken} = require("../helpers/GenerateToken");
+const accounts = require("../models/Accounts");
 const {StatusCodes} = require ("http-status-codes");
-const {responseGeneral} = require("../helpers/response-result");
-const {logError} = require("../helpers/log-error");
+const {responseGeneral} = require("../helpers/ResponseResult");
+const {logError} = require("../helpers/LogError");
 
 const checkRoleAuth = (roles) => async (request, response, next) => {
     const token = request.headers.authorization;

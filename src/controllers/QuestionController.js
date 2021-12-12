@@ -1,8 +1,8 @@
-const Questions = require("../models/questions");
+const Questions = require("../models/Questions");
 const {StatusCodes} = require ("http-status-codes");
-const {responseServer, responseNotFound, responseGeneral} = require("../helpers/response-result");
-const {logError} = require("../helpers/log-error");
-const Number = require("../helpers/enum-number");
+const {responseServer, responseNotFound, responseGeneral} = require("../helpers/ResponseResult");
+const {logError} = require("../helpers/LogError");
+const Number = require("../helpers/EnumNumber");
 
 const validateExistsQuestion = (request, response, next) => {
     const idQuestion = request.body.idQuestion || request.params.questionID;

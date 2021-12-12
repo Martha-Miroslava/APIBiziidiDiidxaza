@@ -1,8 +1,8 @@
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const mongoose = require("mongoose");
-const {server} = require("../src/app");
-const LessonRecords = require("../src/models/lessonRecords");
+const {server} = require("../src/App");
+const LessonRecords = require("../src/models/LessonRecords");
 chai.should();
 chai.use(chaiHttp);
 let accessToken= null;

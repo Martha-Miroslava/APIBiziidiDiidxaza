@@ -1,7 +1,7 @@
-const Answers = require("../models/answers");
+const Answers = require("../models/Answers");
 const {StatusCodes} = require ("http-status-codes");
-const {responseServer, responseNotFound} = require("../helpers/response-result");
-const {logError} = require("../helpers/log-error");
+const {responseServer, responseNotFound} = require("../helpers/ResponseResult");
+const {logError} = require("../helpers/LogError");
 
 const getAnswers = async (request, response) => {
     const questionID = request.params.questionID;
