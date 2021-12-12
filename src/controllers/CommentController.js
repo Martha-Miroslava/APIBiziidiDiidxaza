@@ -47,7 +47,7 @@ const postComment = async (request, response) => {
     const newComment = new Comments ({comment: comment, dateCreation: dateCreation, idAccount: idAccountConverted, idDiscussion: idDiscussionConverted});
     await newComment.save()
     .then(async (commentSave) => {  
-        await Discussions.updateOne({_id:idDiscussion}, {$inc:{numberComments:1}})
+        await Discussions.updateOne({_id:idDiscussion}, {$inc:{numberComments:1}});
         response.status(StatusCodes.CREATED).json(commentSave);
     })
     .catch(function (error){

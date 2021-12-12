@@ -9,7 +9,7 @@ const validateTitleDiscussion = (request, response, next) => {
     const {title} = request.body;
     const chars = {'á':'a','é':'e','í':'i','ó':'o','ú':'u','Á':'A','É':'E','Í':'I','Ó':'O','Ú':'U'};
     var regExpTitle=/[áéíóú]/ig;
-	var titleUpper = title.replace(regExpTitle,function(e){return chars[e]})
+	var titleUpper = title.replace(regExpTitle,function(e){return chars[e]});
     const tileFinal = titleUpper.toUpperCase();
     Discussions.findOne({titleUpper:tileFinal.trim()}, {_id:1})
     .then(function (discussion) { 
@@ -87,7 +87,7 @@ const getDiscussionsCriterion = async (request, response) => {
                 responseNotFound(response);
             }
             else{
-                const disccussions = await Discussions.find({_id:{ $in: account.discussions}}, {title:1, dateCreation:1, numberComments:1, theme:1})
+                const disccussions = await Discussions.find({_id:{ $in: account.discussions}}, {title:1, dateCreation:1, numberComments:1, theme:1});
                 if(disccussions.length){
                     response.status(StatusCodes.OK).json(disccussions);
                 }
