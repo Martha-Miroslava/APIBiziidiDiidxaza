@@ -4,8 +4,8 @@
   "description": "APIBiziidiDiidxaza",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon src/app.js",
-    "start": "node app.js",
+    "dev": "nodemon src/App.js",
+    "start": "node App.js",
     "test": "mocha --timeout 8000",
     "test-html": "mocha --timeout 8000 --reporter mochawesome --reporter-options reportDir=./test/reports"
   },
