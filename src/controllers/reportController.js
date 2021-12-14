@@ -1,4 +1,4 @@
-const Reports = require("../models/Reports");
+const Reports = require("../models/reports");
 const { StatusCodes } = require("http-status-codes");
 const mongoose = require("mongoose");
 const { responseServer, responseNotFound } = require("../helpers/responseResult");
