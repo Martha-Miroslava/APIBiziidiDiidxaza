@@ -63,7 +63,7 @@ const deleteComment = async (request, response) => {
     const idComment  = mongoose.Types.ObjectId(_id);
     Comments.deleteOne({_id:idComment})
     .then(async (document) => {  
-        await Discussions.updateOne({$and:[{_id:idDiscussion},{numberComments:{$gte: 1}}]}, {$inc:{numberComments:-1}})
+        await Discussions.updateOne({$and:[{_id:idDiscussion},{numberComments:{$gte: 1}}]}, {$inc:{numberComments:-1}});
         responseGeneral(response, StatusCodes.OK, "El comentario se eliminó exitosamente");
     })
     .catch(function (error){
