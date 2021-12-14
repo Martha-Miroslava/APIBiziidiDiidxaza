@@ -1,4 +1,4 @@
-const {verifyToken} = require("../helpers/GenerateToken");
+const {verifyToken} = require("../helpers/generateToken");
 const {StatusCodes} = require ("http-status-codes");
 const {responseGeneral} = require("../helpers/responseResult");
 const {logError} = require("../helpers/logError");
