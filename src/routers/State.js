@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const {getStates} = require("../controllers/StateController");
-const {cacheInit} = require("../middleware/Cache");
+const {getStates} = require("../controllers/stateController");
+const {cacheInit} = require("../middleware/cache");
 
 router.get("/states", cacheInit, getStates);
 

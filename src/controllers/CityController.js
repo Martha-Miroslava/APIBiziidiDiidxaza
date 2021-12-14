@@ -1,8 +1,8 @@
-const Cities = require("../models/Cities");
+const Cities = require("../models/cities");
 const mongoose = require("mongoose");
 const {StatusCodes} = require ("http-status-codes");
-const {responseServer, responseNotFound, responseGeneral} = require("../helpers/ResponseResult");
-const {logError} = require("../helpers/LogError");
+const {responseServer, responseNotFound, responseGeneral} = require("../helpers/responseResult");
+const {logError} = require("../helpers/logError");
 
 const validateExistsCity = (request, response, next) => {
     const {idCity} = request.body;

@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const {getCities, postCity} = require("../controllers/CityController");
-const {validateExistState} = require("../controllers/StateController");
-const {validationStateId, validationCity}= require("../validators/CityValidator");
-const {cacheInit} = require("../middleware/Cache");
+const {getCities, postCity} = require("../controllers/cityController");
+const {validateExistState} = require("../controllers/stateController");
+const {validationStateId, validationCity}= require("../validators/cityValidator");
+const {cacheInit} = require("../middleware/cache");
 
 router.get("/cities/:stateID", validationStateId, cacheInit, getCities);
 

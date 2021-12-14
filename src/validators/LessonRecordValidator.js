@@ -1,6 +1,6 @@
 const  {check}  =  require ("express-validator");
-const {validateResult} = require("../helpers/ResponseResult");
-const {validationAccountId} = require("./DiscussionValidator");
+const {validateResult} = require("../helpers/responseResult");
+const {validationAccountId} = require("./discussionValidator");
 
 const validationLessonRecord = [
     check("pointsObtained")

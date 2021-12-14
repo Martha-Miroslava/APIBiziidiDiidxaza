@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const {logError} = require("../helpers/LogError");
+const {logError} = require("../helpers/logError");
 
 const{NODE_ENV, URI_PRODUCTION, URI_TEST, NODE_TEST, URI_TEST_FRONTEND} = process.env;
 

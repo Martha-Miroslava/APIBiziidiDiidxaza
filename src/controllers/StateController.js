@@ -1,7 +1,7 @@
-const States = require("../models/States");
+const States = require("../models/states");
 const {StatusCodes} = require ("http-status-codes");
-const {responseServer, responseNotFound, responseGeneral} = require("../helpers/ResponseResult");
-const {logError} = require("../helpers/LogError");
+const {responseServer, responseNotFound, responseGeneral} = require("../helpers/responseResult");
+const {logError} = require("../helpers/logError");
 
 const validateExistState = (request, response, next) => {
     const {idState} = request.body;

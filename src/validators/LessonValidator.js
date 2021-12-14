@@ -1,6 +1,6 @@
 const  {check, param}  =  require ("express-validator");
-const {validateResult} = require("../helpers/ResponseResult");
-const Number = require("../helpers/EnumNumber");
+const {validateResult} = require("../helpers/responseResult");
+const Number = require("../helpers/enumNumber");
 
 const validationLesson= [
     check("name")

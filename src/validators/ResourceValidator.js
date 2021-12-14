@@ -1,6 +1,6 @@
 const  {check}  =  require ("express-validator");
-const {validationAccountId} = require("../validators/DiscussionValidator");
-const {validateResult} = require("../helpers/ResponseResult");
+const {validationAccountId} = require("./discussionValidator");
+const {validateResult} = require("../helpers/responseResult");
 
 const validationAccount  = [
     validationAccountId,

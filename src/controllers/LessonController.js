@@ -1,7 +1,7 @@
-const Lessons = require("../models/Lessons");
+const Lessons = require("../models/lessons");
 const {StatusCodes} = require ("http-status-codes");
-const {responseServer, responseGeneral, responseNotFound} = require("../helpers/ResponseResult");
-const {logError} = require("../helpers/LogError");
+const {responseServer, responseGeneral, responseNotFound} = require("../helpers/responseResult");
+const {logError} = require("../helpers/logError");
 
 
 const validateExistsLesson = (request, response, next) => {

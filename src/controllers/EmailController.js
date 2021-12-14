@@ -1,8 +1,8 @@
-const Accounts = require("../models/Accounts");
+const Accounts = require("../models/accounts");
 const {StatusCodes} = require ("http-status-codes");
-const {generateCode} = require("../helpers/GenerateCode");
+const {generateCode} = require("../helpers/generateCode");
 const nodemailer = require("nodemailer");
-const {responseServer, responseGeneral} = require("../helpers/ResponseResult");
+const {responseServer, responseGeneral} = require("../helpers/responseResult");
 
 const postEmail = async (request, response) => {
     const email = request.body.email;

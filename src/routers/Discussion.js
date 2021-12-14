@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const checkAuth = require("../middleware/Auth");
-const checkRoleAuth = require("../middleware/RoleAuth");
+const checkAuth = require("../middleware/auth");
+const checkRoleAuth = require("../middleware/roleAuth");
 const {getDiscussions, getDiscussionsFilters, getDiscussionsCriterion, getDiscussion, postDiscussion, 
-    patchDiscussion, validateTitleDiscussion} = require("../controllers/DiscussionController");
+    patchDiscussion, validateTitleDiscussion} = require("../controllers/discussionController");
 const {validationDiscussionFilters, validationDiscussionCriterion, validationCriterion, validationDiscussionId,
-    validationDiscussion, validationUpdateDiscussion} = require("../validators/DiscussionValidator");
-const {validateExistsAccount} = require("../controllers/AccountController");
-const {cacheInit} = require("../middleware/Cache");
+    validationDiscussion, validationUpdateDiscussion} = require("../validators/discussionValidator");
+const {validateExistsAccount} = require("../controllers/accountController");
+const {cacheInit} = require("../middleware/cache");
 
 router.get("/discussions/filters/:filter", checkAuth, checkRoleAuth(["manager", "user"]), validationDiscussionFilters, cacheInit, getDiscussionsFilters);
 

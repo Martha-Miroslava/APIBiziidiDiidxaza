@@ -1,9 +1,9 @@
-const Comments = require("../models/Comments");
+const Comments = require("../models/comments");
 const {StatusCodes} = require ("http-status-codes");
 const mongoose = require("mongoose");
-const Discussions = require("../models/Discussions");
-const {responseServer, responseNotFound, responseGeneral} = require("../helpers/ResponseResult");
-const {logError} = require("../helpers/LogError");
+const Discussions = require("../models/discussions");
+const {responseServer, responseNotFound, responseGeneral} = require("../helpers/responseResult");
+const {logError} = require("../helpers/logError");
 
 const validateExistsCommentt = (request, response, next) => {
     const idComment = request.body._id;

@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const checkAuth = require("../middleware/Auth");
-const checkRoleAuth = require("../middleware/RoleAuth");
-const { getReports, postReport, getReport, getReportsFilters } = require("../controllers/ReportController");
-const { validationReport, validationReportFilters, validationCriterion, validationReportId } = require("../validators/ReportValidator");
-const { validateExistsAccounts } = require("../controllers/AccountController");
-const {cacheInit} = require("../middleware/Cache");
+const checkAuth = require("../middleware/auth");
+const checkRoleAuth = require("../middleware/roleAuth");
+const { getReports, postReport, getReport, getReportsFilters } = require("../controllers/reportController");
+const { validationReport, validationReportFilters, validationCriterion, validationReportId } = require("../validators/reportValidator");
+const { validateExistsAccounts } = require("../controllers/accountController");
+const {cacheInit} = require("../middleware/cache");
 
 router.get("/reports/:filter/:criterion", checkAuth, checkRoleAuth(["manager"]), validationReportFilters, validationCriterion, getReportsFilters);
 

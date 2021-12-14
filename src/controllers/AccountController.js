@@ -1,11 +1,11 @@
-const Accounts = require("../models/Accounts");
+const Accounts = require("../models/accounts");
 const {StatusCodes} = require ("http-status-codes");
 const mongoose = require("mongoose");
-const {generateCode} = require("../helpers/GenerateCode");
-const {responseServer, responseNotFound, responseGeneral} = require("../helpers/ResponseResult");
-const {sendEmail} = require("./EmailController");
-const {logError} = require("../helpers/LogError");
-const Number = require("../helpers/EnumNumber");
+const {generateCode} = require("../helpers/generateCode");
+const {responseServer, responseNotFound, responseGeneral} = require("../helpers/responseResult");
+const {sendEmail} = require("./emailController");
+const {logError} = require("../helpers/logError");
+const Number = require("../helpers/enumNumber");
 
 const validateExistsAccount = (request, response, next) => {
     const idAccount = request.body.idAccount;

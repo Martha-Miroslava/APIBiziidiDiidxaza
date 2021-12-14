@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const checkAuth = require("../middleware/Auth");
-const checkRoleAuth = require("../middleware/RoleAuth");
-const {getQuestions} = require("../controllers/QuestionController");
-const {validationLessonID} = require("../validators/LessonValidator");
+const checkAuth = require("../middleware/auth");
+const checkRoleAuth = require("../middleware/roleAuth");
+const {getQuestions} = require("../controllers/questionController");
+const {validationLessonID} = require("../validators/lessonValidator");
 
 router.get("/questions/:lessonID", checkAuth, checkRoleAuth(["manager","user"]), validationLessonID, getQuestions);
 
