@@ -18,7 +18,7 @@ const postResource = async (request, response, id, URLPhoto, model) => {
         if(allowedExtensions.test(extension) && size<Number.SIZE_IMAGE){
             const url = URLPhoto+id+extension;
             file.mv(path.join(__dirname, url)).then(async () => {
-                await model.updateOne({_id:id}, {URL:url})
+                await model.updateOne({_id:id}, {URL:url});
                 return response.status(StatusCodes.CREATED).json({URL:url});
             }).catch((error) => {
                 logError(error);
