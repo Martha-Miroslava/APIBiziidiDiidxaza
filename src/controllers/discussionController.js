@@ -8,8 +8,8 @@ const {logError} = require("../helpers/logError");
 const validateTitleDiscussion = (request, response, next) => {
     const {title} = request.body;
     const chars = {'á':'a','é':'e','í':'i','ó':'o','ú':'u','Á':'A','É':'E','Í':'I','Ó':'O','Ú':'U'};
-    var regExpTitle=/[áéíóú]/ig;
-	var titleUpper = title.replace(regExpTitle,(e) => {
+    let regExpTitle=/[áéíóú]/ig;
+	let titleUpper = title.replace(regExpTitle,(e) => {
         return chars[e];
     });
     const tileFinal = titleUpper.toUpperCase();
@@ -146,8 +146,8 @@ const postDiscussion = async (request, response) => {
     const dateNow = new Date();
     const dateCreation = new Date(dateNow.getTime() - (dateNow.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10);
     const chars = {'á':'a','é':'e','í':'i','ó':'o','ú':'u','Á':'A','É':'E','Í':'I','Ó':'O','Ú':'U'};
-    var regExpTitle=/[áéíóú]/ig;
-	var titleUpper = title.replace(regExpTitle,(e) => {
+    let regExpTitle=/[áéíóú]/ig;
+	let titleUpper = title.replace(regExpTitle,(e) => {
         return chars[e];
     });
     const newDiscussion = new Discussions ({title: title.trim(), titleUpper:titleUpper.trim().toUpperCase(), comment: comment,dateCreation: dateCreation,status: 1,theme: theme,idAccount: idAccountConverted});
