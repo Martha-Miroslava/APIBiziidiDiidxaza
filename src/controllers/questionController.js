@@ -25,7 +25,7 @@ const getQuestions = async (request, response) => {
         if(errorCount){
             responseServer(response, errorCount);
         } else{
-            var rand = 0;
+            let rand = 0;
             if(count>=Number.FIVE){
                 rand = Math.floor(Math.random()*(count-5));
             }

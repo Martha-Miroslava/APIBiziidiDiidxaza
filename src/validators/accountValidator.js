@@ -204,7 +204,7 @@ const validationAccountFilters  = [
 const validationCriterion = (request, response, next) => {
     const filter = request.params.filter;
     const criterion = request.params.criterion;
-    var expReg =  new RegExp(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü ]+$/);
+    let expReg =  new RegExp(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü ]+$/);
     let message = "Solo se permiten letras y espacios";
     switch(filter){
         case "age":
