@@ -42,7 +42,7 @@ const validationReportFilters  = [
 const validationCriterion = (request, response, next) => {
     const filter = request.params.filter;
     const criterion = request.params.criterion;
-    var expReg =  new RegExp(/^[A-Za-z0-9]{3,20}$/);
+    let expReg =  new RegExp(/^[A-Za-z0-9]{3,20}$/);
     let message = "Solo letras de la A a la Z y números. Caracteres de 3 a 20";
     if(filter === "dateCreation"){
         expReg = new RegExp(/^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/);
